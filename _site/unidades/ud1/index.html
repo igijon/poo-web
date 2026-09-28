@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>UD1. Del código a producción. ¿Qué significa que una aplicación sea segura? – Puesta en Producción Segura</title>
+<title>UD1. Python profesional y modelo orientado a objetos – Programación Orientada a Objetos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Python profesional y modelo orientado a objetos</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Puesta en Producción Segura</a> 
+      <a href="../../">Programación Orientada a Objetos</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</span></a>
+ <span class="menu-text">1-Python profesional y modelo orientado a objetos</span></a>
   </div>
 </li>
       </ul>
@@ -182,13 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
+ <span class="menu-text">UD1 · Lab 1 · Taskflow. Pensar antes de programar</span></a>
   </div>
 </li>
       </ul>
@@ -225,50 +219,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#aplicaciones-modernas" id="toc-aplicaciones-modernas" class="nav-link active" data-scroll-target="#aplicaciones-modernas">📚 1. Aplicaciones modernas</a></li>
-  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 2. Del código fuente a la ejecución</a>
+  <li><a href="#por-qué-necesitamos-los-objetos" id="toc-por-qué-necesitamos-los-objetos" class="nav-link active" data-scroll-target="#por-qué-necesitamos-los-objetos">📕 ¿Por qué necesitamos los objetos?</a></li>
+  <li><a href="#pensar-en-objetos.-programación-orientada-a-objetos" id="toc-pensar-en-objetos.-programación-orientada-a-objetos" class="nav-link" data-scroll-target="#pensar-en-objetos.-programación-orientada-a-objetos">🍗 Pensar en objetos. Programación orientada a objetos</a>
   <ul class="collapse">
-  <li><a href="#lenguajes-compilados-e-interpretados" id="toc-lenguajes-compilados-e-interpretados" class="nav-link" data-scroll-target="#lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</a>
-  <ul class="collapse">
-  <li><a href="#lenguajes-compilados" id="toc-lenguajes-compilados" class="nav-link" data-scroll-target="#lenguajes-compilados">Lenguajes Compilados</a></li>
-  <li><a href="#lenguajes-interpretados" id="toc-lenguajes-interpretados" class="nav-link" data-scroll-target="#lenguajes-interpretados">Lenguajes Interpretados</a></li>
+  <li><a href="#estado" id="toc-estado" class="nav-link" data-scroll-target="#estado">Estado</a></li>
+  <li><a href="#clase-estado" id="toc-clase-estado" class="nav-link" data-scroll-target="#clase-estado">Clase ≠ Estado</a></li>
+  <li><a href="#objeto" id="toc-objeto" class="nav-link" data-scroll-target="#objeto">Objeto</a></li>
+  <li><a href="#instancia" id="toc-instancia" class="nav-link" data-scroll-target="#instancia">Instancia</a></li>
+  <li><a href="#comportamiento" id="toc-comportamiento" class="nav-link" data-scroll-target="#comportamiento">Comportamiento</a></li>
+  <li><a href="#responsabilidad" id="toc-responsabilidad" class="nav-link" data-scroll-target="#responsabilidad">Responsabilidad</a></li>
   </ul></li>
+  <li><a href="#el-modelo-mental-fundamental" id="toc-el-modelo-mental-fundamental" class="nav-link" data-scroll-target="#el-modelo-mental-fundamental">✍ El modelo mental fundamental</a></li>
+  <li><a href="#primer-contacto-con-python" id="toc-primer-contacto-con-python" class="nav-link" data-scroll-target="#primer-contacto-con-python">🐍 Primer contacto con Python</a>
+  <ul class="collapse">
+  <li><a href="#ide" id="toc-ide" class="nav-link" data-scroll-target="#ide">IDE</a></li>
+  <li><a href="#creación-de-un-entorno-virtual" id="toc-creación-de-un-entorno-virtual" class="nav-link" data-scroll-target="#creación-de-un-entorno-virtual">Creación de un entorno virtual</a></li>
+  <li><a href="#gestión-de-nuestros-proyectos" id="toc-gestión-de-nuestros-proyectos" class="nav-link" data-scroll-target="#gestión-de-nuestros-proyectos">Gestión de nuestros proyectos</a></li>
+  <li><a href="#qué-es-venv" id="toc-qué-es-venv" class="nav-link" data-scroll-target="#qué-es-venv">¿Qué es <code>venv</code>?</a></li>
+  <li><a href="#qué-es-uv" id="toc-qué-es-uv" class="nav-link" data-scroll-target="#qué-es-uv">¿Qué es <code>uv</code>?</a></li>
+  <li><a href="#flujo-que-vamos-a-seguir" id="toc-flujo-que-vamos-a-seguir" class="nav-link" data-scroll-target="#flujo-que-vamos-a-seguir">Flujo que vamos a seguir</a>
+  <ul class="collapse">
+  <li><a href="#instalaciones" id="toc-instalaciones" class="nav-link" data-scroll-target="#instalaciones">Instalaciones</a></li>
+  <li><a href="#creación-de-un-proyecto" id="toc-creación-de-un-proyecto" class="nav-link" data-scroll-target="#creación-de-un-proyecto">Creación de un proyecto</a></li>
   </ul></li>
-  <li><a href="#seguridad-de-lenguajes-y-runtimes" id="toc-seguridad-de-lenguajes-y-runtimes" class="nav-link" data-scroll-target="#seguridad-de-lenguajes-y-runtimes">🍢 Seguridad de lenguajes y runtimes</a></li>
-  <li><a href="#arquitectura-y-comunicación" id="toc-arquitectura-y-comunicación" class="nav-link" data-scroll-target="#arquitectura-y-comunicación">📟 3. Arquitectura y comunicación</a>
+  <li><a href="#repositorios-git" id="toc-repositorios-git" class="nav-link" data-scroll-target="#repositorios-git">Repositorios: Git</a>
   <ul class="collapse">
-  <li><a href="#arquitectura-cliente-servidor" id="toc-arquitectura-cliente-servidor" class="nav-link" data-scroll-target="#arquitectura-cliente-servidor">Arquitectura cliente-servidor</a></li>
-  <li><a href="#http-y-https" id="toc-http-y-https" class="nav-link" data-scroll-target="#http-y-https">HTTP y HTTPS</a></li>
-  <li><a href="#apis-rest" id="toc-apis-rest" class="nav-link" data-scroll-target="#apis-rest">APIs REST</a>
-  <ul class="collapse">
-  <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">¿Cómo funciona?</a></li>
-  <li><a href="#métodos-y-códigos-básicos" id="toc-métodos-y-códigos-básicos" class="nav-link" data-scroll-target="#métodos-y-códigos-básicos">Métodos y códigos básicos</a></li>
-  </ul></li>
-  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a>
-  <ul class="collapse">
-  <li><a href="#estructura-técnica" id="toc-estructura-técnica" class="nav-link" data-scroll-target="#estructura-técnica">Estructura técnica</a></li>
-  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
-  </ul></li>
-  <li><a href="#arquitectura-por-capas" id="toc-arquitectura-por-capas" class="nav-link" data-scroll-target="#arquitectura-por-capas">Arquitectura por capas</a>
-  <ul class="collapse">
-  <li><a href="#estructura-tradicional-arquitectura-de-3-capas" id="toc-estructura-tradicional-arquitectura-de-3-capas" class="nav-link" data-scroll-target="#estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</a></li>
-  <li><a href="#regla-de-acoplamiento-cerrado" id="toc-regla-de-acoplamiento-cerrado" class="nav-link" data-scroll-target="#regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</a></li>
-  </ul></li>
-  <li><a href="#servidores-y-entornos-de-ejecución" id="toc-servidores-y-entornos-de-ejecución" class="nav-link" data-scroll-target="#servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</a></li>
-  </ul></li>
-  <li><a href="#el-ecosistema-de-una-aplicación" id="toc-el-ecosistema-de-una-aplicación" class="nav-link" data-scroll-target="#el-ecosistema-de-una-aplicación">🌗 4. El ecosistema de una aplicación</a>
-  <ul class="collapse">
-  <li><a href="#componentes-la-anatomía-del-software" id="toc-componentes-la-anatomía-del-software" class="nav-link" data-scroll-target="#componentes-la-anatomía-del-software">Componentes (la anatomía del software)</a></li>
-  <li><a href="#dependencias-el-software-de-terceros" id="toc-dependencias-el-software-de-terceros" class="nav-link" data-scroll-target="#dependencias-el-software-de-terceros">Dependencias (el software de terceros)</a>
-  <ul class="collapse">
-  <li><a href="#qué-es-una-dependencia" id="toc-qué-es-una-dependencia" class="nav-link" data-scroll-target="#qué-es-una-dependencia">¿Qué es una dependencia?</a></li>
-  <li><a href="#dependencias-transitivas" id="toc-dependencias-transitivas" class="nav-link" data-scroll-target="#dependencias-transitivas">Dependencias Transitivas</a></li>
-  <li><a href="#riesgos-de-seguridad-asociados" id="toc-riesgos-de-seguridad-asociados" class="nav-link" data-scroll-target="#riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</a></li>
-  <li><a href="#buenas-prácticas-de-producción-segura" id="toc-buenas-prácticas-de-producción-segura" class="nav-link" data-scroll-target="#buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</a></li>
-  </ul></li>
-  <li><a href="#entornos-de-desarrollo-pruebas-y-producción" id="toc-entornos-de-desarrollo-pruebas-y-producción" class="nav-link" data-scroll-target="#entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</a>
-  <ul class="collapse">
-  <li><a href="#conceptos-clave-de-la-seguridad-en-entornos" id="toc-conceptos-clave-de-la-seguridad-en-entornos" class="nav-link" data-scroll-target="#conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</a></li>
+  <li><a href="#qué-problema-resuelve-git" id="toc-qué-problema-resuelve-git" class="nav-link" data-scroll-target="#qué-problema-resuelve-git">¿Qué problema resuelve Git?</a></li>
+  <li><a href="#instalaciones-necesarias" id="toc-instalaciones-necesarias" class="nav-link" data-scroll-target="#instalaciones-necesarias">Instalaciones necesarias</a></li>
+  <li><a href="#primeros-pasos" id="toc-primeros-pasos" class="nav-link" data-scroll-target="#primeros-pasos">Primeros pasos</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -277,9 +255,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Python profesional y modelo orientado a objetos</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?</h1>
+<h1 class="title">UD1. Python profesional y modelo orientado a objetos</h1>
 </div>
 
 
@@ -296,282 +274,429 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<ol type="1">
-<li>El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.</li>
-<li>Primera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.</li>
-<li>Nuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.</li>
-</ol>
+<section id="por-qué-necesitamos-los-objetos" class="level1">
+<h1>📕 ¿Por qué necesitamos los objetos?</h1>
 <blockquote class="blockquote">
-<p><strong>¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?</strong></p>
+<p><strong>Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos…?</strong></p>
 </blockquote>
-<section id="aplicaciones-modernas" class="level1">
-<h1>📚 1. Aplicaciones modernas</h1>
-<p>Una aplicación o app es un programa informático diseñado para ayudar al usuario a realizar una tarea específica.</p>
-<p>Una aplicación moderna combina muchas piezas para ofrecer una experiencia rápida y conectada en cualquier dispositivo:</p>
+<p>Al principio, podríamos resolverlo con variables y funciones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tarea_1_titulo <span class="op">=</span> <span class="st">"Diseñar login"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tarea_1_estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tarea_1_responsable <span class="op">=</span> <span class="st">"Ana"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tarea_2_titulo <span class="op">=</span> <span class="st">"Crear API"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>tarea_2_estado <span class="op">=</span> <span class="st">"en progreso"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>tarea_2_responsable <span class="op">=</span> <span class="st">"Luis"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y funciones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> completar_tarea(...):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cambiar_responsable(...):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mostrar_tarea(...):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Rápidamente aparecen las preguntas: - ¿A qué proyecto pertenece la tarea?</p>
 <ul>
-<li><strong>Frontend:</strong> Es la interfaz visual con la que interactúa el usuario en su pantalla. Se diseña para navegadores web o teléfonos móviles.</li>
-<li><strong>Backend:</strong> Es el servidor que procesa las reglas del negocio, la seguridad y las peticiones del usuario de forma oculta.</li>
-<li><strong>Base de datos:</strong> Es el sistema seguro donde se guarda toda la información, como perfiles de usuarios, textos o imágenes.</li>
-<li><strong>APIs:</strong> Funcionan como un puente de comunicación para que el frontend, el backend y otros servicios externos compartan datos al instante.</li>
+<li><p>¿Quién es responsable?</p></li>
+<li><p>¿Qué ocurre si tenemos 200 tareas?</p></li>
+<li><p>¿Cómo evitamos mezclar los datos?</p></li>
+<li><p>¿Dónde colocamos las operaciones relacionadas con una tarea?</p></li>
 </ul>
-<p>Los productos finales los podemos encontrar como aplicaciones web o móviles, por ejemplo.</p>
+</blockquote>
+</section>
+<section id="pensar-en-objetos.-programación-orientada-a-objetos" class="level1">
+<h1>🍗 Pensar en objetos. Programación orientada a objetos</h1>
+<blockquote class="blockquote">
+<p>La POO organiza el software alrededor de objetos que representan elementos del problema y combinan información y comportamiento.</p>
+</blockquote>
+<p>Un <strong>objeto</strong> representa una entidad que tiene:</p>
+<ul>
+<li>Información sobre sí mismo</li>
+<li>Comportamiento</li>
+<li>Una identidad propia</li>
+</ul>
+<p>Podríamos pensar inicialmente en:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Proyecto</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Tarea</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Usuario</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Una <code>Tarea</code> podría tener:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Título</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Descripción</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Estado</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y podría realizar determinadas acciones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Completar</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Reasignar</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Cambiar de estado</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esto nos lleva a una serie de <strong>conceptos fundamentales</strong>.</p>
+<section id="estado" class="level2">
+<h2 class="anchored" data-anchor-id="estado">Estado</h2>
+<p>El <strong>estado</strong> de un objeto es la información que describe cómo se encuentra ese objeto en un momento determinado.</p>
+<p>El estado está compuesto por los datos o características que tiene un objeto en un momento determinado. En programación, el estado se almacena en las variables o atributos del objeto. El estado puede cambiar a lo largo del tiempo.</p>
+<p>Por ejemplo, una tarea podría tener:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Título: Diseñar pantalla de login</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Estado: pendiente</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Responsable: Ana</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ese conjunto de valores forma parte del estado de la tarea.</p>
+<p>Si la tarea se completa:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Título: Diseñar pantalla de login</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Estado: completada</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Responsable: Ana</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El objeto sigue siendo la misma tarea, pero su estado ha cambiado.</p>
+<p>Podemos representar el cambio:</p>
+<p>ESTADO INICIAL</p>
+<p>estado = “pendiente”</p>
+<pre><code>    │
+    │ completar()
+    ▼</code></pre>
+<p>NUEVO ESTADO</p>
+<p>estado = “completada”</p>
+</section>
+<section id="clase-estado" class="level2">
+<h2 class="anchored" data-anchor-id="clase-estado">Clase ≠ Estado</h2>
+<p>Una clase es el <strong>molde, plantilla o plano arquitectónico</strong> a partir del cual se crean los objetos. No es un objeto real, sino la definición de cómo será ese objeto. Define qué datos tendrá y qué acciones podrá realizar.</p>
+<p>Una clase define qué información puede tener un determinado tipo de objeto.</p>
+<p>Pero cada instancia tendrá sus propios valores.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Tarea </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>│ </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>├── tarea1 </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>│ ├── título: <span class="st">"Diseñar login"</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>│ └── estado: <span class="st">"pendiente"</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>├── tarea2 </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>│   ├── título: <span class="st">"Crear API"</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>│   └── estado: <span class="st">"en progreso"</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>└── tarea3 </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    ├── título: <span class="st">"Escribir documentación"</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    └── estado: <span class="st">"completada"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Las tres pertenecen a la clase <code>Tarea</code>, pero sus estados son diferentes.</p>
+<p>En Python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>tarea3 <span class="op">=</span> Tarea()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada objeto tiene su propio estado.</p>
+</section>
+<section id="objeto" class="level2">
+<h2 class="anchored" data-anchor-id="objeto">Objeto</h2>
+<p>Un objeto es una entidad concreta creada a partir de una clase.</p>
+</section>
+<section id="instancia" class="level2">
+<h2 class="anchored" data-anchor-id="instancia">Instancia</h2>
+<p>En Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.</p>
+<p>Por ejemplo:</p>
+<p>tarea1 = Tarea() tarea2 = Tarea()</p>
+<p>Podemos representarlo:</p>
+<pre><code>                CLASE
+                 Tarea
+                   │
+          ┌────────┴────────┐
+          ▼                 ▼
+       tarea1             tarea2
+      instancia          instancia</code></pre>
+<p>Las dos instancias pertenecen a la misma clase, pero son objetos diferentes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1 <span class="kw">is</span> tarea2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Resultado:</p>
+<p><code>False</code></p>
+</section>
+<section id="comportamiento" class="level2">
+<h2 class="anchored" data-anchor-id="comportamiento">Comportamiento</h2>
+<p>El <strong>comportamiento</strong> representa las acciones que un objeto puede realizar.</p>
+<p>Una tarea podría:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>completar()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>reasignar()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cambiar_estado()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Por ejemplo:</p>
+<p><code>tarea.completar()</code></p>
+<p>puede provocar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        │ completar()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        ▼</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>estado <span class="op">=</span> <span class="st">"completada"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El comportamiento se implementará mediante <strong>métodos</strong>.</p>
+<p>Podemos representarlo así:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/ud1_1.png" class="img-fluid figure-img"></p>
-<figcaption>Aplicaciones modernas</figcaption>
+<p><img src="./images/ud1_1.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>UML</figcaption>
+</figure>
+</div>
+</section>
+<section id="responsabilidad" class="level2">
+<h2 class="anchored" data-anchor-id="responsabilidad">Responsabilidad</h2>
+<blockquote class="blockquote">
+<p><strong>¿De qué debería encargarse cada objeto?</strong></p>
+</blockquote>
+<p>Una <strong>responsabilidad</strong> es aquello que un objeto debe conocer o hacer dentro del sistema.</p>
+<p>Por ejemplo, podemos decir que una <code>Tarea</code> es responsable de:</p>
+<ul>
+<li>conocer su título;</li>
+<li>conocer su estado;</li>
+<li>conocer su responsable;</li>
+<li>cambiar su estado;</li>
+<li>cambiar su responsable.</li>
+</ul>
+<p>Pero probablemente no debería ser responsable de:</p>
+<ul>
+<li>enviar correos electrónicos;</li>
+<li>generar documentos PDF;</li>
+<li>conectarse directamente a una base de datos;</li>
+<li>enviar mensajes a Telegram.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Una pregunta importante cuando diseñes una clase es: <strong>¿Tiene sentido que este objeto sea responsable de hacer esto?</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="el-modelo-mental-fundamental" class="level1">
+<h1>✍ El modelo mental fundamental</h1>
+<p>A partir de ahora podemos analizar cualquier problema siguiendo esta secuencia:</p>
+<p><strong>PROBLEMA REAL -&gt; ¿Qué cosas existen? -&gt; OBJETOS -&gt; ¿Qué sabe cada objeto? -&gt; ESTADO -&gt; ¿Qué puede hacer? -&gt; COMPORTAMIENTO -&gt; ¿De qué debe encargarse? -&gt; RESPONSABILIDADES -&gt; DISEÑO -&gt; UML</strong></p>
+</section>
+<section id="primer-contacto-con-python" class="level1">
+<h1>🐍 Primer contacto con Python</h1>
+<section id="ide" class="level2">
+<h2 class="anchored" data-anchor-id="ide">IDE</h2>
+<p>Vamos a utilizar como ide <strong>VSCode + extensión oficial de Python de Microsoft</strong></p>
+</section>
+<section id="creación-de-un-entorno-virtual" class="level2">
+<h2 class="anchored" data-anchor-id="creación-de-un-entorno-virtual">Creación de un entorno virtual</h2>
+<blockquote class="blockquote">
+<p>Necesitamos la creación de un entorno virtual. Vamos a empezar a trabajar como se trabajaría en un proyecto profesional, por lo tanto, no vamos a instalar todas las dependencias de nuestros proyectos en global en el equipo sino locales a cada proyecto.</p>
+</blockquote>
+<p>Si lo instalásemos de forma global, como vemos a continuación, podría provocar conflictos de paquetes y versiones.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>PYTHON DEL ORDENADOR</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        ├── Proyecto A</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        │      └── dependencias</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        ├── Proyecto B</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        │      └── dependencias</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        └── Proyecto C</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>               └── dependencias</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Con un entorno virtual:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>PYTHON DEL ORDENADOR</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        ├── entorno proyecto A</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        │      ├── Python</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        │      └── dependencias</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        ├── entorno proyecto B</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        │      ├── Python</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        │      └── dependencias</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        └── entorno proyecto C</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>               ├── Python</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>               └── dependencias</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada proyecto ve su versión de Python y las dependencias que necesita con sus versiones correspondientes.</p>
+</section>
+<section id="gestión-de-nuestros-proyectos" class="level2">
+<h2 class="anchored" data-anchor-id="gestión-de-nuestros-proyectos">Gestión de nuestros proyectos</h2>
+<p>Para la gestión del entorno virtual de cada proyecto tenemos dos opciones:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>              PROYECTO PYTHON</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                    │</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          ┌─────────┴─────────┐</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>          │                   │</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    ENTORNO AISLADO       GESTIÓN DEL PROYECTO</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>          │                   │</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        venv                  uv</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>          │                   │</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"Dónde se instalan       "</span>Cómo gestiono</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>     las dependencias<span class="st">"        el proyecto"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Con <strong>uv</strong> también podemos crear y gestionar nuestros entornos virtuales, por lo que <code>uv</code> puede sustituir el uso directo de <code>venv</code> en el día a día</p>
+</section>
+<section id="qué-es-venv" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-venv">¿Qué es <code>venv</code>?</h2>
+<p><code>venv</code> es una herramienta que viene incluída con Python y sirve fundamentalmente para crear un <strong>entorno virtual aislado</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esto crea:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mi-proyecto/</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>└── .venv/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Normalmente tenemos que activarlo. En Mac:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\activate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después podríamos instalar los paquetes que necesitásemos de este modo (ejemplo):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Dentro de <code>.venv</code> tendremos un entorno independiente donde podemos instalar paquetes.</p>
+<p>La razón de utilizarlo es evitar situaciones como:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>PROYECTO A</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    └── necesita requests 2.x</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>PROYECTO B</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    └── necesita requests 3.x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sin entornos virtuales, ambos proyectos podrían entrar en conflicto.</p>
+<p>Con entornos virtuales:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>PROYECTO A</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>└── .venv/</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    └── requests 2.x</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>PROYECTO B</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>└── .venv/</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    └── requests 3.x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Cada proyecto tiene su propio <strong>entorno</strong></p>
+</blockquote>
+</section>
+<section id="qué-es-uv" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-uv">¿Qué es <code>uv</code>?</h2>
+<blockquote class="blockquote">
+<p>En proyectos profesionales vamos a utilizar <code>uv</code> para gestionar nuestros proyectos en Python. <code>uv</code> puede crear y administrar el entorno virtual, además de gestionar las dependencias.</p>
+</blockquote>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>y</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>y</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>También podríamos hacer:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>y esto crearía un entorno virtual <code>.venv</code></p>
+<p>Conceptualmente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>python -m venv .venv</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        ▼</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>   crea entorno</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>uv venv</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        │</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        ▼</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>   crea entorno</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Los dos crean un entorno virtual. La diferencia es quién lo gestiona.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>En este módulo utilizaremos <code>uv</code> para gestionar los proyectos Python</strong></p>
+</blockquote>
+</section>
+<section id="flujo-que-vamos-a-seguir" class="level2">
+<h2 class="anchored" data-anchor-id="flujo-que-vamos-a-seguir">Flujo que vamos a seguir</h2>
+<section id="instalaciones" class="level3">
+<h3 class="anchored" data-anchor-id="instalaciones">Instalaciones</h3>
+<p>En primer lugar, debemos instalar Python:</p>
+<p><a href="https://www.python.org/downloads/">Python</a></p>
+<p>También debemos tener instalado <code>uv</code>, para ello:</p>
+<p><strong>En Mac</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">sudo</span> sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>En Windows, en la consola de Powershell</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>powershell <span class="op">-</span>ExecutionPolicy ByPass <span class="op">-</span>c <span class="st">"irm https://astral.sh/uv/install.ps1 | iex"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Alternativa con <strong>Winget</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>winget install <span class="op">--</span>id astral<span class="op">.</span><span class="fu">uv</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En cualquier sistema operativo, si tenemos <code>pip</code> instalado podemos hacer:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install uv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="creación-de-un-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="creación-de-un-proyecto">Creación de un proyecto</h3>
+<p>Por ejemplo, para <code>Taskflow</code>, crearíamos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> taskflow</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> taskflow</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Creamos un fichero <code>main.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hola, Taskflow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esto crea la siguiente estructura:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ud1_2.png" class="img-fluid figure-img"></p>
+<figcaption>Estructura proyecto inicial</figcaption>
 </figure>
 </div>
 <blockquote class="blockquote">
-<p><strong>¿Qué parte tenemos que proteger?</strong></p>
-<p><strong>Todas</strong></p>
+<p><strong><code>uv</code> puede crear y gestionar entornos virtuales y proporciona además herramientas para gestionar el proyecto, sus dependencias y su ejecución. <code>venv</code> es la herramienta estándar incluida con Python para crear entornos virtuales.</strong></p>
 </blockquote>
-</section>
-<section id="del-código-fuente-a-la-ejecución" class="level1">
-<h1>💻 2. Del código fuente a la ejecución</h1>
-<p>El código fuente es lo que escribe el desarrollador, por ejemplo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">login</span>(user<span class="op">,</span> password) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Pero una aplicación no termina aquí. Tenemos:</p>
-<blockquote class="blockquote">
-<p><strong>Código fuente -&gt; Transformación (dependiendo del lenguaje) -&gt; Ejecución -&gt; Aplicación </strong></p>
-</blockquote>
-<section id="lenguajes-compilados-e-interpretados" class="level2">
-<h2 class="anchored" data-anchor-id="lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</h2>
-<section id="lenguajes-compilados" class="level3">
-<h3 class="anchored" data-anchor-id="lenguajes-compilados">Lenguajes Compilados</h3>
-<blockquote class="blockquote">
-<p>Código fuente → Compilador → Programa ejecutable → Ejecución</p>
-</blockquote>
-<p>Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)</p>
-</section>
-<section id="lenguajes-interpretados" class="level3">
-<h3 class="anchored" data-anchor-id="lenguajes-interpretados">Lenguajes Interpretados</h3>
-<blockquote class="blockquote">
-<p>Código fuente → Runtime → Ejecución</p>
-</blockquote>
-<p>JavaScript → Node.js (lado del servidor), navegador web (lado del cliente)</p>
-<p>Python → Python runtime</p>
-<p>Por ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:</p>
-<ul>
-<li>Vulnerabilidades</li>
-<li>Dependencias</li>
-<li>Configuración</li>
-<li>Contenedores</li>
-<li>Servidores…</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="seguridad-de-lenguajes-y-runtimes" class="level1">
-<h1>🍢 Seguridad de lenguajes y runtimes</h1>
-<blockquote class="blockquote">
-<p><strong>No todos los lenguajes tienen las mismas características de seguridad</strong></p>
-</blockquote>
-<p>Por ejemplo, en la <strong>gestión de memoria</strong>, algunos lenguajes permiten trabajar directamente con memoria y otros la gestionan automáticamente.</p>
-<p><strong>C/C++</strong>: + control ⇒ + responsabilidad.</p>
-<p><strong>JS/Python/Java:</strong> Gestión automática de la memoria.</p>
-<blockquote class="blockquote">
-<p>Esto no quiere decir que “JavaScript sea seguro”. <strong>Un lenguaje puede reducir determinados tipos de errores, pero ninguna tecnologían convierte automáticamente una aplicación en segura. </strong></p>
-</blockquote>
-<p>Por ejemplo, una aplicación JavaScript puede tener:</p>
-<ul>
-<li><strong>XSS</strong> (<em>Cross-Site Scripting</em>) es una vulnerabilidad de seguridad informática que permite a un atacante inyectar código malicioso (generalmente JS) en una página web legítima para que se ejecute en el navegador de otros usuarios.</li>
-<li>Problemas de autenticación</li>
-<li>Exposición de secretos</li>
-<li>Dependencias vulnerables</li>
-</ul>
-</section>
-<section id="arquitectura-y-comunicación" class="level1">
-<h1>📟 3. Arquitectura y comunicación</h1>
-<section id="arquitectura-cliente-servidor" class="level2">
-<h2 class="anchored" data-anchor-id="arquitectura-cliente-servidor">Arquitectura cliente-servidor</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/u1_4.png" class="img-fluid figure-img"></p>
-<figcaption>Arquitectura cliente-servidor</figcaption>
+<p><img src="./images/ud1_3.png" class="img-fluid figure-img"></p>
+<figcaption>Hola mundo</figcaption>
 </figure>
 </div>
-<p><strong>El Cliente:</strong> Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones.</p>
-<p><strong>El Servidor:</strong> Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos.</p>
-<p><strong>Cómo Funciona</strong></p>
-<ol type="1">
-<li>El usuario interactúa con el <strong>cliente</strong> y realiza una acción o petición (por ejemplo, entrar a una página web).</li>
-<li>El cliente envía un mensaje a través de la red usando protocolos como <strong>HTTP o HTTPS</strong>.</li>
-<li>El <strong>servidor</strong> recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.</li>
-<li>El servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.</li>
-</ol>
 </section>
-<section id="http-y-https" class="level2">
-<h2 class="anchored" data-anchor-id="http-y-https">HTTP y HTTPS</h2>
-<p>La diferencia principal entre <strong>HTTP</strong> y <strong>HTTPS</strong> es que <strong>el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta</strong>.</p>
-<p><strong>¿Qué es HTTP?</strong></p>
-<p>Significa <em>Hypertext Transfer Protocol</em> (Protocolo de Transferencia de Hipertexto).</p>
-<p>Envía la información en texto plano entre el navegador y el servidor.</p>
-<p>No ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan.</p>
-<p><strong>¿Qué es HTTPS?</strong></p>
-<p>Significa <em>Hypertext Transfer Protocol Secure</em> (Protocolo de Transferencia de Hipertexto Seguro).</p>
-<p>Añade los protocolos de seguridad <strong>SSL o TLS</strong> para cifrar los datos intercambiados.</p>
-<p>Protege la información confidencial, como contraseñas o números de tarjetas de crédito.</p>
-<p>Valida la identidad del servidor web para evitar suplantaciones.</p>
+</section>
+<section id="repositorios-git" class="level2">
+<h2 class="anchored" data-anchor-id="repositorios-git">Repositorios: Git</h2>
+<section id="qué-problema-resuelve-git" class="level3">
+<h3 class="anchored" data-anchor-id="qué-problema-resuelve-git">¿Qué problema resuelve Git?</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>taskflow_final.py</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>taskflow_final_v2.py</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>taskflow_final_v3.py</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo.py</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo_ahora_si.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
-<p><strong>HTTPS</strong> protege la comunicación pero <strong>NO GARANTIZA</strong> que la aplicación sea segura.</p>
+<ul>
+<li><p>¿Cómo sabemos qué hemos cambiado?</p></li>
+<li><p>¿Podemos volver atrás?</p></li>
+<li><p>¿Quién hizo el cambio?</p></li>
+<li><p>¿Qué ocurre si trabajamos dos personas?</p></li>
+</ul>
 </blockquote>
-</section>
-<section id="apis-rest" class="level2">
-<h2 class="anchored" data-anchor-id="apis-rest">APIs REST</h2>
-<p>Un <strong>API REST</strong> es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.</p>
-<p>El acrónimo significa <em>Application Programming Interface</em> (Interfaz de programación de aplicaciones) y <em>REpresentational State Transfer</em> (Transferencia de estado representacional).</p>
 <blockquote class="blockquote">
-<p>Funciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.</p>
+<p><strong>Git es un sistema de control de versiones. Permite registrar la evolución de un proyecto y recuperar versiones anteriores</strong></p>
 </blockquote>
-<section id="cómo-funciona" class="level3">
-<h3 class="anchored" data-anchor-id="cómo-funciona">¿Cómo funciona?</h3>
-<p>Una API REST funciona mediante un modelo de cliente y servidor:</p>
+<p>En este módulo vamos a utilizar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Git</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>↓</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>Sistema de control de versiones</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>GitHub</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>↓</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>Servicio donde podemos alojar</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>repositorios Git y colaborar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="instalaciones-necesarias" class="level3">
+<h3 class="anchored" data-anchor-id="instalaciones-necesarias">Instalaciones necesarias</h3>
 <ul>
-<li><strong>El cliente</strong>: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.</li>
-<li><strong>El servidor</strong>: Es el sistema que recibe la petición, procesa la información en el <em>backend</em> (como buscar en una base de datos) y devuelve un resultado.</li>
+<li>Necesitamos instalar <strong>Git</strong></li>
 </ul>
-<p>Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.</p>
-<p>### Request/response</p>
-<p><strong>Request (Solicitud / Petición):</strong> Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como <code>GET</code> o <code>POST</code>, cabeceras y datos.</p>
-<p><strong>Response:</strong> Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.</p>
-</section>
-<section id="métodos-y-códigos-básicos" class="level3">
-<h3 class="anchored" data-anchor-id="métodos-y-códigos-básicos">Métodos y códigos básicos</h3>
-<p><strong>Métodos HTTP básicos (Acciones)</strong></p>
-<p>Los métodos indican al servidor <strong>qué acción</strong> se desea realizar sobre un recurso.</p>
-<p>• <strong>GET:</strong> Solicita datos o información de un servidor. <strong>No modifica nada</strong> en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • <strong>POST:</strong> Envía datos al servidor para <strong>crear un nuevo recurso</strong> (por ejemplo, registrar un nuevo usuario o publicar un comentario). • <strong>PUT:</strong> Envía datos para <strong>actualizar por completo</strong> un recurso existente. Si no existe, a veces lo crea. • <strong>DELETE:</strong> Solicita la <strong>eliminación</strong> de un recurso específico en el servidor. • <strong>PATCH:</strong> Aplica <strong>modificaciones parciales</strong> a un recurso (a diferencia de PUT, no lo reemplaza entero).</p>
-<p><strong>Códigos de estado HTTP básicos (Respuestas)</strong></p>
-<p>Los códigos son números de tres dígitos que el servidor devuelve para indicar el <strong>resultado de la petición</strong>.</p>
-<p>Se dividen en grupos según su primer dígito:</p>
-<p><strong>🟢 2xx: Éxito (Todo salió bien)</strong> • <strong>200 OK:</strong> La petición fue exitosa y el servidor devuelve los datos solicitados. • <strong>201 Created:</strong> La petición fue exitosa y se ha <strong>creado un nuevo recurso</strong> (común tras un POST).</p>
-<p><strong>🟡 3xx: Redirección (Hay que ir a otro lado)</strong> • <strong>301 Moved Permanently:</strong> El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • <strong>302 Found:</strong> El recurso está temporalmente en otra dirección.</p>
-<p><strong>🔴 4xx: Errores del Cliente (El error está en tu petición)</strong> • <strong>400 Bad Request:</strong> El servidor no entiende la petición porque está mal redactada o corrupta. • <strong>401 Unauthorized:</strong> No tienes permiso para ver el recurso; necesitas <strong>iniciar sesión</strong>. • <strong>403 Forbidden:</strong> El servidor entiende quién eres, pero <strong>tienes prohibido</strong> el acceso a ese recurso. • <strong>404 Not Found:</strong> El recurso solicitado <strong>no existe</strong> o no se pudo encontrar en el servidor.</p>
-<p><strong>🟣 5xx: Errores del Servidor (El error es de la web/sistema)</strong> • <strong>500 Internal Server Error:</strong> El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • <strong>503 Service Unavailable:</strong> El servidor <strong>no está disponible</strong> temporalmente, generalmente por mantenimiento o sobrecarga.</p>
-</section>
-</section>
-<section id="json" class="level2">
-<h2 class="anchored" data-anchor-id="json">JSON</h2>
-<p><strong>JSON</strong> (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.</p>
-<p>A pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día <strong>es un estándar completamente independiente del lenguaje</strong> y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).</p>
-<section id="estructura-técnica" class="level3">
-<h3 class="anchored" data-anchor-id="estructura-técnica">Estructura técnica</h3>
-<p>Un archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:</p>
+<p><a href="https://git-scm.com/">Git</a></p>
 <ul>
-<li><strong>Colecciones de pares clave/valor</strong>: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.</li>
-<li><strong>Listas ordenadas de valores</strong>: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.</li>
+<li>Necesitamos tener una cuenta en <strong>Github</strong> para almacenar nuestros repositorios</li>
 </ul>
+<p><a href="https://github.com/">Github</a></p>
 </section>
-<section id="ejemplo" class="level3">
-<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"usuario_id"</span><span class="op">:</span> <span class="dv">10543</span><span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nombre"</span><span class="op">:</span> <span class="st">"Elena"</span><span class="op">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"es_administrador"</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"telefonos"</span><span class="op">:</span> [</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 600 000 000"</span><span class="op">,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 910 000 000"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"configuracion"</span><span class="op">:</span> {</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tema"</span><span class="op">:</span> <span class="st">"oscuro"</span><span class="op">,</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"notificaciones"</span><span class="op">:</span> <span class="kw">true</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ultimo_acceso"</span><span class="op">:</span> <span class="kw">null</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="primeros-pasos" class="level3">
+<h3 class="anchored" data-anchor-id="primeros-pasos">Primeros pasos</h3>
+<ul>
+<li><p>Creamos un repositorio en Github</p></li>
+<li><p>Tenemos que inicializar Git en la carpeta local de nuestro proyecto</p></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Cambiamos el nombre de nuestra rama principal para asegurarnos que es <code>main</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esto crea un directorio <code>.git</code></p>
+<ul>
+<li>Conectamos la carpeta local con el repositorio remoto de GitHub</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin <span class="pp">[</span><span class="ss">URL</span><span class="pp">-</span><span class="ss">HTTPS</span><span class="pp">-</span><span class="ss">del</span><span class="pp">-</span><span class="ss">repositorio</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Preparamos y confirmamos nuestros archivos</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Primer commit"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Subimos los cambios a GitHub</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p># 🐉 Clases en Python</p>
+<p>Una clase básica:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(tarea1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
-<p><strong>Los datos que llegan desde fuera no son confiables</strong></p>
+<p>Son objetos diferentes tarea1 != tarea2</p>
 </blockquote>
-</section>
-</section>
-<section id="arquitectura-por-capas" class="level2">
-<h2 class="anchored" data-anchor-id="arquitectura-por-capas">Arquitectura por capas</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/u1_5.png" class="img-fluid figure-img"></p>
-<figcaption>Arquitectura 3 capas</figcaption>
-</figure>
-</div>
-<p>La <strong>arquitectura por capas</strong> (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. Se fundamenta en el principio de <strong>separación de responsabilidades</strong> (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.</p>
-<section id="estructura-tradicional-arquitectura-de-3-capas" class="level3">
-<h3 class="anchored" data-anchor-id="estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</h3>
-<p>Aunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:</p>
-<ul>
-<li><strong>Capa de Presentación</strong> (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).</li>
-<li><strong>Capa de Lógica de Negocio</strong> (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.</li>
-<li><strong>Capa de Acceso a Datos</strong> (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.</li>
-</ul>
-</section>
-<section id="regla-de-acoplamiento-cerrado" class="level3">
-<h3 class="anchored" data-anchor-id="regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</h3>
-<p>En una arquitectura limpia por capas, estas operan de forma <strong>cerrada</strong>. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente “saltarse” niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).</p>
-</section>
-</section>
-<section id="servidores-y-entornos-de-ejecución" class="level2">
-<h2 class="anchored" data-anchor-id="servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</h2>
-<blockquote class="blockquote">
-<p>Mi aplicación funciona en local, ¿qué necesita para funcionar en producción?</p>
-<p><strong>Qué funcione en mi ordenador no significa que esté preparada para producción</strong></p>
-</blockquote>
-<p>Ejemplo:</p>
-<p><strong>Mi equipo MACOS -&gt; Node.js -&gt; Aplicación</strong></p>
-<p><strong>Servidor -&gt; Node.js -&gt; Aplicación</strong></p>
-</section>
-</section>
-<section id="el-ecosistema-de-una-aplicación" class="level1">
-<h1>🌗 4. El ecosistema de una aplicación</h1>
-<section id="componentes-la-anatomía-del-software" class="level2">
-<h2 class="anchored" data-anchor-id="componentes-la-anatomía-del-software">Componentes (la anatomía del software)</h2>
-<p>Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:</p>
-<ul>
-<li><strong>Frontend</strong> (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). <em>Foco de seguridad</em>: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).</li>
-<li><strong>Backend</strong> (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. <em>Foco de seguridad</em>: Autenticación, autorización (RBAC) y sanitización de entradas.</li>
-<li><strong>Almacenamiento y Persistencia</strong> (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). <em>Foco de seguridad</em>: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).</li>
-<li><strong>Servicios Periféricos y Middleware</strong>: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).</li>
-</ul>
-</section>
-<section id="dependencias-el-software-de-terceros" class="level2">
-<h2 class="anchored" data-anchor-id="dependencias-el-software-de-terceros">Dependencias (el software de terceros)</h2>
-<p>Hoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).</p>
-<section id="qué-es-una-dependencia" class="level3">
-<h3 class="anchored" data-anchor-id="qué-es-una-dependencia">¿Qué es una dependencia?</h3>
-<p>Código preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).</p>
-</section>
-<section id="dependencias-transitivas" class="level3">
-<h3 class="anchored" data-anchor-id="dependencias-transitivas">Dependencias Transitivas</h3>
-<p>Las librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.</p>
-</section>
-<section id="riesgos-de-seguridad-asociados" class="level3">
-<h3 class="anchored" data-anchor-id="riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</h3>
-<ul>
-<li><strong>Vulnerabilidades conocidas (CVEs)</strong>: Fallos de seguridad descubiertos en versiones antiguas de una librería.</li>
-<li><strong>Ataques a la Cadena de Suministro (Supply Chain Attacks)</strong>: Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.</li>
-</ul>
-</section>
-<section id="buenas-prácticas-de-producción-segura" class="level3">
-<h3 class="anchored" data-anchor-id="buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</h3>
-<ul>
-<li><p>Uso de herramientas <strong>SCA (Software Composition Analysis)</strong> como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline.</p></li>
-<li><p>Fijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.</p></li>
-</ul>
-</section>
-</section>
-<section id="entornos-de-desarrollo-pruebas-y-producción" class="level2">
-<h2 class="anchored" data-anchor-id="entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</h2>
-<p>Una regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (<em>sandbox</em>) antes de llegar al usuario final.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/ud1_6.png" class="img-fluid figure-img"></p>
-<figcaption>Entornos</figcaption>
-</figure>
-</div>
-<section id="conceptos-clave-de-la-seguridad-en-entornos" class="level3">
-<h3 class="anchored" data-anchor-id="conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</h3>
-<ul>
-<li><strong>Principio de Menor Privilegio</strong>: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.</li>
-<li><strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).</li>
-<li><strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</li>
-</ul>
 
 
 </section>

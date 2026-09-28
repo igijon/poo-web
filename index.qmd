@@ -1,9 +1,9 @@
 ---
-title: "Puesta en Producción Segura"
+title: "Programación Orientada a Objetos"
 ---
 
 <div class="home-hero">
-<div class="home-eyebrow">Puesta en Producción Segura · CIBER</div>
+<div class="home-eyebrow">Programación Orientada a Objetos · Python</div>
 <h1>Aprender.<br><span>Construir.</span></h1>
 <p>Un espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.</p>
 </div>
@@ -22,16 +22,16 @@ title: "Puesta en Producción Segura"
 <div class="home-card-content">
 <div class="home-card-label">Módulo</div>
 <div class="home-card-title">Carga lectiva</div>
-<div class="home-card-description">120 horas anuales.</div>
-<div class="home-card-description">4 horas a la semana.</div>
+<div class="home-card-description">150 horas anuales.</div>
+<div class="home-card-description">5 horas a la semana.</div>
 </div>
 </div>
 
 <div class="home-card">
 <div class="home-card-icon">🧪</div>
 <div class="home-card-content">
-<div class="home-card-label">RRAAA</div>
-<div class="home-card-title">Resultados de aprendizaje</div>
+<div class="home-card-label">RRAAA y UUDD</div>
+<div class="home-card-title">Resultados de aprendizaje y planificación de UUDD</div>
 <div class="home-card-description">Objetivos que debemos alcanzar para superar el módulo.</div>
 <a href="rraa/index.html" class="home-card-link">Ver RRAA →</a>
 </div>

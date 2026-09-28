@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación? – Puesta en Producción Segura</title>
+<title>UD1 · Lab 1 · Taskflow: Pensar antes de programar – Programación Orientada a Objetos</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">UD1 · Lab 1 · ¿Dónde se ejecuta?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">UD1 · Lab 1 · Taskflow. Pensar antes de programar</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">Puesta en Producción Segura</a> 
+      <a href="../../">Programación Orientada a Objetos</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</span></a>
+ <span class="menu-text">1-Python profesional y modelo orientado a objetos</span></a>
   </div>
 </li>
       </ul>
@@ -182,13 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
+ <span class="menu-text">UD1 · Lab 1 · Taskflow. Pensar antes de programar</span></a>
   </div>
 </li>
       </ul>
@@ -225,23 +219,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dónde-se-ejecuta" id="toc-dónde-se-ejecuta" class="nav-link active" data-scroll-target="#dónde-se-ejecuta">🧪 ¿Dónde se ejecuta?</a></li>
-  <li><a href="#cómo-se-comunica" id="toc-cómo-se-comunica" class="nav-link" data-scroll-target="#cómo-se-comunica">🧪 ¿Cómo se comunica?</a>
+  <li><a href="#pensar-antes-de-programar" id="toc-pensar-antes-de-programar" class="nav-link active" data-scroll-target="#pensar-antes-de-programar">🧪 Pensar antes de programar</a>
   <ul class="collapse">
-  <li><a href="#herramientas" id="toc-herramientas" class="nav-link" data-scroll-target="#herramientas">Herramientas</a></li>
-  <li><a href="#qué-debemos-hacer" id="toc-qué-debemos-hacer" class="nav-link" data-scroll-target="#qué-debemos-hacer">¿Qué debemos hacer?</a></li>
-  <li><a href="#observamos" id="toc-observamos" class="nav-link" data-scroll-target="#observamos">Observamos:</a></li>
-  <li><a href="#responde" id="toc-responde" class="nav-link" data-scroll-target="#responde">Responde</a></li>
+  <li><a href="#parte-1.-analizar-el-problema" id="toc-parte-1.-analizar-el-problema" class="nav-link" data-scroll-target="#parte-1.-analizar-el-problema">Parte 1. Analizar el problema</a></li>
+  <li><a href="#parte-2.-identificar-el-estado" id="toc-parte-2.-identificar-el-estado" class="nav-link" data-scroll-target="#parte-2.-identificar-el-estado">Parte 2. Identificar el estado</a></li>
+  <li><a href="#parte-3.-identificar-el-comportamiento" id="toc-parte-3.-identificar-el-comportamiento" class="nav-link" data-scroll-target="#parte-3.-identificar-el-comportamiento">Parte 3. Identificar el comportamiento</a></li>
+  <li><a href="#parte-4.-responsabilidades" id="toc-parte-4.-responsabilidades" class="nav-link" data-scroll-target="#parte-4.-responsabilidades">Parte 4. Responsabilidades</a></li>
+  <li><a href="#parte-5.-diseñar-el-modelo" id="toc-parte-5.-diseñar-el-modelo" class="nav-link" data-scroll-target="#parte-5.-diseñar-el-modelo">Parte 5. Diseñar el modelo</a></li>
+  <li><a href="#parte-6.-diseñar-las-clases-con-uml" id="toc-parte-6.-diseñar-las-clases-con-uml" class="nav-link" data-scroll-target="#parte-6.-diseñar-las-clases-con-uml">Parte 6. Diseñar las clases con UML</a></li>
+  <li><a href="#parte-7.-primera-implementación-con-python" id="toc-parte-7.-primera-implementación-con-python" class="nav-link" data-scroll-target="#parte-7.-primera-implementación-con-python">Parte 7. Primera implementación con Python</a></li>
+  <li><a href="#parte-8.-el-historial-de-git" id="toc-parte-8.-el-historial-de-git" class="nav-link" data-scroll-target="#parte-8.-el-historial-de-git">Parte 8. El historial de Git</a></li>
   </ul></li>
+  <li><a href="#entregables-del-laboratorio" id="toc-entregables-del-laboratorio" class="nav-link" data-scroll-target="#entregables-del-laboratorio">📦 Entregables del laboratorio</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">UD1 · Lab 1 · ¿Dónde se ejecuta?</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">🧪 Laboratorios</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud1/lab1.html">UD1 · Lab 1 · Taskflow. Pensar antes de programar</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?</h1>
+<h1 class="title">UD1 · Lab 1 · Taskflow: Pensar antes de programar</h1>
 </div>
 
 
@@ -258,78 +256,288 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="dónde-se-ejecuta" class="level1">
-<h1>🧪 ¿Dónde se ejecuta?</h1>
-<p>Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:</p>
+<section id="pensar-antes-de-programar" class="level1">
+<h1>🧪 Pensar antes de programar</h1>
+<p>Imagina que una pequeña empresa necesita una aplicación para organizar sus proyectos de desarrollo.</p>
+<p>La aplicación debe permitir:</p>
 <ul>
-<li>React</li>
-<li>JavaScript en navegador.</li>
-<li>Node.js</li>
-<li>Python</li>
-<li>Aplicación Android</li>
-<li>Base de datos</li>
+<li>crear proyectos;</li>
+<li>registrar usuarios;</li>
+<li>crear tareas;</li>
+<li>asignar tareas a usuarios;</li>
+<li>cambiar el estado de una tarea;</li>
+<li>consultar las tareas de un proyecto;</li>
+<li>consultar las tareas asignadas a una persona.</li>
 </ul>
-<p>Debes responder, para cada una:</p>
-<ul>
-<li>¿Dónde se ejecuta?</li>
-<li>¿Qué necesita para ejecutarse?</li>
-</ul>
+<p>Una tarea puede encontrarse en diferentes estados:</p>
+<p>PENDIENTE → EN PROGRESO → COMPLETADA</p>
 <blockquote class="blockquote">
-<p>Esta actividad es conceptual</p>
+<p>Nuestro objetivo es únicamente diseñar el modelo de objetos y realizar una primera implementación en Python.</p>
 </blockquote>
+<section id="parte-1.-analizar-el-problema" class="level2">
+<h2 class="anchored" data-anchor-id="parte-1.-analizar-el-problema">Parte 1. Analizar el problema</h2>
+<p>Antes de escribir código, identifica las entidades importantes del problema.</p>
+<p>Completa una tabla como esta:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Posible objeto</th>
+<th>¿Por qué existe?</th>
+<th>¿Qué información necesita?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Proyecto</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Tarea</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Después responde:</p>
+<p>¿Qué otras entidades podrían existir?</p>
+<p>¿Cuáles son realmente necesarias?</p>
+<p>¿Cuáles son solamente datos o características de otras entidades?</p>
+<p>No busques todavía una única respuesta correcta.</p>
+<p>Lo importante es justificar tus decisiones.</p>
 </section>
-<section id="cómo-se-comunica" class="level1">
-<h1>🧪 ¿Cómo se comunica?</h1>
-<section id="herramientas" class="level2">
-<h2 class="anchored" data-anchor-id="herramientas">Herramientas</h2>
-<ul>
-<li>Navegador.</li>
-<li>DevTools.</li>
-<li>Una aplicación web sencilla que tú elijas.</li>
-</ul>
-</section>
-<section id="qué-debemos-hacer" class="level2">
-<h2 class="anchored" data-anchor-id="qué-debemos-hacer">¿Qué debemos hacer?</h2>
-<ul>
-<li>Abrir la aplicación.</li>
-<li>Abrir DevTools.</li>
-<li>Ir a Network.</li>
-<li>Identificar peticiones.</li>
-</ul>
-</section>
-<section id="observamos" class="level2">
-<h2 class="anchored" data-anchor-id="observamos">Observamos:</h2>
-<ul>
-<li>URL.</li>
-<li>Método.</li>
-<li>Request.</li>
-<li>Response.</li>
-<li>JSON.</li>
-<li>Headers.</li>
-</ul>
+<section id="parte-2.-identificar-el-estado" class="level2">
+<h2 class="anchored" data-anchor-id="parte-2.-identificar-el-estado">Parte 2. Identificar el estado</h2>
+<blockquote class="blockquote">
+<p>El estado de un objeto es la información que describe cómo se encuentra en un momento determinado.</p>
+</blockquote>
+<p>Para cada objeto que hayas identificado, determina qué información necesita conocer.</p>
 <p>Por ejemplo:</p>
-<p><code>GET /api/products</code></p>
-<p>Respuesta:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"id"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"name"</span><span class="fu">:</span> <span class="st">"Producto"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>TAREA</p>
+<p>Estado: - título - descripción - estado - responsable</p>
 <blockquote class="blockquote">
-<p>Tenemos que ver que una aplicación está formada por componentes que se comunican</p>
+<p>No incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?</p>
 </blockquote>
 </section>
-<section id="responde" class="level2">
-<h2 class="anchored" data-anchor-id="responde">Responde</h2>
+<section id="parte-3.-identificar-el-comportamiento" class="level2">
+<h2 class="anchored" data-anchor-id="parte-3.-identificar-el-comportamiento">Parte 3. Identificar el comportamiento</h2>
+<p>Ahora vamos a cambiar la pregunta.</p>
+<p>Ya no queremos saber qué tiene cada objeto.</p>
+<p>Queremos saber qué puede hacer.</p>
+<p>Por ejemplo:</p>
+<p>TAREA</p>
+<p>Puede:</p>
 <ul>
-<li>¿Qué información estamos enviando?</li>
-<li>¿Qué información estamos recibiendo?</li>
-<li>¿Qué ocurre si alguien la modifica?</li>
+<li><p>completar</p></li>
+<li><p>iniciar</p></li>
+<li><p>reasignarse</p></li>
 </ul>
-
-
+<p>Piensa en comportamientos para cada objeto.</p>
+<blockquote class="blockquote">
+<p>Regla: Expresa los comportamientos como acciones.</p>
+</blockquote>
 </section>
+<section id="parte-4.-responsabilidades" class="level2">
+<h2 class="anchored" data-anchor-id="parte-4.-responsabilidades">Parte 4. Responsabilidades</h2>
+<p>Ahora viene una de las decisiones más importantes de la POO.</p>
+<blockquote class="blockquote">
+<p>¿Quién debería encargarse de cada acción?</p>
+</blockquote>
+<p>Supongamos que queremos completar una tarea.</p>
+<p>Tenemos varias posibilidades:</p>
+<p>Tarea</p>
+<p>Usuario</p>
+<p>Proyecto</p>
+<p>main.py</p>
+<p>¿Quién debería ser responsable?</p>
+<p>Justifica tu decisión.</p>
+<p>Haz lo mismo con:</p>
+<p>Asignar una tarea</p>
+<p>Cambiar el estado de una tarea</p>
+<p>rear un proyecto</p>
+<p>Añadir una tarea a un proyecto</p>
+<p>Puedes utilizar esta tabla:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Acción</th>
+<th>Objeto responsable</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Completar una tarea</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Iniciar una tarea</td>
+<td></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>Asignar responsable</td>
+<td></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="even">
+<td>Crear proyecto</td>
+<td></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>Añadir tarea al proyecto</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parte-5.-diseñar-el-modelo" class="level2">
+<h2 class="anchored" data-anchor-id="parte-5.-diseñar-el-modelo">Parte 5. Diseñar el modelo</h2>
+<p>Ahora reúne tus decisiones.</p>
+<p>Construye un primer modelo conceptual:</p>
+<pre><code>             PROYECTO
+                 │
+                 │ contiene
+                 ▼
+               TAREA
+                 │
+                 │ asignada a
+                 ▼
+              USUARIO</code></pre>
+<p>Añade la información y comportamientos que hayas decidido.</p>
+</section>
+<section id="parte-6.-diseñar-las-clases-con-uml" class="level2">
+<h2 class="anchored" data-anchor-id="parte-6.-diseñar-las-clases-con-uml">Parte 6. Diseñar las clases con UML</h2>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>┌─────────────────────────────┐</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>│           Tarea             │</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>├─────────────────────────────┤</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>│ - titulo: str               │</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>│ - descripcion: str          │</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>│ - estado: str               │</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>│ - responsable: Usuario      │</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>├─────────────────────────────┤</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>│ + iniciar(): None           │</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>│ + completar(): None         │</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>│ + reasignar(): None         │</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>└─────────────────────────────┘</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Haz lo mismo para el resto de objetos que hayas determinado.</p>
+<blockquote class="blockquote">
+<p>No es necesario representar todavía las relaciones UML posibles.</p>
+</blockquote>
+</section>
+<section id="parte-7.-primera-implementación-con-python" class="level2">
+<h2 class="anchored" data-anchor-id="parte-7.-primera-implementación-con-python">Parte 7. Primera implementación con Python</h2>
+<p>Ahora sí podemos programar.</p>
+<p>Crea el proyecto utilizando el entorno profesional que hemos visto en clase.</p>
+<p>La estructura inicial será:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>taskflow/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>├── .gitignore</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>├── README.md</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>├── pyproject.toml</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>└── src/</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    └── taskflow/</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        ├── __init__.py</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        └── main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Crea primero la clase Tarea y a continuación el resto.</p>
+<p>Crea también el repositorio correspondiente en Github.</p>
+</section>
+<section id="parte-8.-el-historial-de-git" class="level2">
+<h2 class="anchored" data-anchor-id="parte-8.-el-historial-de-git">Parte 8. El historial de Git</h2>
+<p>Durante el laboratorio utiliza Git para registrar la evolución del proyecto.</p>
+<p>No esperes hasta el final.</p>
+<p>Realiza commits cuando completes partes significativas.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"chore: crear proyecto TaskFlow"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: crear clase Tarea"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y posteriormente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: implementar comportamiento de Tarea"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finalmente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Consulta el historial:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tu repositorio debe permitir observar cómo ha evolucionado el diseño.</p>
+<p>##&nbsp;Parte 9. La IA como analista</p>
+<p>En este laboratorio vamos a utilizar IA, pero <strong>no para que nos diseñe y programe TaskFlow</strong>.</p>
+<p>Primero realiza tu propio análisis.</p>
+<p>Después puedes utilizar una IA para contrastarlo.</p>
+<p>Utiliza un prompt como:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Estoy diseñando una aplicación de gestión de proyectos</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>llamada TaskFlow.</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>He identificado estos objetos:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>- Proyecto</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>- Usuario</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>- Tarea</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>Para cada uno he definido este estado:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>[PEGA AQUÍ TU PROPUESTA]</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>Y estos comportamientos:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>[PEGA AQUÍ TU PROPUESTA]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>Analiza mi diseño como si fueras un analista de software.</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>No escribas código.</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>Indica:</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>1. qué decisiones parecen coherentes;</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>2. qué responsabilidades podrían estar mal asignadas;</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>3. qué información podría faltar;</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>4. qué información podría sobrar;</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>5. qué preguntas debería hacerme antes de programar.</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>No rediseñes la solución completa.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después compara:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>MI DISEÑO</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     │</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     ├── Coincidencias</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     │</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     ├── Diferencias</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     │</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     └── Decisiones que cambio</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>La IA no sustituye tu diseño.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>La utilizamos para hacer preguntas y detectar posibles problemas.</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="entregables-del-laboratorio" class="level1">
+<h1>📦 Entregables del laboratorio</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>taskflow/</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>├── .gitignore</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>├── README.md</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>├── pyproject.toml</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>└── src/</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    └── taskflow/</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        ├── __init__.py</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        └── main.py</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>└── doc/</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    └── 01-analisis.md</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    └── 02-modelo-uml.png</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    └── 03-ia-prompt.md</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El documento 01-analisis.md debe recoger:</p>
+<ol type="1">
+<li>Objetos identificados</li>
+<li>Estado de cada objeto</li>
+<li>Comportamiento</li>
+<li>Responsabilidades</li>
+<li>Decisiones de diseño</li>
+<li>Cambios realizados después de utilizar IA</li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->

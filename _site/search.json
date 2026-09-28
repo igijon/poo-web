@@ -9,9 +9,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Puesta en Producción Segura",
+    "title": "Programación Orientada a Objetos",
     "section": "",
-    "text": "Puesta en Producción Segura · CIBER\n\n\nAprender.Construir.\n\n\nUn espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.\n\n\n\n\nInvestigación · Diseño · Desarrollo · IA · Comunicación\n\n\n¿Cómo conseguimos que una aplicación pase de código a producción de forma segura utilizando automatización e IA?.\n\n\n\nTu espacio de trabajo\n\n\n\n\n📚\n\n\n\nMódulo\n\n\nCarga lectiva\n\n\n120 horas anuales.\n\n\n4 horas a la semana.\n\n\n\n\n\n🧪\n\n\n\nRRAAA\n\n\nResultados de aprendizaje\n\n\nObjetivos que debemos alcanzar para superar el módulo.\n\nVer RRAA →\n\n\n\n\nRecursos\n\n\n\n\n🤖\n\n\n\nTRANSVERSAL\n\n\nIA\n\n\nLa inteligencia artificial como herramienta para aprender, investigar y desarrollar.\n\nExplorar IA →\n\n\n\n\n📦\n\n\n\nAPOYO\n\n\nRecursos\n\n\nPlantillas, herramientas y recursos de apoyo para el proyecto.\n\nVer recursos →",
+    "text": "Programación Orientada a Objetos · Python\n\n\nAprender.Construir.\n\n\nUn espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.\n\n\n\n\nInvestigación · Diseño · Desarrollo · IA · Comunicación\n\n\n¿Cómo conseguimos que una aplicación pase de código a producción de forma segura utilizando automatización e IA?.\n\n\n\nTu espacio de trabajo\n\n\n\n\n📚\n\n\n\nMódulo\n\n\nCarga lectiva\n\n\n150 horas anuales.\n\n\n5 horas a la semana.\n\n\n\n\n\n🧪\n\n\n\nRRAAA y UUDD\n\n\nResultados de aprendizaje y planificación de UUDD\n\n\nObjetivos que debemos alcanzar para superar el módulo.\n\nVer RRAA →\n\n\n\n\nRecursos\n\n\n\n\n🤖\n\n\n\nTRANSVERSAL\n\n\nIA\n\n\nLa inteligencia artificial como herramienta para aprender, investigar y desarrollar.\n\nExplorar IA →\n\n\n\n\n📦\n\n\n\nAPOYO\n\n\nRecursos\n\n\nPlantillas, herramientas y recursos de apoyo para el proyecto.\n\nVer recursos →",
     "crumbs": [
       "🏠 Inicio"
     ]
@@ -256,12 +256,12 @@
   {
     "objectID": "unidades/ud1/index.html",
     "href": "unidades/ud1/index.html",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "",
-    "text": "El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.\nPrimera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.\nNuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.",
+    "text": "Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos…?\n\nAl principio, podríamos resolverlo con variables y funciones:\ntarea_1_titulo = \"Diseñar login\"\ntarea_1_estado = \"pendiente\"\ntarea_1_responsable = \"Ana\"\n\ntarea_2_titulo = \"Crear API\"\ntarea_2_estado = \"en progreso\"\ntarea_2_responsable = \"Luis\"\nY funciones:\ndef completar_tarea(...):\n    ...\n\ndef cambiar_responsable(...):\n    ...\n\ndef mostrar_tarea(...):\n    ...\n\nRápidamente aparecen las preguntas: - ¿A qué proyecto pertenece la tarea?\n\n¿Quién es responsable?\n¿Qué ocurre si tenemos 200 tareas?\n¿Cómo evitamos mezclar los datos?\n¿Dónde colocamos las operaciones relacionadas con una tarea?",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
@@ -322,12 +322,12 @@
   {
     "objectID": "laboratorios/ud1/lab1.html",
     "href": "laboratorios/ud1/lab1.html",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
     "section": "",
-    "text": "Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:\n\nReact\nJavaScript en navegador.\nNode.js\nPython\nAplicación Android\nBase de datos\n\nDebes responder, para cada una:\n\n¿Dónde se ejecuta?\n¿Qué necesita para ejecutarse?\n\n\nEsta actividad es conceptual",
+    "text": "Imagina que una pequeña empresa necesita una aplicación para organizar sus proyectos de desarrollo.\nLa aplicación debe permitir:\n\ncrear proyectos;\nregistrar usuarios;\ncrear tareas;\nasignar tareas a usuarios;\ncambiar el estado de una tarea;\nconsultar las tareas de un proyecto;\nconsultar las tareas asignadas a una persona.\n\nUna tarea puede encontrarse en diferentes estados:\nPENDIENTE → EN PROGRESO → COMPLETADA\n\nNuestro objetivo es únicamente diseñar el modelo de objetos y realizar una primera implementación en Python.\n\n\n\nAntes de escribir código, identifica las entidades importantes del problema.\nCompleta una tabla como esta:\n\n\n\nPosible objeto\n¿Por qué existe?\n¿Qué información necesita?\n\n\n\n\nProyecto\n\n\n\n\nTarea\n\n\n\n\n\nDespués responde:\n¿Qué otras entidades podrían existir?\n¿Cuáles son realmente necesarias?\n¿Cuáles son solamente datos o características de otras entidades?\nNo busques todavía una única respuesta correcta.\nLo importante es justificar tus decisiones.\n\n\n\n\nEl estado de un objeto es la información que describe cómo se encuentra en un momento determinado.\n\nPara cada objeto que hayas identificado, determina qué información necesita conocer.\nPor ejemplo:\nTAREA\nEstado: - título - descripción - estado - responsable\n\nNo incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?\n\n\n\n\nAhora vamos a cambiar la pregunta.\nYa no queremos saber qué tiene cada objeto.\nQueremos saber qué puede hacer.\nPor ejemplo:\nTAREA\nPuede:\n\ncompletar\niniciar\nreasignarse\n\nPiensa en comportamientos para cada objeto.\n\nRegla: Expresa los comportamientos como acciones.\n\n\n\n\nAhora viene una de las decisiones más importantes de la POO.\n\n¿Quién debería encargarse de cada acción?\n\nSupongamos que queremos completar una tarea.\nTenemos varias posibilidades:\nTarea\nUsuario\nProyecto\nmain.py\n¿Quién debería ser responsable?\nJustifica tu decisión.\nHaz lo mismo con:\nAsignar una tarea\nCambiar el estado de una tarea\nrear un proyecto\nAñadir una tarea a un proyecto\nPuedes utilizar esta tabla:\n\n\n\nAcción\nObjeto responsable\n¿Por qué?\n\n\n\n\nCompletar una tarea\n\n\n\n\nIniciar una tarea\n\n \n\n\nAsignar responsable\n\n \n\n\nCrear proyecto\n\n \n\n\nAñadir tarea al proyecto\n\n\n\n\n\n\n\n\nAhora reúne tus decisiones.\nConstruye un primer modelo conceptual:\n             PROYECTO\n                 │\n                 │ contiene\n                 ▼\n               TAREA\n                 │\n                 │ asignada a\n                 ▼\n              USUARIO\nAñade la información y comportamientos que hayas decidido.\n\n\n\nPor ejemplo:\n┌─────────────────────────────┐\n│           Tarea             │\n├─────────────────────────────┤\n│ - titulo: str               │\n│ - descripcion: str          │\n│ - estado: str               │\n│ - responsable: Usuario      │\n├─────────────────────────────┤\n│ + iniciar(): None           │\n│ + completar(): None         │\n│ + reasignar(): None         │\n└─────────────────────────────┘\nHaz lo mismo para el resto de objetos que hayas determinado.\n\nNo es necesario representar todavía las relaciones UML posibles.\n\n\n\n\nAhora sí podemos programar.\nCrea el proyecto utilizando el entorno profesional que hemos visto en clase.\nLa estructura inicial será:\ntaskflow/\n├── .gitignore\n├── README.md\n├── pyproject.toml\n└── src/\n    └── taskflow/\n        ├── __init__.py\n        └── main.py\nCrea primero la clase Tarea y a continuación el resto.\nCrea también el repositorio correspondiente en Github.\n\n\n\nDurante el laboratorio utiliza Git para registrar la evolución del proyecto.\nNo esperes hasta el final.\nRealiza commits cuando completes partes significativas.\nPor ejemplo:\ngit add .\ngit commit -m \"chore: crear proyecto TaskFlow\"\nDespués:\ngit add .\ngit commit -m \"feat: crear clase Tarea\"\nY posteriormente:\ngit add .\ngit commit -m \"feat: implementar comportamiento de Tarea\"\nFinalmente:\ngit push\nConsulta el historial:\ngit log --oneline\nTu repositorio debe permitir observar cómo ha evolucionado el diseño.\n## Parte 9. La IA como analista\nEn este laboratorio vamos a utilizar IA, pero no para que nos diseñe y programe TaskFlow.\nPrimero realiza tu propio análisis.\nDespués puedes utilizar una IA para contrastarlo.\nUtiliza un prompt como:\nEstoy diseñando una aplicación de gestión de proyectos\nllamada TaskFlow.\n\nHe identificado estos objetos:\n\n- Proyecto\n- Usuario\n- Tarea\n\nPara cada uno he definido este estado:\n[PEGA AQUÍ TU PROPUESTA]\n\nY estos comportamientos:\n[PEGA AQUÍ TU PROPUESTA]\n\nAnaliza mi diseño como si fueras un analista de software.\n\nNo escribas código.\n\nIndica:\n1. qué decisiones parecen coherentes;\n2. qué responsabilidades podrían estar mal asignadas;\n3. qué información podría faltar;\n4. qué información podría sobrar;\n5. qué preguntas debería hacerme antes de programar.\n\nNo rediseñes la solución completa.\nDespués compara:\nMI DISEÑO\n     │\n     ├── Coincidencias\n     │\n     ├── Diferencias\n     │\n     └── Decisiones que cambio\n\nLa IA no sustituye tu diseño.\n\n\nLa utilizamos para hacer preguntas y detectar posibles problemas.",
     "crumbs": [
       "🧪 Laboratorios",
-      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
   {
@@ -671,9 +671,9 @@
   {
     "objectID": "rraa/index.html",
     "href": "rraa/index.html",
-    "title": "Resultados de aprendizaje",
+    "title": "Resultados de aprendizaje, unidades y planteamiento",
     "section": "",
-    "text": "🎯 Resultados de aprendizaje\n\n\n\n\n\n\n\nRA\nResultado de aprendizaje\n\n\n\n\nRA1\nPrueba aplicaciones web y aplicaciones para dispositivos móviles analizando la estructura del código y su modelo de ejecución.\n\n\nRA2\nDetermina el nivel de seguridad requerido por aplicaciones identificando los vectores de ataque habituales y sus riesgos asociados.\n\n\nRA3\nDetecta y corrige vulnerabilidades de aplicaciones web analizando su código fuente y configurando servidores web.\n\n\nRA4\nDetecta problemas de seguridad en las aplicaciones para dispositivos móviles, monitorizando su ejecución y analizando ficheros y datos.\n\n\nRA5\nImplanta sistemas seguros de desplegado de software, utilizando herramientas para la automatización de la construcción de sus elementos."
+    "text": "🎯 Resultados de aprendizaje\n\n\n\n\n\n\n\nRA\nResultado de aprendizaje\n\n\n\n\nRA1\nCaracteriza la programación orientada a objetos organizándolos y relacionándolos con el código para manejarlos.\n\n\nRA2\nAplica la programación orientada a objetos para generar código eficiente y correctamente estructurado.\n\n\nRA3\nGestiona y maneja la creación de ficheros usando código Python.\n\n\nRA4\nConecta y gestiona bases de datos partiendo de entradas de datos desde aplicaciones Web.\n\n\nRA5\nEscribe programas en Python dando respuesta a problemas reales en diferentes campos de aplicación y teniendo en cuenta el contexto de uso.\n\n\n\n\n\n⚾️ Unidades didácticas\n\n\n\n\n\n\n\n\n\nUD\nUnidad Didáctica\nHoras\nRRAA\n\n\n\n\nUD1\nPython profesional y modelo orientado a objetos\n10h\nRA1\n\n\nUD2\nClases, objetos y encapsulación\n16h\nRA1-RA2\n\n\nUD3\nRelaciones entre objetos: composición, herencia y polimorfismo\n16h\nRA2\n\n\nUD4\nDiseño orientado a objetos y arquitectura\n14h\nRA2\n\n\nUD5\nPython avanzado para aplicaciones mantenibles\n12h\nRA1-RA2\n\n\nUD6\nPersistencia y serialización\n14h\nRA3\n\n\nUD7\nBases de datos con SQLAlchemy\n18h\nRA4\n\n\nUD8\nAPIs profesionales con FastAPI\n18h\nRA4\n\n\nUD9\nSeguridad, integración y entrega continua\n12h\nRA4-RA5\n\n\nUD10\nProyecto profesional Python + IA\n20h\nRA5"
   },
   {
     "objectID": "unidades/ud1/index.html#lenguajes-compilados",
@@ -700,34 +700,34 @@
   {
     "objectID": "unidades/ud1/index.html#lenguajes-compilados-e-interpretados",
     "href": "unidades/ud1/index.html#lenguajes-compilados-e-interpretados",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Lenguajes compilados e interpretados",
     "text": "Lenguajes compilados e interpretados\n\nLenguajes Compilados\n\nCódigo fuente → Compilador → Programa ejecutable → Ejecución\n\nEjemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)\n\n\nLenguajes Interpretados\n\nCódigo fuente → Runtime → Ejecución\n\nJavaScript → Node.js (lado del servidor), navegador web (lado del cliente)\nPython → Python runtime\nPor ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:\n\nVulnerabilidades\nDependencias\nConfiguración\nContenedores\nServidores…",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "unidades/ud1/index.html#arquitectura-cliente-servidor",
     "href": "unidades/ud1/index.html#arquitectura-cliente-servidor",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Arquitectura cliente-servidor",
     "text": "Arquitectura cliente-servidor\n\n\n\nArquitectura cliente-servidor\n\n\nEl Cliente: Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones.\nEl Servidor: Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos.\nCómo Funciona\n\nEl usuario interactúa con el cliente y realiza una acción o petición (por ejemplo, entrar a una página web).\nEl cliente envía un mensaje a través de la red usando protocolos como HTTP o HTTPS.\nEl servidor recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.\nEl servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "unidades/ud1/index.html#http-y-https",
     "href": "unidades/ud1/index.html#http-y-https",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "HTTP y HTTPS",
     "text": "HTTP y HTTPS\nLa diferencia principal entre HTTP y HTTPS es que el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta.\n¿Qué es HTTP?\nSignifica Hypertext Transfer Protocol (Protocolo de Transferencia de Hipertexto).\nEnvía la información en texto plano entre el navegador y el servidor.\nNo ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan.\n¿Qué es HTTPS?\nSignifica Hypertext Transfer Protocol Secure (Protocolo de Transferencia de Hipertexto Seguro).\nAñade los protocolos de seguridad SSL o TLS para cifrar los datos intercambiados.\nProtege la información confidencial, como contraseñas o números de tarjetas de crédito.\nValida la identidad del servidor web para evitar suplantaciones.\n\nHTTPS protege la comunicación pero NO GARANTIZA que la aplicación sea segura.",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
@@ -744,12 +744,12 @@
   {
     "objectID": "unidades/ud1/index.html#apis-rest",
     "href": "unidades/ud1/index.html#apis-rest",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "APIs REST",
     "text": "APIs REST\nUn API REST es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.\nEl acrónimo significa Application Programming Interface (Interfaz de programación de aplicaciones) y REpresentational State Transfer (Transferencia de estado representacional).\n\nFunciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.\n\n\n¿Cómo funciona?\nUna API REST funciona mediante un modelo de cliente y servidor:\n\nEl cliente: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.\nEl servidor: Es el sistema que recibe la petición, procesa la información en el backend (como buscar en una base de datos) y devuelve un resultado.\n\nLos datos se suelen enviar y recibir en formato , que es un formato de texto ligero.\n### Request/response\nRequest (Solicitud / Petición): Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como GET o POST, cabeceras y datos.\nResponse: Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.\n\n\nMétodos y códigos básicos\nMétodos HTTP básicos (Acciones)\nLos métodos indican al servidor qué acción se desea realizar sobre un recurso.\n• GET: Solicita datos o información de un servidor. No modifica nada en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • POST: Envía datos al servidor para crear un nuevo recurso (por ejemplo, registrar un nuevo usuario o publicar un comentario). • PUT: Envía datos para actualizar por completo un recurso existente. Si no existe, a veces lo crea. • DELETE: Solicita la eliminación de un recurso específico en el servidor. • PATCH: Aplica modificaciones parciales a un recurso (a diferencia de PUT, no lo reemplaza entero).\nCódigos de estado HTTP básicos (Respuestas)\nLos códigos son números de tres dígitos que el servidor devuelve para indicar el resultado de la petición.\nSe dividen en grupos según su primer dígito:\n🟢 2xx: Éxito (Todo salió bien) • 200 OK: La petición fue exitosa y el servidor devuelve los datos solicitados. • 201 Created: La petición fue exitosa y se ha creado un nuevo recurso (común tras un POST).\n🟡 3xx: Redirección (Hay que ir a otro lado) • 301 Moved Permanently: El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • 302 Found: El recurso está temporalmente en otra dirección.\n🔴 4xx: Errores del Cliente (El error está en tu petición) • 400 Bad Request: El servidor no entiende la petición porque está mal redactada o corrupta. • 401 Unauthorized: No tienes permiso para ver el recurso; necesitas iniciar sesión. • 403 Forbidden: El servidor entiende quién eres, pero tienes prohibido el acceso a ese recurso. • 404 Not Found: El recurso solicitado no existe o no se pudo encontrar en el servidor.\n🟣 5xx: Errores del Servidor (El error es de la web/sistema) • 500 Internal Server Error: El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • 503 Service Unavailable: El servidor no está disponible temporalmente, generalmente por mantenimiento o sobrecarga.",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
@@ -766,12 +766,12 @@
   {
     "objectID": "unidades/ud1/index.html#json",
     "href": "unidades/ud1/index.html#json",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "JSON",
     "text": "JSON\nJSON (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.\nA pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día es un estándar completamente independiente del lenguaje y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).\n\nEstructura técnica\nUn archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:\n\nColecciones de pares clave/valor: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.\nListas ordenadas de valores: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.\n\n\n\nEjemplo\n{\n  \"usuario_id\": 10543,\n  \"nombre\": \"Elena\",\n  \"es_administrador\": false,\n  \"telefonos\": [\n    \"+34 600 000 000\",\n    \"+34 910 000 000\"\n  ],\n  \"configuracion\": {\n    \"tema\": \"oscuro\",\n    \"notificaciones\": true\n  },\n  \"ultimo_acceso\": null\n}\n\nLos datos que llegan desde fuera no son confiables",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
@@ -788,23 +788,23 @@
   {
     "objectID": "unidades/ud1/index.html#arquitectura-por-capas",
     "href": "unidades/ud1/index.html#arquitectura-por-capas",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Arquitectura por capas",
     "text": "Arquitectura por capas\n\n\n\nArquitectura 3 capas\n\n\nLa arquitectura por capas (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. Se fundamenta en el principio de separación de responsabilidades (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.\n\nEstructura tradicional (arquitectura de 3 capas)\nAunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:\n\nCapa de Presentación (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).\nCapa de Lógica de Negocio (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.\nCapa de Acceso a Datos (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.\n\n\n\nRegla de acoplamiento cerrado\nEn una arquitectura limpia por capas, estas operan de forma cerrada. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente “saltarse” niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "unidades/ud1/index.html#servidores-y-entornos-de-ejecución",
     "href": "unidades/ud1/index.html#servidores-y-entornos-de-ejecución",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Servidores y entornos de ejecución",
     "text": "Servidores y entornos de ejecución\n\nMi aplicación funciona en local, ¿qué necesita para funcionar en producción?\nQué funcione en mi ordenador no significa que esté preparada para producción\n\nEjemplo:\nMi equipo MACOS -&gt; Node.js -&gt; Aplicación\nServidor -&gt; Node.js -&gt; Aplicación",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
@@ -832,57 +832,49 @@
   {
     "objectID": "unidades/ud1/index.html#entornos-de-desarrollo-pruebas-y-producción",
     "href": "unidades/ud1/index.html#entornos-de-desarrollo-pruebas-y-producción",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Entornos de desarrollo, pruebas y producción",
     "text": "Entornos de desarrollo, pruebas y producción\nUna regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (sandbox) antes de llegar al usuario final.\n\n\n\nEntornos\n\n\n\nConceptos clave de la seguridad en entornos\n\nPrincipio de Menor Privilegio: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.\nGestión Segura de Secretos: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).\nParidad de Entornos: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "unidades/ud1/index.html#componentes-la-anatomía-del-software",
     "href": "unidades/ud1/index.html#componentes-la-anatomía-del-software",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Componentes (la anatomía del software)",
     "text": "Componentes (la anatomía del software)\nPara proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:\n\nFrontend (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). Foco de seguridad: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).\nBackend (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. Foco de seguridad: Autenticación, autorización (RBAC) y sanitización de entradas.\nAlmacenamiento y Persistencia (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). Foco de seguridad: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).\nServicios Periféricos y Middleware: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "unidades/ud1/index.html#dependencias-el-software-de-terceros",
     "href": "unidades/ud1/index.html#dependencias-el-software-de-terceros",
-    "title": "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Dependencias (el software de terceros)",
     "text": "Dependencias (el software de terceros)\nHoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).\n\n¿Qué es una dependencia?\nCódigo preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).\n\n\nDependencias Transitivas\nLas librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.\n\n\nRiesgos de Seguridad Asociados\n\nVulnerabilidades conocidas (CVEs): Fallos de seguridad descubiertos en versiones antiguas de una librería.\nAtaques a la Cadena de Suministro (Supply Chain Attacks): Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.\n\n\n\nBuenas Prácticas de Producción Segura\n\nUso de herramientas SCA (Software Composition Analysis) como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline.\nFijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.",
     "crumbs": [
       "📚 Unidades",
-      "1-Del código a producción. ¿Qué significa que una aplicación sea segura?"
+      "1-Python profesional y modelo orientado a objetos"
     ]
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#herramientas",
     "href": "laboratorios/ud1/lab1.html#herramientas",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
     "section": "Herramientas",
-    "text": "Herramientas\n\nNavegador.\nDevTools.\nUna aplicación web sencilla que tú elijas.",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
-    ]
+    "text": "Herramientas\n\nNavegador.\nDevTools.\nUna aplicación web sencilla que tú elijas."
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#qué-debemos-hacer",
     "href": "laboratorios/ud1/lab1.html#qué-debemos-hacer",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
     "section": "¿Qué debemos hacer?",
-    "text": "¿Qué debemos hacer?\n\nAbrir la aplicación.\nAbrir DevTools.\nIr a Network.\nIdentificar peticiones.",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
-    ]
+    "text": "¿Qué debemos hacer?\n\nAbrir la aplicación.\nAbrir DevTools.\nIr a Network.\nIdentificar peticiones."
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#observan",
@@ -898,24 +890,16 @@
   {
     "objectID": "laboratorios/ud1/lab1.html#observamos",
     "href": "laboratorios/ud1/lab1.html#observamos",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
     "section": "Observamos:",
-    "text": "Observamos:\n\nURL.\nMétodo.\nRequest.\nResponse.\nJSON.\nHeaders.\n\nPor ejemplo:\nGET /api/products\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Producto\"\n  }\n]\n\nTenemos que ver que una aplicación está formada por componentes que se comunican",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
-    ]
+    "text": "Observamos:\n\nURL.\nMétodo.\nRequest.\nResponse.\nJSON.\nHeaders.\n\nPor ejemplo:\nGET /api/products\nRespuesta:\n[\n  {\n    \"id\": 1,\n    \"name\": \"Producto\"\n  }\n]\n\nTenemos que ver que una aplicación está formada por componentes que se comunican"
   },
   {
     "objectID": "laboratorios/ud1/lab1.html#responde",
     "href": "laboratorios/ud1/lab1.html#responde",
-    "title": "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
     "section": "Responde",
-    "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?",
-    "crumbs": [
-      "🧪 Laboratorios",
-      "UD1 · Lab 1 · ¿Dónde se ejecuta?"
-    ]
+    "text": "Responde\n\n¿Qué información estamos enviando?\n¿Qué información estamos recibiendo?\n¿Qué ocurre si alguien la modifica?"
   },
   {
     "objectID": "laboratorios/ud1/lab2.html#herramientas",
@@ -992,6 +976,336 @@
     "crumbs": [
       "🧪 Laboratorios",
       "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#representación-mediante-uml",
+    "href": "unidades/ud1/index.html#representación-mediante-uml",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Representación mediante UML",
+    "text": "Representación mediante UML\nUML (Unified Modeling Language) es un lenguaje gráfico para representar sistemas de software.\n\nUML es una herramienta para pensar y comunicar cómo vamos a construir nuestro software antes de escribir código\n\n\nPor ejemplo, si tenemos que gestionar en nuestra aplicación tareas, cada tarea tendrá un título, una descripción, un estado y una persona responsable. Una tarea se podrá marcar como completada\n\nPodríamos representarla así:\nLa caja tiene tres partes:\n\nNombre de la clase: Hablaremos después del concepto de clase…",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#conceptos-fundamentales",
+    "href": "unidades/ud1/index.html#conceptos-fundamentales",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Conceptos fundamentales",
+    "text": "Conceptos fundamentales\n\nClase\n\nUna clase es el molde, plantilla o plano arquitectónico a partir del cual se crean los objetos. No es un objeto real, sino la definición de cómo será ese objeto. Define qué datos tendrá y qué acciones podrá realizar.\nEjemplo: El plano de diseño de la raza “Perro”. Dice que todos los perros tendrán un nombre, una raza y la capacidad de ladrar.\n\nObjeto\n\nUn objeto es la instancia real y concreta creada a partir de una clase. Tiene existencia propia en la memoria de la computadora y posee datos específicos.\nEjemplo: firulais es un objeto real. Es un perro de carne y hueso (en código) que existe porque usamos el molde “Perro”.\n\nEstado\n\nEl estado está compuesto por los datos o características que tiene un objeto en un momento determinado. En programación, el estado se almacena en las variables o atributos del objeto. El estado puede cambiar a lo largo del tiempo.\nEjemplo: El estado de firulais incluye:Nombre: “Firulais”Edad: 3 añosHambre: Alto (este valor puede cambiar a “Bajo” si come)\n\nComportamiento\n\nEl comportamiento es el conjunto de acciones que un objeto puede realizar o los mensajes a los que puede responder. En código, el comportamiento se define mediante métodos o funciones dentro de la clase. El comportamiento usualmente lee o modifica el estado del propio objeto.\nEjemplo: Lo que firulais puede hacer:ladrar() (hace un sonido)comer() (cambia su estado de hambre a “Bajo”)\n\nResponsabilidad\n\nLa responsabilidad es el rol o la obligación que tiene una clase dentro del sistema. Es un concepto de diseño abstracto. Determina qué información debe conocer una clase y qué acciones debe gestionar ella misma, respetando el principio de que cada clase debe hacer una sola cosa bien (cohesión).\nEjemplo: La responsabilidad de la clase Perro es gestionar sus propias necesidades biológicas y datos básicos. No es su responsabilidad calcular el precio de la consulta médica en la veterinaria; eso sería responsabilidad de una clase Consulta o Factura.\nSin entrar en detalle, un ejemplo en Python podría ser:\n# CLASE: El molde\nclass Perro:\n    def __init__(self, nombre, edad):\n        # ESTADO: Los atributos del objeto\n        self.nombre = nombre\n        self.edad = edad\n        self.hambre = True \n\n    # COMPORTAMIENTO: Los métodos\n    def ladrar(self):\n        return f\"{self.nombre} dice: ¡Guau!\"\n\n    def comer(self):\n        self.hambre = False # Modifica el estado\n\n# OBJETO: La instancia real\nfirulais = Perro(\"Firulais\", 3)\n\n# Ver el comportamiento y estado\nprint(firulais.ladrar()) # Salida: Firulais dice: ¡Guau!\nPor tanto:\nUn objeto tiene:\nEstado\nnombre\nestado\nresponsable\nComportamiento\ncompletar()\nasignar()\ncambiar_estado()\nIdentidad\n\nDos tareas pueden tener exactamente los mismos datos y seguir siendo objetos diferentes",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#estado",
+    "href": "unidades/ud1/index.html#estado",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Estado",
+    "text": "Estado\nEl estado de un objeto es la información que describe cómo se encuentra ese objeto en un momento determinado.\nEl estado está compuesto por los datos o características que tiene un objeto en un momento determinado. En programación, el estado se almacena en las variables o atributos del objeto. El estado puede cambiar a lo largo del tiempo.\nPor ejemplo, una tarea podría tener:\nTítulo: Diseñar pantalla de login\nEstado: pendiente\nResponsable: Ana\nEse conjunto de valores forma parte del estado de la tarea.\nSi la tarea se completa:\nTítulo: Diseñar pantalla de login\nEstado: completada\nResponsable: Ana\nEl objeto sigue siendo la misma tarea, pero su estado ha cambiado.\nPodemos representar el cambio:\nESTADO INICIAL\nestado = “pendiente”\n    │\n    │ completar()\n    ▼\nNUEVO ESTADO\nestado = “completada”",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#clase",
+    "href": "unidades/ud1/index.html#clase",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Clase !",
+    "text": "Clase !",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#clase-estado",
+    "href": "unidades/ud1/index.html#clase-estado",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Clase ≠ Estado",
+    "text": "Clase ≠ Estado\nUna clase es el molde, plantilla o plano arquitectónico a partir del cual se crean los objetos. No es un objeto real, sino la definición de cómo será ese objeto. Define qué datos tendrá y qué acciones podrá realizar.\nUna clase define qué información puede tener un determinado tipo de objeto.\nPero cada instancia tendrá sus propios valores.\nPor ejemplo:\nTarea \n│ \n├── tarea1 \n│ ├── título: \"Diseñar login\" \n│ └── estado: \"pendiente\" \n├── tarea2 \n│   ├── título: \"Crear API\" \n│   └── estado: \"en progreso\" \n└── tarea3 \n    ├── título: \"Escribir documentación\" \n    └── estado: \"completada\"\nLas tres pertenecen a la clase Tarea, pero sus estados son diferentes.\nEn Python:\ntarea1 = Tarea()\ntarea2 = Tarea()\ntarea3 = Tarea()\nCada objeto tiene su propio estado.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#comportamiento",
+    "href": "unidades/ud1/index.html#comportamiento",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Comportamiento",
+    "text": "Comportamiento\nEl comportamiento representa las acciones que un objeto puede realizar.\nUna tarea podría:\ncompletar()\nreasignar()\ncambiar_estado()\nPor ejemplo:\ntarea.completar()\npuede provocar:\nestado = \"pendiente\"\n        │\n        │ completar()\n        ▼\nestado = \"completada\"\nEl comportamiento se implementará mediante métodos.\nPodemos representarlo así:\n\n\n\nUML",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#estado-1",
+    "href": "unidades/ud1/index.html#estado-1",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Estado",
+    "text": "Estado\nEl estado de un objeto es la información que describe cómo se encuentra ese objeto en un momento determinado.\nPor ejemplo:\nTarea ──────────────────────────── Título: Diseñar login Estado: pendiente Responsable: Ana\nEse conjunto de valores forma parte del estado de la tarea.\nSi la tarea se completa:\nTarea ──────────────────────────── Título: Diseñar login Estado: completada Responsable: Ana\nEl objeto sigue siendo la misma tarea, pero su estado ha cambiado.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#clase-objeto-e-instancia",
+    "href": "unidades/ud1/index.html#clase-objeto-e-instancia",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Clase, objeto e instancia",
+    "text": "Clase, objeto e instancia",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#objeto",
+    "href": "unidades/ud1/index.html#objeto",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Objeto",
+    "text": "Objeto\nUn objeto es una entidad concreta creada a partir de una clase.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#instancia",
+    "href": "unidades/ud1/index.html#instancia",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Instancia",
+    "text": "Instancia\nEn Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.\nPor ejemplo:\ntarea1 = Tarea() tarea2 = Tarea()\nPodemos representarlo:\n                CLASE\n                 Tarea\n                   │\n          ┌────────┴────────┐\n          ▼                 ▼\n       tarea1             tarea2\n      instancia          instancia\nLas dos instancias pertenecen a la misma clase, pero son objetos diferentes.\ntarea1 = Tarea()\ntarea2 = Tarea()\n\nprint(tarea1 is tarea2)\nResultado:\nFalse",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#responsabilidad",
+    "href": "unidades/ud1/index.html#responsabilidad",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Responsabilidad",
+    "text": "Responsabilidad\n\n¿De qué debería encargarse cada objeto?\n\nUna responsabilidad es aquello que un objeto debe conocer o hacer dentro del sistema.\nPor ejemplo, podemos decir que una Tarea es responsable de:\n\nconocer su título;\nconocer su estado;\nconocer su responsable;\ncambiar su estado;\ncambiar su responsable.\n\nPero probablemente no debería ser responsable de:\n\nenviar correos electrónicos;\ngenerar documentos PDF;\nconectarse directamente a una base de datos;\nenviar mensajes a Telegram.\n\n\nUna pregunta importante cuando diseñes una clase es: ¿Tiene sentido que este objeto sea responsable de hacer esto?",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#ide",
+    "href": "unidades/ud1/index.html#ide",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "IDE",
+    "text": "IDE\nVamos a utilizar como ide VSCode + extensión oficial de Python de Microsoft",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#creación-de-un-entorno-virtual",
+    "href": "unidades/ud1/index.html#creación-de-un-entorno-virtual",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Creación de un entorno virtual",
+    "text": "Creación de un entorno virtual\n\nNecesitamos la creación de un entorno virtual. Vamos a empezar a trabajar como se trabajaría en un proyecto profesional, por lo tanto, no vamos a instalar todas las dependencias de nuestros proyectos en global en el equipo sino locales a cada proyecto.\n\nSi lo instalásemos de forma global, como vemos a continuación, podría provocar conflictos de paquetes y versiones.\nPYTHON DEL ORDENADOR\n        │\n        ├── Proyecto A\n        │      └── dependencias\n        │\n        ├── Proyecto B\n        │      └── dependencias\n        │\n        └── Proyecto C\n               └── dependencias\nCon un entorno virtual:\nPYTHON DEL ORDENADOR\n        │\n        ├── entorno proyecto A\n        │      ├── Python\n        │      └── dependencias\n        │\n        ├── entorno proyecto B\n        │      ├── Python\n        │      └── dependencias\n        │\n        └── entorno proyecto C\n               ├── Python\n               └── dependencias\nCada proyecto ve su versión de Python y las dependencias que necesita con sus versiones correspondientes.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#gestión-de-nuestros-proyectos",
+    "href": "unidades/ud1/index.html#gestión-de-nuestros-proyectos",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Gestión de nuestros proyectos",
+    "text": "Gestión de nuestros proyectos\nPara la gestión del entorno virtual de cada proyecto tenemos dos opciones:\n              PROYECTO PYTHON\n                    │\n          ┌─────────┴─────────┐\n          │                   │\n    ENTORNO AISLADO       GESTIÓN DEL PROYECTO\n          │                   │\n        venv                  uv\n          │                   │\n    \"Dónde se instalan       \"Cómo gestiono\n     las dependencias\"        el proyecto\"\nCon uv también podemos crear y gestionar nuestros entornos virtuales, por lo que uv puede sustituir el uso directo de venv en el día a día",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#venv",
+    "href": "unidades/ud1/index.html#venv",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "venv",
+    "text": "venv",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#qué-es-venv",
+    "href": "unidades/ud1/index.html#qué-es-venv",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "¿Qué es venv?",
+    "text": "¿Qué es venv?\nvenv es una herramienta que viene incluída con Python y sirve fundamentalmente para crear un entorno virtual aislado.\npython -m venv .venv\nEsto crea:\nmi-proyecto/\n└── .venv/\nNormalmente tenemos que activarlo. En Mac:\nsource .venv/bin/activate\nEn Windows:\n.venv\\Scripts\\activate\nDespués podríamos instalar los paquetes que necesitásemos de este modo (ejemplo):\npip install pytest\nDentro de .venv tendremos un entorno independiente donde podemos instalar paquetes.\nLa razón de utilizarlo es evitar situaciones como:\nPROYECTO A\n    └── necesita requests 2.x\n\nPROYECTO B\n    └── necesita requests 3.x\nSin entornos virtuales, ambos proyectos podrían entrar en conflicto.\nCon entornos virtuales:\nPROYECTO A\n└── .venv/\n    └── requests 2.x\n\nPROYECTO B\n└── .venv/\n    └── requests 3.x\n\nCada proyecto tiene su propio entorno",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#qué-es-uv",
+    "href": "unidades/ud1/index.html#qué-es-uv",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "¿Qué es uv?",
+    "text": "¿Qué es uv?\n\nEn proyectos profesionales vamos a utilizar uv para gestionar nuestros proyectos en Python. uv puede crear y administrar el entorno virtual, además de gestionar las dependencias.\n\nPor ejemplo:\nuv init\ny\nuv add pytest\ny\nuv run main.py\nTambién podríamos hacer:\nuv venv\ny esto crearía un entorno virtual .venv\nConceptualmente:\npython -m venv .venv\n        │\n        ▼\n   crea entorno\n\n\nuv venv\n        │\n        ▼\n   crea entorno\n\nLos dos crean un entorno virtual. La diferencia es quién lo gestiona.\n\n\nEn este módulo utilizaremos uv para gestionar los proyectos Python",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#flujo-que-vamos-a-seguir",
+    "href": "unidades/ud1/index.html#flujo-que-vamos-a-seguir",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Flujo que vamos a seguir",
+    "text": "Flujo que vamos a seguir\n\nInstalaciones\nEn primer lugar, debemos instalar Python:\nPython\nTambién debemos tener instalado uv, para ello:\nEn Mac\nsudo curl -LsSf https://astral.sh/uv/install.sh | sudo sh\nEn Windows, en la consola de Powershell\npowershell -ExecutionPolicy ByPass -c \"irm https://astral.sh/uv/install.ps1 | iex\"\nAlternativa con Winget:\nwinget install --id astral.uv\nEn cualquier sistema operativo, si tenemos pip instalado podemos hacer:\npip install uv\n\n\nCreación de un proyecto\nPor ejemplo, para Taskflow, crearíamos:\nmkdir taskflow\ncd taskflow\n\nuv init\nCreamos un fichero main.py:\nprint(\"Hola, Taskflow\")\nuv run main.py\nEsto crea la siguiente estructura:\n\n\n\nEstructura proyecto inicial\n\n\n\nuv puede crear y gestionar entornos virtuales y proporciona además herramientas para gestionar el proyecto, sus dependencias y su ejecución. venv es la herramienta estándar incluida con Python para crear entornos virtuales.\n\n\n\n\nHola mundo",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#repositorio",
+    "href": "unidades/ud1/index.html#repositorio",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Repositorio",
+    "text": "Repositorio",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#repositorios",
+    "href": "unidades/ud1/index.html#repositorios",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Repositorios",
+    "text": "Repositorios",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#repositorios-git",
+    "href": "unidades/ud1/index.html#repositorios-git",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Repositorios: Git",
+    "text": "Repositorios: Git\n\n¿Qué problema resuelve Git?\ntaskflow_final.py\ntaskflow_final_v2.py\ntaskflow_final_v3.py\ntaskflow_final_definitivo.py\ntaskflow_final_definitivo_ahora_si.py\n\n\n¿Cómo sabemos qué hemos cambiado?\n¿Podemos volver atrás?\n¿Quién hizo el cambio?\n¿Qué ocurre si trabajamos dos personas?\n\n\n\nGit es un sistema de control de versiones. Permite registrar la evolución de un proyecto y recuperar versiones anteriores\n\nEn este módulo vamos a utilizar:\nGit\n↓\nSistema de control de versiones\n\nGitHub\n↓\nServicio donde podemos alojar\nrepositorios Git y colaborar\n\n\nInstalaciones necesarias\n\nNecesitamos instalar Git\n\nGit\n\nNecesitamos tener una cuenta en Github para almacenar nuestros repositorios\n\nGithub\n\n\nPrimeros pasos\n\nCreamos un repositorio en Github\nTenemos que inicializar Git en la carpeta local de nuestro proyecto\n\ngit init\n\nCambiamos el nombre de nuestra rama principal para asegurarnos que es main\n\ngit branch -M main\nEsto crea un directorio .git\n\nConectamos la carpeta local con el repositorio remoto de GitHub\n\ngit remote add origin [URL-HTTPS-del-repositorio]\n\nPreparamos y confirmamos nuestros archivos\n\ngit add .\ngit commit -m \"Primer commit\"\n\nSubimos los cambios a GitHub\n\ngit push -u origin main\n# 🐉 Clases en Python\nUna clase básica:\nclass Tarea:\n    pass\n\ntarea1 = Tarea()\ntarea2 = Tarea()\nprint(type(tarea1))\n\nSon objetos diferentes tarea1 != tarea2",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#clases-en-python",
+    "href": "unidades/ud1/index.html#clases-en-python",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Clases en Python",
+    "text": "Clases en Python",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-1.-analizar-el-problema",
+    "href": "laboratorios/ud1/lab1.html#parte-1.-analizar-el-problema",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Antes de escribir código, identifica las entidades importantes del problema.\nCompleta una tabla como esta:\n\n\n\nPosible objeto\n¿Por qué existe?\n¿Qué información necesita?\n\n\n\n\nProyecto\n\n\n\n\nTarea\n\n\n\n\n\nDespués responde:\n¿Qué otras entidades podrían existir?\n¿Cuáles son realmente necesarias?\n¿Cuáles son solamente datos o características de otras entidades?\nNo busques todavía una única respuesta correcta.\nLo importante es justificar tus decisiones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-2.-identificar-el-estado",
+    "href": "laboratorios/ud1/lab1.html#parte-2.-identificar-el-estado",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "El estado de un objeto es la información que describe cómo se encuentra en un momento determinado.\n\nPara cada objeto que hayas identificado, determina qué información necesita conocer.\nPor ejemplo:\nTAREA\nEstado: - título - descripción - estado - responsable\n\nNo incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-3.-identificar-el-comportamiento",
+    "href": "laboratorios/ud1/lab1.html#parte-3.-identificar-el-comportamiento",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Ahora vamos a cambiar la pregunta.\nYa no queremos saber qué tiene cada objeto.\nQueremos saber qué puede hacer.\nPor ejemplo:\nTAREA\nPuede:\n\ncompletar\niniciar\nreasignarse\n\nPiensa en comportamientos para cada objeto.\n\nRegla: Expresa los comportamientos como acciones.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-4.-responsabilidades",
+    "href": "laboratorios/ud1/lab1.html#parte-4.-responsabilidades",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Ahora viene una de las decisiones más importantes de la POO.\n\n¿Quién debería encargarse de cada acción?\n\nSupongamos que queremos completar una tarea.\nTenemos varias posibilidades:\nTarea\nUsuario\nProyecto\nmain.py\n¿Quién debería ser responsable?\nJustifica tu decisión.\nHaz lo mismo con:\nAsignar una tarea\nCambiar el estado de una tarea\nrear un proyecto\nAñadir una tarea a un proyecto\nPuedes utilizar esta tabla:\n\n\n\nAcción\nObjeto responsable\n¿Por qué?\n\n\n\n\nCompletar una tarea\n\n\n\n\nIniciar una tarea\n\n \n\n\nAsignar responsable\n\n \n\n\nCrear proyecto\n\n \n\n\nAñadir tarea al proyecto",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-5.-diseñar-el-modelo",
+    "href": "laboratorios/ud1/lab1.html#parte-5.-diseñar-el-modelo",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Ahora reúne tus decisiones.\nConstruye un primer modelo conceptual:\n             PROYECTO\n                 │\n                 │ contiene\n                 ▼\n               TAREA\n                 │\n                 │ asignada a\n                 ▼\n              USUARIO\nAñade la información y comportamientos que hayas decidido.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-6.-diseñar-las-clases-con-uml",
+    "href": "laboratorios/ud1/lab1.html#parte-6.-diseñar-las-clases-con-uml",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Por ejemplo:\n┌─────────────────────────────┐\n│           Tarea             │\n├─────────────────────────────┤\n│ - titulo: str               │\n│ - descripcion: str          │\n│ - estado: str               │\n│ - responsable: Usuario      │\n├─────────────────────────────┤\n│ + iniciar(): None           │\n│ + completar(): None         │\n│ + reasignar(): None         │\n└─────────────────────────────┘\nHaz lo mismo para el resto de objetos que hayas determinado.\n\nNo es necesario representar todavía las relaciones UML posibles.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-7.-primera-implementación-con-python",
+    "href": "laboratorios/ud1/lab1.html#parte-7.-primera-implementación-con-python",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Ahora sí podemos programar.\nCrea el proyecto utilizando el entorno profesional que hemos visto en clase.\nLa estructura inicial será:\ntaskflow/\n├── .gitignore\n├── README.md\n├── pyproject.toml\n└── src/\n    └── taskflow/\n        ├── __init__.py\n        └── main.py\nCrea primero la clase Tarea y a continuación el resto.\nCrea también el repositorio correspondiente en Github.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud1/lab1.html#parte-8.-el-historial-de-git",
+    "href": "laboratorios/ud1/lab1.html#parte-8.-el-historial-de-git",
+    "title": "UD1 · Lab 1 · Taskflow: Pensar antes de programar",
+    "section": "",
+    "text": "Durante el laboratorio utiliza Git para registrar la evolución del proyecto.\nNo esperes hasta el final.\nRealiza commits cuando completes partes significativas.\nPor ejemplo:\ngit add .\ngit commit -m \"chore: crear proyecto TaskFlow\"\nDespués:\ngit add .\ngit commit -m \"feat: crear clase Tarea\"\nY posteriormente:\ngit add .\ngit commit -m \"feat: implementar comportamiento de Tarea\"\nFinalmente:\ngit push\nConsulta el historial:\ngit log --oneline\nTu repositorio debe permitir observar cómo ha evolucionado el diseño.\n## Parte 9. La IA como analista\nEn este laboratorio vamos a utilizar IA, pero no para que nos diseñe y programe TaskFlow.\nPrimero realiza tu propio análisis.\nDespués puedes utilizar una IA para contrastarlo.\nUtiliza un prompt como:\nEstoy diseñando una aplicación de gestión de proyectos\nllamada TaskFlow.\n\nHe identificado estos objetos:\n\n- Proyecto\n- Usuario\n- Tarea\n\nPara cada uno he definido este estado:\n[PEGA AQUÍ TU PROPUESTA]\n\nY estos comportamientos:\n[PEGA AQUÍ TU PROPUESTA]\n\nAnaliza mi diseño como si fueras un analista de software.\n\nNo escribas código.\n\nIndica:\n1. qué decisiones parecen coherentes;\n2. qué responsabilidades podrían estar mal asignadas;\n3. qué información podría faltar;\n4. qué información podría sobrar;\n5. qué preguntas debería hacerme antes de programar.\n\nNo rediseñes la solución completa.\nDespués compara:\nMI DISEÑO\n     │\n     ├── Coincidencias\n     │\n     ├── Diferencias\n     │\n     └── Decisiones que cambio\n\nLa IA no sustituye tu diseño.\n\n\nLa utilizamos para hacer preguntas y detectar posibles problemas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   }
 ]

@@ -1,68 +1,319 @@
 ---
-title: "UD1 · Lab 1 · ¿Dónde se ejecuta? ¿Cómo se comunica una aplicación?"
+title: "UD1 · Lab 1 · Taskflow: Pensar antes de programar"
 ---
 
-# 🧪 ¿Dónde se ejecuta?
+# 🧪 Pensar antes de programar
 
-Imagina que tenemos distintas piezas de software utilizando distintas tecnologías:
+Imagina que una pequeña empresa necesita una aplicación para organizar sus proyectos de desarrollo.
 
-- React
-- JavaScript en navegador.
-- Node.js
-- Python
-- Aplicación Android
-- Base de datos
+La aplicación debe permitir:
 
-Debes responder, para cada una:
+- crear proyectos;
+- registrar usuarios;
+- crear tareas;
+- asignar tareas a usuarios;
+- cambiar el estado de una tarea;
+- consultar las tareas de un proyecto;
+- consultar las tareas asignadas a una persona.
 
-- ¿Dónde se ejecuta?
-- ¿Qué necesita para ejecutarse?
+Una tarea puede encontrarse en diferentes estados:
 
->Esta actividad es conceptual
+PENDIENTE → EN PROGRESO → COMPLETADA
 
+>Nuestro objetivo es únicamente diseñar el modelo de objetos y realizar una primera implementación en Python.
 
-# 🧪 ¿Cómo se comunica?
+## Parte 1. Analizar el problema
 
-## Herramientas
-- Navegador.
-- DevTools.
-- Una aplicación web sencilla que tú elijas.
+Antes de escribir código, identifica las entidades importantes del problema.
 
-## ¿Qué debemos hacer?
+Completa una tabla como esta:
 
-- Abrir la aplicación.
-- Abrir DevTools.
-- Ir a Network.
-- Identificar peticiones.
+| Posible objeto	| ¿Por qué existe?	| ¿Qué información necesita? |
+| - | - | - |
+| Proyecto	| | |
+| Tarea	| | |
+	
 
 
-## Observamos:
 
-- URL.
-- Método.
-- Request.
-- Response.
-- JSON.
-- Headers.
+Después responde:
+
+¿Qué otras entidades podrían existir?
+
+¿Cuáles son realmente necesarias?
+
+¿Cuáles son solamente datos o características de otras entidades?
+
+No busques todavía una única respuesta correcta.
+
+Lo importante es justificar tus decisiones.
+
+## Parte 2. Identificar el estado
+
+> El estado de un objeto es la información que describe cómo se encuentra en un momento determinado.
+
+
+Para cada objeto que hayas identificado, determina qué información necesita conocer.
 
 Por ejemplo:
 
-`GET /api/products`
+TAREA
 
-Respuesta:
+Estado:
+- título
+- descripción
+- estado
+- responsable
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Producto"
-  }
-]
+> No incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?
+
+## Parte 3. Identificar el comportamiento
+
+Ahora vamos a cambiar la pregunta.
+
+Ya no queremos saber qué tiene cada objeto.
+
+Queremos saber qué puede hacer.
+
+Por ejemplo:
+
+TAREA
+
+Puede:
+
+- completar
+  
+- iniciar
+  
+- reasignarse
+
+Piensa en comportamientos para cada objeto.
+
+> Regla: Expresa los comportamientos como acciones.
+
+## Parte 4. Responsabilidades
+
+Ahora viene una de las decisiones más importantes de la POO.
+
+>¿Quién debería encargarse de cada acción?
+
+Supongamos que queremos completar una tarea.
+
+Tenemos varias posibilidades:
+
+Tarea
+
+Usuario
+
+Proyecto
+
+main.py
+
+¿Quién debería ser responsable?
+
+Justifica tu decisión.
+
+Haz lo mismo con:
+
+Asignar una tarea
+
+Cambiar el estado de una tarea
+
+rear un proyecto
+
+Añadir una tarea a un proyecto
+
+Puedes utilizar esta tabla:
+
+| Acción |	Objeto responsable | ¿Por qué? | 
+| - | - | - |
+| Completar una tarea	| | |
+| Iniciar una tarea	| | |
+| Asignar responsable	| | |
+| Crear proyecto	| | |
+| Añadir tarea al proyecto | | |
+
+
+## Parte 5. Diseñar el modelo
+
+Ahora reúne tus decisiones.
+
+Construye un primer modelo conceptual:
+
+                 PROYECTO
+                     │
+                     │ contiene
+                     ▼
+                   TAREA
+                     │
+                     │ asignada a
+                     ▼
+                  USUARIO
+
+Añade la información y comportamientos que hayas decidido.
+
+## Parte 6. Diseñar las clases con UML
+
+Por ejemplo:
+
+```txt
+┌─────────────────────────────┐
+│           Tarea             │
+├─────────────────────────────┤
+│ - titulo: str               │
+│ - descripcion: str          │
+│ - estado: str               │
+│ - responsable: Usuario      │
+├─────────────────────────────┤
+│ + iniciar(): None           │
+│ + completar(): None         │
+│ + reasignar(): None         │
+└─────────────────────────────┘
 ```
->Tenemos que ver que una aplicación está formada por componentes que se comunican
 
-## Responde
 
-- ¿Qué información estamos enviando?
-- ¿Qué información estamos recibiendo?
-- ¿Qué ocurre si alguien la modifica?
+Haz lo mismo para el resto de objetos que hayas determinado.
+
+> No es necesario representar todavía las relaciones UML posibles.
+
+## Parte 7. Primera implementación con Python
+
+Ahora sí podemos programar.
+
+Crea el proyecto utilizando el entorno profesional que hemos visto en clase.
+
+La estructura inicial será:
+
+```txt
+taskflow/
+├── .gitignore
+├── README.md
+├── pyproject.toml
+└── src/
+    └── taskflow/
+        ├── __init__.py
+        └── main.py
+
+```
+
+Crea primero la clase Tarea y a continuación el resto.
+
+Crea también el repositorio correspondiente en Github.
+
+## Parte 8. El historial de Git
+
+Durante el laboratorio utiliza Git para registrar la evolución del proyecto.
+
+No esperes hasta el final.
+
+Realiza commits cuando completes partes significativas.
+
+Por ejemplo:
+```bash
+git add .
+git commit -m "chore: crear proyecto TaskFlow"
+```
+Después:
+```bash
+git add .
+git commit -m "feat: crear clase Tarea"
+```
+Y posteriormente:
+```bash
+git add .
+git commit -m "feat: implementar comportamiento de Tarea"
+```
+Finalmente:
+```bash
+git push
+```
+Consulta el historial:
+```bash
+git log --oneline
+```
+Tu repositorio debe permitir observar cómo ha evolucionado el diseño.
+
+## Parte 9. La IA como analista
+
+En este laboratorio vamos a utilizar IA, pero **no para que nos diseñe y programe TaskFlow**.
+
+Primero realiza tu propio análisis.
+
+Después puedes utilizar una IA para contrastarlo.
+
+Utiliza un prompt como:
+
+```txt
+Estoy diseñando una aplicación de gestión de proyectos
+llamada TaskFlow.
+
+He identificado estos objetos:
+
+- Proyecto
+- Usuario
+- Tarea
+
+Para cada uno he definido este estado:
+[PEGA AQUÍ TU PROPUESTA]
+
+Y estos comportamientos:
+[PEGA AQUÍ TU PROPUESTA]
+
+Analiza mi diseño como si fueras un analista de software.
+
+No escribas código.
+
+Indica:
+1. qué decisiones parecen coherentes;
+2. qué responsabilidades podrían estar mal asignadas;
+3. qué información podría faltar;
+4. qué información podría sobrar;
+5. qué preguntas debería hacerme antes de programar.
+
+No rediseñes la solución completa.
+```
+
+Después compara:
+
+```txt
+MI DISEÑO
+     │
+     ├── Coincidencias
+     │
+     ├── Diferencias
+     │
+     └── Decisiones que cambio
+
+```
+>La IA no sustituye tu diseño.
+
+>**La utilizamos para hacer preguntas y detectar posibles problemas.**
+
+# 📦 Entregables del laboratorio
+
+```txt
+
+taskflow/
+├── .gitignore
+├── README.md
+├── pyproject.toml
+└── src/
+    └── taskflow/
+        ├── __init__.py
+        └── main.py
+└── doc/
+    └── 01-analisis.md
+    └── 02-modelo-uml.png
+    └── 03-ia-prompt.md
+
+```
+El documento 01-analisis.md debe recoger:
+
+1. Objetos identificados
+2. Estado de cada objeto
+3. Comportamiento
+4. Responsabilidades
+5. Decisiones de diseño
+6. Cambios realizados después de utilizar IA
+   
+

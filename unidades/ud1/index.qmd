@@ -1,314 +1,597 @@
 ---
-title: "UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?"
+title: "UD1. Python profesional y modelo orientado a objetos"
 ---
 
+# 📕 ¿Por qué necesitamos los objetos?
 
-1. El ecosistema de una aplicación
-Componentes.
-Dependencias.
-Entornos de desarrollo, pruebas y producción.
-1. Primera aproximación a la seguridad
-Entradas externas.
-Superficie de ataque.
-Seguridad desde el diseño.
-1. Nuevas aplicaciones
-Aplicaciones integradas con LLM.
-Nuevos componentes y superficie de ataque.
+> **Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos...?**
 
+Al principio, podríamos resolverlo con variables y funciones:
 
+```py
+tarea_1_titulo = "Diseñar login"
+tarea_1_estado = "pendiente"
+tarea_1_responsable = "Ana"
 
-> **¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?**
-
-# 📚 1. Aplicaciones modernas
-
-Una aplicación o app es un programa informático diseñado para ayudar al usuario a realizar una tarea específica.
-
-Una aplicación moderna combina muchas piezas para ofrecer una experiencia rápida y conectada en cualquier dispositivo:
-
-- **Frontend:** Es la interfaz visual con la que interactúa el usuario en su pantalla. Se diseña para navegadores web o teléfonos móviles.
-- **Backend:** Es el servidor que procesa las reglas del negocio, la seguridad y las peticiones del usuario de forma oculta.
-- **Base de datos:** Es el sistema seguro donde se guarda toda la información, como perfiles de usuarios, textos o imágenes.
-- **APIs:** Funcionan como un puente de comunicación para que el frontend, el backend y otros servicios externos compartan datos al instante.
-
-Los productos finales los podemos encontrar como aplicaciones web o móviles, por ejemplo.
-
-![Aplicaciones modernas](images/ud1_1.png)
-
-> **¿Qué parte tenemos que proteger?**
->
-> **Todas**
-
-
-# 💻 2. Del código fuente a la ejecución
-
-El código fuente es lo que escribe el desarrollador, por ejemplo:
-
-```js
-function login(user, password) {
-    // ...
-}
+tarea_2_titulo = "Crear API"
+tarea_2_estado = "en progreso"
+tarea_2_responsable = "Luis"
 ```
 
-Pero una aplicación no termina aquí.
-Tenemos:
+Y funciones:
 
-> **Código fuente -> Transformación (dependiendo del lenguaje) -> Ejecución -> Aplicación **
+```py
+def completar_tarea(...):
+    ...
 
-## Lenguajes compilados e interpretados
+def cambiar_responsable(...):
+    ...
 
-### Lenguajes Compilados
+def mostrar_tarea(...):
+    ...
+```
 
-> Código fuente → Compilador → Programa ejecutable → Ejecución
+>Rápidamente aparecen las preguntas:
+> - ¿A qué proyecto pertenece la tarea?
+> 
+> - ¿Quién es responsable?
+> 
+> - ¿Qué ocurre si tenemos 200 tareas?
+> 
+> - ¿Cómo evitamos mezclar los datos?
+> 
+> - ¿Dónde colocamos las operaciones relacionadas con una tarea?
 
-Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)
+# 🍗 Pensar en objetos. Programación orientada a objetos
 
-### Lenguajes Interpretados
+> La POO organiza el software alrededor de objetos que representan elementos del problema y combinan información y comportamiento.
 
-> Código fuente → Runtime → Ejecución
+Un **objeto** representa una entidad que tiene:
 
-JavaScript → Node.js (lado del servidor), navegador web (lado del cliente)
+- Información sobre sí mismo
+- Comportamiento
+- Una identidad propia
 
-Python → Python runtime
+Podríamos pensar inicialmente en:
 
-Por ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:
+```py
+Proyecto
+Tarea
+Usuario
+```
 
-- Vulnerabilidades
-- Dependencias
-- Configuración
-- Contenedores
-- Servidores…
+Una `Tarea` podría tener:
 
-# 🍢 Seguridad de lenguajes y runtimes
+```py
+Título
+Descripción
+Estado
+Responsable
+```
 
->**No todos los lenguajes tienen las mismas características de seguridad**
+Y podría realizar determinadas acciones:
 
-Por ejemplo, en la **gestión de memoria**, algunos lenguajes permiten trabajar directamente con memoria y otros la gestionan automáticamente.
+```py
+Completar
+Reasignar
+Cambiar de estado
+```
 
-**C/C++**:  + control ⇒ + responsabilidad.
+Esto nos lleva a una serie de **conceptos fundamentales**.
 
-**JS/Python/Java:** Gestión automática de la memoria.
+## Estado
 
->Esto no quiere decir que “JavaScript sea seguro”.
->**Un lenguaje puede reducir determinados tipos de errores, pero ninguna tecnologían convierte automáticamente una aplicación en segura.
-**
+El **estado** de un objeto es la información que describe cómo se encuentra ese objeto en un momento determinado.
 
-Por ejemplo, una aplicación JavaScript puede tener:
+El estado está compuesto por los datos o características que tiene un objeto en un momento determinado. En programación, el estado se almacena en las variables o atributos del objeto. El estado puede cambiar a lo largo del tiempo.
 
-- **XSS** (*Cross-Site Scripting*) es una vulnerabilidad de seguridad informática que permite a un atacante inyectar código malicioso (generalmente JS) en una página web legítima para que se ejecute en el navegador de otros usuarios.
-- Problemas de autenticación
-- Exposición de secretos
-- Dependencias vulnerables
+Por ejemplo, una tarea podría tener:
 
-# 📟 3. Arquitectura y comunicación
+```py
+Título: Diseñar pantalla de login
+Estado: pendiente
+Responsable: Ana
+```
 
-## Arquitectura cliente-servidor
+Ese conjunto de valores forma parte del estado de la tarea.
 
-![Arquitectura cliente-servidor](./images/u1_4.png)
+Si la tarea se completa:
 
-**El Cliente:** Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones. 
+```py
+Título: Diseñar pantalla de login
+Estado: completada
+Responsable: Ana
+```
 
-**El Servidor:** Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos. 
+El objeto sigue siendo la misma tarea, pero su estado ha cambiado.
 
-**Cómo Funciona**
+Podemos representar el cambio:
 
-1. El usuario interactúa con el **cliente** y realiza una acción o petición (por ejemplo, entrar a una página web).
-2. El cliente envía un mensaje a través de la red usando protocolos como **HTTP o HTTPS**.
-3. El **servidor** recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.
-4. El servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.
+ESTADO INICIAL
 
-## HTTP y HTTPS
+estado = "pendiente"
 
-La diferencia principal entre **HTTP** y **HTTPS** es que **el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta**. 
+        │
+        │ completar()
+        ▼
 
-**¿Qué es HTTP?**
+NUEVO ESTADO
 
-Significa *Hypertext Transfer Protocol* (Protocolo de Transferencia de Hipertexto).
+estado = "completada"
 
-Envía la información en texto plano entre el navegador y el servidor.
+## Clase ≠ Estado
 
-No ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan. 
+Una clase es el **molde, plantilla o plano arquitectónico** a partir del cual se crean los objetos. No es un objeto real, sino la definición de cómo será ese objeto. Define qué datos tendrá y qué acciones podrá realizar.
 
-**¿Qué es HTTPS?**
+Una clase define qué información puede tener un determinado tipo de objeto.
 
-Significa *Hypertext Transfer Protocol Secure* (Protocolo de Transferencia de Hipertexto Seguro).
+Pero cada instancia tendrá sus propios valores.
 
-Añade los protocolos de seguridad **SSL o TLS** para cifrar los datos intercambiados.
+Por ejemplo:
 
-Protege la información confidencial, como contraseñas o números de tarjetas de crédito.
+```py
+Tarea 
+│ 
+├── tarea1 
+│ ├── título: "Diseñar login" 
+│ └── estado: "pendiente" 
+├── tarea2 
+│   ├── título: "Crear API" 
+│   └── estado: "en progreso" 
+└── tarea3 
+    ├── título: "Escribir documentación" 
+    └── estado: "completada"
+```
 
-Valida la identidad del servidor web para evitar suplantaciones.
+Las tres pertenecen a la clase `Tarea`, pero sus estados son diferentes.
 
+En Python:
 
->**HTTPS** protege la comunicación pero **NO GARANTIZA** que la aplicación sea segura.
+```py
+tarea1 = Tarea()
+tarea2 = Tarea()
+tarea3 = Tarea()
+```
 
-## APIs REST
+Cada objeto tiene su propio estado.
 
-Un **API REST** es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.
+## Objeto
 
-El acrónimo significa *Application Programming Interface* (Interfaz de programación de aplicaciones) y *REpresentational State Transfer* (Transferencia de estado representacional).
+Un objeto es una entidad concreta creada a partir de una clase.
 
->Funciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.
 
-### ¿Cómo funciona?
+## Instancia
 
-Una API REST funciona mediante un modelo de cliente y servidor:
 
-- **El cliente**: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.
-- **El servidor**: Es el sistema que recibe la petición, procesa la información en el *backend* (como buscar en una base de datos) y devuelve un resultado.
- 
-Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.
- 
- ### Request/response
+En Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.
 
- **Request (Solicitud / Petición):** Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como `GET` o `POST`, cabeceras y datos. 
+Por ejemplo:
 
-**Response:** Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.
+tarea1 = Tarea()
+tarea2 = Tarea()
 
-### Métodos y códigos básicos
+Podemos representarlo:
 
-**Métodos HTTP básicos (Acciones)**
+                    CLASE
+                     Tarea
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+           tarea1             tarea2
+          instancia          instancia
 
-Los métodos indican al servidor **qué acción** se desea realizar sobre un recurso.
+Las dos instancias pertenecen a la misma clase, pero son objetos diferentes.
 
-• **GET:** Solicita datos o información de un servidor. **No modifica nada** en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil).
-• **POST:** Envía datos al servidor para **crear un nuevo recurso** (por ejemplo, registrar un nuevo usuario o publicar un comentario).
-• **PUT:** Envía datos para **actualizar por completo** un recurso existente. Si no existe, a veces lo crea.
-• **DELETE:** Solicita la **eliminación** de un recurso específico en el servidor.
-• **PATCH:** Aplica **modificaciones parciales** a un recurso (a diferencia de PUT, no lo reemplaza entero).
+```py
+tarea1 = Tarea()
+tarea2 = Tarea()
 
-**Códigos de estado HTTP básicos (Respuestas)**
+print(tarea1 is tarea2)
+```
 
-Los códigos son números de tres dígitos que el servidor devuelve para indicar el **resultado de la petición**. 
+Resultado:
 
-Se dividen en grupos según su primer dígito:
+`False`
 
-**🟢 2xx: Éxito (Todo salió bien)**
-• **200 OK:** La petición fue exitosa y el servidor devuelve los datos solicitados.
-• **201 Created:** La petición fue exitosa y se ha **creado un nuevo recurso** (común tras un POST).
 
-**🟡 3xx: Redirección (Hay que ir a otro lado)**
-• **301 Moved Permanently:** El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL).
-• **302 Found:** El recurso está temporalmente en otra dirección.
+## Comportamiento
 
-**🔴 4xx: Errores del Cliente (El error está en tu petición)**
-• **400 Bad Request:** El servidor no entiende la petición porque está mal redactada o corrupta.
-• **401 Unauthorized:** No tienes permiso para ver el recurso; necesitas **iniciar sesión**.
-• **403 Forbidden:** El servidor entiende quién eres, pero **tienes prohibido** el acceso a ese recurso.
-• **404 Not Found:** El recurso solicitado **no existe** o no se pudo encontrar en el servidor.
+El **comportamiento** representa las acciones que un objeto puede realizar.
 
-**🟣 5xx: Errores del Servidor (El error es de la web/sistema)**
-• **500 Internal Server Error:** El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor).
-• **503 Service Unavailable:** El servidor **no está disponible** temporalmente, generalmente por mantenimiento o sobrecarga.
+Una tarea podría:
 
-## JSON
+```py
+completar()
+reasignar()
+cambiar_estado()
+```
 
-**JSON** (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.
+Por ejemplo:
 
-A pesar de que su nombre incluye "JavaScript" y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día **es un estándar completamente independiente del lenguaje** y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).
+`tarea.completar()`
 
-### Estructura técnica
+puede provocar:
 
-Un archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:
+```py
+estado = "pendiente"
+        │
+        │ completar()
+        ▼
+estado = "completada"
+```
 
-- **Colecciones de pares clave/valor**: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.
-- **Listas ordenadas de valores**: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.
+El comportamiento se implementará mediante **métodos**.
 
-### Ejemplo
+Podemos representarlo así:
 
-```js
-{
-  "usuario_id": 10543,
-  "nombre": "Elena",
-  "es_administrador": false,
-  "telefonos": [
-    "+34 600 000 000",
-    "+34 910 000 000"
-  ],
-  "configuracion": {
-    "tema": "oscuro",
-    "notificaciones": true
-  },
-  "ultimo_acceso": null
-}
+![UML](./images/ud1_1.png){width=400px}
+
+## Responsabilidad
+
+> **¿De qué debería encargarse cada objeto?**
+
+Una **responsabilidad** es aquello que un objeto debe conocer o hacer dentro del sistema.
+
+Por ejemplo, podemos decir que una `Tarea` es responsable de:
+
+- conocer su título;
+- conocer su estado;
+- conocer su responsable;
+- cambiar su estado;
+- cambiar su responsable.
+
+Pero probablemente no debería ser responsable de:
+
+- enviar correos electrónicos;
+- generar documentos PDF;
+- conectarse directamente a una base de datos;
+- enviar mensajes a Telegram.
+
+> Una pregunta importante cuando diseñes una clase es:
+> **¿Tiene sentido que este objeto sea responsable de hacer esto?**
+
+# ✍ El modelo mental fundamental
+
+A partir de ahora podemos analizar cualquier problema siguiendo esta secuencia:
+
+**PROBLEMA REAL -> ¿Qué cosas existen? -> OBJETOS -> ¿Qué sabe cada objeto? -> ESTADO -> ¿Qué puede hacer? -> COMPORTAMIENTO -> ¿De qué debe encargarse? -> RESPONSABILIDADES -> DISEÑO -> UML**
+
+# 🐍 Primer contacto con Python
+
+## IDE
+
+Vamos a utilizar como ide **VSCode + extensión oficial de Python de Microsoft**
+
+## Creación de un entorno virtual
+
+> Necesitamos la creación de un entorno virtual. Vamos a empezar a trabajar como se trabajaría en un proyecto profesional, por lo tanto, no vamos a instalar todas las dependencias de nuestros proyectos en global en el equipo sino locales a cada proyecto.
+
+
+Si lo instalásemos de forma global, como vemos a continuación, podría provocar conflictos de paquetes y versiones.
+
+```py
+PYTHON DEL ORDENADOR
+        │
+        ├── Proyecto A
+        │      └── dependencias
+        │
+        ├── Proyecto B
+        │      └── dependencias
+        │
+        └── Proyecto C
+               └── dependencias
+```
+
+Con un entorno virtual:
+
+```py
+PYTHON DEL ORDENADOR
+        │
+        ├── entorno proyecto A
+        │      ├── Python
+        │      └── dependencias
+        │
+        ├── entorno proyecto B
+        │      ├── Python
+        │      └── dependencias
+        │
+        └── entorno proyecto C
+               ├── Python
+               └── dependencias
+```
+
+Cada proyecto ve su versión de Python y las dependencias que necesita con sus versiones correspondientes.
+
+## Gestión de nuestros proyectos
+
+Para la gestión del entorno virtual de cada proyecto tenemos dos opciones:
+
+```py
+              PROYECTO PYTHON
+                    │
+          ┌─────────┴─────────┐
+          │                   │
+    ENTORNO AISLADO       GESTIÓN DEL PROYECTO
+          │                   │
+        venv                  uv
+          │                   │
+    "Dónde se instalan       "Cómo gestiono
+     las dependencias"        el proyecto"
 
 ```
 
->**Los datos que llegan desde fuera no son confiables**
+Con **uv** también podemos crear y gestionar nuestros entornos virtuales, por lo que `uv` puede sustituir el uso directo de `venv` en el día a día
 
-## Arquitectura por capas
+## ¿Qué es `venv`?
 
-![Arquitectura 3 capas](./images/u1_5.png)
+`venv` es una herramienta que viene incluída con Python  y sirve fundamentalmente para crear un **entorno virtual aislado**.
 
-La **arquitectura por capas** (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. 
-Se fundamenta en el principio de **separación de responsabilidades** (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.
+```bash
+python -m venv .venv
+```
 
-### Estructura tradicional (arquitectura de 3 capas)
+Esto crea:
 
-Aunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:
+```txt
+mi-proyecto/
+└── .venv/
+```
 
-- **Capa de Presentación** (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).
-- **Capa de Lógica de Negocio** (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.
-- **Capa de Acceso a Datos** (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.
+Normalmente tenemos que activarlo. 
+En Mac:
 
-### Regla de acoplamiento cerrado
+```bash
+source .venv/bin/activate
+```
 
-En una arquitectura limpia por capas, estas operan de forma **cerrada**. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente "saltarse" niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).
+En Windows:
+```powershell
+.venv\Scripts\activate
+```
 
-## Servidores y entornos de ejecución
+Después podríamos instalar los paquetes que necesitásemos de este modo (ejemplo):
 
->Mi aplicación funciona en local, ¿qué necesita para funcionar en producción?
+
+```bash
+pip install pytest
+```
+
+Dentro de `.venv` tendremos un entorno independiente donde podemos instalar paquetes.
+
+La razón de utilizarlo es evitar situaciones como:
+
+```txt
+PROYECTO A
+    └── necesita requests 2.x
+
+PROYECTO B
+    └── necesita requests 3.x
+```
+
+Sin entornos virtuales, ambos proyectos podrían entrar en conflicto. 
+
+Con entornos virtuales:
+
+```txt
+PROYECTO A
+└── .venv/
+    └── requests 2.x
+
+PROYECTO B
+└── .venv/
+    └── requests 3.x
+```
+
+>Cada proyecto tiene su propio **entorno**
+
+## ¿Qué es `uv`?
+
+>En proyectos profesionales vamos a utilizar `uv` para gestionar nuestros proyectos en Python. `uv` puede crear y administrar el entorno virtual, además de gestionar las dependencias.
+
+Por ejemplo:
+
+```bash
+uv init
+```
+
+y 
+
+```bash
+uv add pytest
+```
+
+y 
+
+```bash
+uv run main.py
+```
+
+También podríamos hacer:
+```bash
+uv venv
+```
+
+y esto crearía un entorno virtual `.venv`
+
+Conceptualmente:
+
+```txt
+python -m venv .venv
+        │
+        ▼
+   crea entorno
+
+
+uv venv
+        │
+        ▼
+   crea entorno
+```
+
+>Los dos crean un entorno virtual. La diferencia es quién lo gestiona.
+
+>**En este módulo utilizaremos `uv` para gestionar los proyectos Python**
+
+## Flujo que vamos a seguir
+
+### Instalaciones
+
+En primer lugar, debemos instalar Python:
+
+[Python](https://www.python.org/downloads/)
+
+También debemos tener instalado `uv`, para ello:
+
+**En Mac**
+
+```bash
+sudo curl -LsSf https://astral.sh/uv/install.sh | sudo sh
+```
+
+**En Windows, en la consola de Powershell**
+
+```PowerShell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Alternativa con **Winget**:
+
+```Powershell
+winget install --id astral.uv
+```
+
+En cualquier sistema operativo, si tenemos `pip` instalado podemos hacer:
+
+```bash
+pip install uv
+```
+### Creación de un proyecto
+
+Por ejemplo, para `Taskflow`, crearíamos:
+
+```bash
+mkdir taskflow
+cd taskflow
+
+uv init
+```
+Creamos un fichero `main.py`:
+```py
+print("Hola, Taskflow")
+```
+
+```bash
+uv run main.py
+```
+
+
+Esto crea la siguiente estructura:
+
+![Estructura proyecto inicial](./images/ud1_2.png)
+
+>**`uv` puede crear y gestionar entornos virtuales y proporciona además herramientas para gestionar el proyecto, sus dependencias y su ejecución. `venv` es la herramienta estándar incluida con Python para crear entornos virtuales.**
+
+![Hola mundo](./images/ud1_3.png)
+
+## Repositorios: Git
+
+### ¿Qué problema resuelve Git?
+
+```txt
+taskflow_final.py
+taskflow_final_v2.py
+taskflow_final_v3.py
+taskflow_final_definitivo.py
+taskflow_final_definitivo_ahora_si.py
+```
+
+> - ¿Cómo sabemos qué hemos cambiado?
 >
->**Qué funcione en mi ordenador no significa que esté preparada para producción**
+> - ¿Podemos volver atrás?
+>
+> - ¿Quién hizo el cambio?
+>
+> - ¿Qué ocurre si trabajamos dos personas?
+>
 
-Ejemplo:
+> **Git es un sistema de control de versiones. Permite registrar la evolución de un proyecto y recuperar versiones anteriores**
 
-**Mi equipo MACOS -> Node.js -> Aplicación**
+En este módulo vamos a utilizar:
 
-**Servidor -> Node.js -> Aplicación**
+```txt
+Git
+↓
+Sistema de control de versiones
 
-# 🌗 4. El ecosistema de una aplicación
+GitHub
+↓
+Servicio donde podemos alojar
+repositorios Git y colaborar
+```
 
-## Componentes (la anatomía del software)
+### Instalaciones necesarias
 
-Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:
+- Necesitamos instalar **Git**
 
-- **Frontend** (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). *Foco de seguridad*: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).
-- **Backend** (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. *Foco de seguridad*: Autenticación, autorización (RBAC) y sanitización de entradas.
-- **Almacenamiento y Persistencia** (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). *Foco de seguridad*: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).
-- **Servicios Periféricos y Middleware**: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).
+[Git](https://git-scm.com/)
 
-## Dependencias (el software de terceros)
+- Necesitamos tener una cuenta en **Github** para almacenar nuestros repositorios
 
-Hoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).
+[Github](https://github.com/)
 
-### ¿Qué es una dependencia?
+### Primeros pasos
 
-Código preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).
+- Creamos un repositorio en Github
+  
+- Tenemos que inicializar Git en la carpeta local de nuestro proyecto
 
-### Dependencias Transitivas
+```bash
+git init
+```
 
-Las librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.
+- Cambiamos el nombre de nuestra rama principal para asegurarnos que es `main`
 
-### Riesgos de Seguridad Asociados
+```bash
+git branch -M main
+```
 
-- **Vulnerabilidades conocidas (CVEs)**: Fallos de seguridad descubiertos en versiones antiguas de una librería.
-- **Ataques a la Cadena de Suministro (Supply Chain Attacks)**: Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.
+Esto crea un directorio `.git`
 
-### Buenas Prácticas de Producción Segura
+- Conectamos la carpeta local con el repositorio remoto de GitHub
 
-- Uso de herramientas **SCA (Software Composition Analysis)** como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline. 
+```bash
+git remote add origin [URL-HTTPS-del-repositorio]
+```
 
-- Fijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.
+- Preparamos y confirmamos nuestros archivos
 
-## Entornos de desarrollo, pruebas y producción
+```bash
+git add .
+git commit -m "Primer commit"
+```
 
-Una regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas "cajas de arena" (*sandbox*) antes de llegar al usuario final.
+- Subimos los cambios a GitHub
 
-![Entornos](./images/ud1_6.png)
+```bash
+git push -u origin main
+```
+ # 🐉 Clases en Python
 
-### Conceptos clave de la seguridad en entornos
+Una clase básica:
 
-- **Principio de Menor Privilegio**: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.
-- **Gestión Segura de Secretos**: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).
-- **Paridad de Entornos**: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico "en mi máquina sí funcionaba".
+```py
+class Tarea:
+    pass
+
+tarea1 = Tarea()
+tarea2 = Tarea()
+```
+
+
+```py
+print(type(tarea1))
+```
+
+> Son objetos diferentes tarea1 != tarea2
+
 

@@ -1,5 +1,5 @@
 ---
-title: "Resultados de aprendizaje"
+title: "Resultados de aprendizaje, unidades y planteamiento"
 ---
 
 # 🎯 Resultados de aprendizaje
@@ -7,9 +7,26 @@ title: "Resultados de aprendizaje"
 
 | RA      | Resultado de aprendizaje                                                                                                                                   |
 | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RA1 | Prueba aplicaciones web y aplicaciones para dispositivos móviles analizando la estructura del código y su modelo de ejecución.                                 |
-| RA2 | Determina el nivel de seguridad requerido por aplicaciones identificando los vectores de ataque habituales y sus riesgos asociados.                            |
-| RA3 | Detecta y corrige vulnerabilidades de aplicaciones web analizando su código fuente y configurando servidores web.                      |
-| RA4 | Detecta problemas de seguridad en las aplicaciones para dispositivos móviles, monitorizando su ejecución y analizando ficheros y datos. |
-| RA5 | Implanta sistemas seguros de desplegado de software, utilizando herramientas para la automatización de la construcción de sus elementos. |
+| RA1 | Caracteriza la programación orientada a objetos organizándolos y relacionándolos con el código para manejarlos.                                 |
+| RA2 | Aplica la programación orientada a objetos para generar código eficiente y correctamente estructurado.                            |
+| RA3 | Gestiona y maneja la creación de ficheros usando código Python.                     |
+| RA4 | Conecta y gestiona bases de datos partiendo de entradas de datos desde aplicaciones Web. |
+| RA5 | Escribe programas en Python dando respuesta a problemas reales en diferentes campos de aplicación y teniendo en cuenta el contexto de uso. |
+
+# ⚾️ Unidades didácticas
+
+| UD      | Unidad Didáctica  |  Horas | RRAA |
+| ------- | ------ | ----- | ---- |
+| UD1 | Python profesional y modelo orientado a objetos | 10h | RA1 |
+| UD2 | Clases, objetos y encapsulación | 16h | RA1-RA2 |
+| UD3 | Relaciones entre objetos: composición, herencia y polimorfismo | 16h | RA2 |
+| UD4 | Diseño orientado a objetos y arquitectura | 14h | RA2 |
+| UD5 | Python avanzado para aplicaciones mantenibles | 12h | RA1-RA2 |
+| UD6 | Persistencia y serialización | 14h | RA3 |
+| UD7 | Bases de datos con SQLAlchemy | 18h | RA4 |
+| UD8 | APIs profesionales con FastAPI | 18h | RA4 |
+| UD9 | Seguridad, integración y entrega continua | 12h | RA4-RA5 |
+| UD10 | Proyecto profesional Python + IA | 20h | RA5 |
+
+
 
