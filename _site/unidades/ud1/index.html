@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UD1. Del código a producción. ¿Qué significa que una aplicación sea segura? – Puesta en Producción Segura</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1bdbca75b362e6c5a8c09207907ff998.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Puesta en Producción Segura</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Inicio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">📚 Unidades</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">🧪 Laboratorios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 1 · ¿Dónde se ejecuta?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">🚀 Desafíos</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../proyecto-final/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏆 Proyecto Final</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤖 IA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../recursos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦 Recursos</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#aplicaciones-modernas" id="toc-aplicaciones-modernas" class="nav-link active" data-scroll-target="#aplicaciones-modernas">📚 1. Aplicaciones modernas</a></li>
+  <li><a href="#del-código-fuente-a-la-ejecución" id="toc-del-código-fuente-a-la-ejecución" class="nav-link" data-scroll-target="#del-código-fuente-a-la-ejecución">💻 2. Del código fuente a la ejecución</a>
+  <ul class="collapse">
+  <li><a href="#lenguajes-compilados-e-interpretados" id="toc-lenguajes-compilados-e-interpretados" class="nav-link" data-scroll-target="#lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</a>
+  <ul class="collapse">
+  <li><a href="#lenguajes-compilados" id="toc-lenguajes-compilados" class="nav-link" data-scroll-target="#lenguajes-compilados">Lenguajes Compilados</a></li>
+  <li><a href="#lenguajes-interpretados" id="toc-lenguajes-interpretados" class="nav-link" data-scroll-target="#lenguajes-interpretados">Lenguajes Interpretados</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#seguridad-de-lenguajes-y-runtimes" id="toc-seguridad-de-lenguajes-y-runtimes" class="nav-link" data-scroll-target="#seguridad-de-lenguajes-y-runtimes">🍢 Seguridad de lenguajes y runtimes</a></li>
+  <li><a href="#arquitectura-y-comunicación" id="toc-arquitectura-y-comunicación" class="nav-link" data-scroll-target="#arquitectura-y-comunicación">📟 3. Arquitectura y comunicación</a>
+  <ul class="collapse">
+  <li><a href="#arquitectura-cliente-servidor" id="toc-arquitectura-cliente-servidor" class="nav-link" data-scroll-target="#arquitectura-cliente-servidor">Arquitectura cliente-servidor</a></li>
+  <li><a href="#http-y-https" id="toc-http-y-https" class="nav-link" data-scroll-target="#http-y-https">HTTP y HTTPS</a></li>
+  <li><a href="#apis-rest" id="toc-apis-rest" class="nav-link" data-scroll-target="#apis-rest">APIs REST</a>
+  <ul class="collapse">
+  <li><a href="#cómo-funciona" id="toc-cómo-funciona" class="nav-link" data-scroll-target="#cómo-funciona">¿Cómo funciona?</a></li>
+  <li><a href="#métodos-y-códigos-básicos" id="toc-métodos-y-códigos-básicos" class="nav-link" data-scroll-target="#métodos-y-códigos-básicos">Métodos y códigos básicos</a></li>
+  </ul></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json">JSON</a>
+  <ul class="collapse">
+  <li><a href="#estructura-técnica" id="toc-estructura-técnica" class="nav-link" data-scroll-target="#estructura-técnica">Estructura técnica</a></li>
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#arquitectura-por-capas" id="toc-arquitectura-por-capas" class="nav-link" data-scroll-target="#arquitectura-por-capas">Arquitectura por capas</a>
+  <ul class="collapse">
+  <li><a href="#estructura-tradicional-arquitectura-de-3-capas" id="toc-estructura-tradicional-arquitectura-de-3-capas" class="nav-link" data-scroll-target="#estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</a></li>
+  <li><a href="#regla-de-acoplamiento-cerrado" id="toc-regla-de-acoplamiento-cerrado" class="nav-link" data-scroll-target="#regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</a></li>
+  </ul></li>
+  <li><a href="#servidores-y-entornos-de-ejecución" id="toc-servidores-y-entornos-de-ejecución" class="nav-link" data-scroll-target="#servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</a></li>
+  </ul></li>
+  <li><a href="#el-ecosistema-de-una-aplicación" id="toc-el-ecosistema-de-una-aplicación" class="nav-link" data-scroll-target="#el-ecosistema-de-una-aplicación">🌗 4. El ecosistema de una aplicación</a>
+  <ul class="collapse">
+  <li><a href="#componentes-la-anatomía-del-software" id="toc-componentes-la-anatomía-del-software" class="nav-link" data-scroll-target="#componentes-la-anatomía-del-software">Componentes (la anatomía del software)</a></li>
+  <li><a href="#dependencias-el-software-de-terceros" id="toc-dependencias-el-software-de-terceros" class="nav-link" data-scroll-target="#dependencias-el-software-de-terceros">Dependencias (el software de terceros)</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-una-dependencia" id="toc-qué-es-una-dependencia" class="nav-link" data-scroll-target="#qué-es-una-dependencia">¿Qué es una dependencia?</a></li>
+  <li><a href="#dependencias-transitivas" id="toc-dependencias-transitivas" class="nav-link" data-scroll-target="#dependencias-transitivas">Dependencias Transitivas</a></li>
+  <li><a href="#riesgos-de-seguridad-asociados" id="toc-riesgos-de-seguridad-asociados" class="nav-link" data-scroll-target="#riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</a></li>
+  <li><a href="#buenas-prácticas-de-producción-segura" id="toc-buenas-prácticas-de-producción-segura" class="nav-link" data-scroll-target="#buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</a></li>
+  </ul></li>
+  <li><a href="#entornos-de-desarrollo-pruebas-y-producción" id="toc-entornos-de-desarrollo-pruebas-y-producción" class="nav-link" data-scroll-target="#entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</a>
+  <ul class="collapse">
+  <li><a href="#conceptos-clave-de-la-seguridad-en-entornos" id="toc-conceptos-clave-de-la-seguridad-en-entornos" class="nav-link" data-scroll-target="#conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">📚 Unidades</a></li><li class="breadcrumb-item"><a href="../../unidades/ud1/index.html">1-Del código a producción. ¿Qué significa que una aplicación sea segura?</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">UD1. Del código a producción. ¿Qué significa que una aplicación sea segura?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<ol type="1">
+<li>El ecosistema de una aplicación Componentes. Dependencias. Entornos de desarrollo, pruebas y producción.</li>
+<li>Primera aproximación a la seguridad Entradas externas. Superficie de ataque. Seguridad desde el diseño.</li>
+<li>Nuevas aplicaciones Aplicaciones integradas con LLM. Nuevos componentes y superficie de ataque.</li>
+</ol>
+<blockquote class="blockquote">
+<p><strong>¿Qué ocurre desde que escribimos código hasta que un usuario utiliza una aplicación?</strong></p>
+</blockquote>
+<section id="aplicaciones-modernas" class="level1">
+<h1>📚 1. Aplicaciones modernas</h1>
+<p>Una aplicación o app es un programa informático diseñado para ayudar al usuario a realizar una tarea específica.</p>
+<p>Una aplicación moderna combina muchas piezas para ofrecer una experiencia rápida y conectada en cualquier dispositivo:</p>
+<ul>
+<li><strong>Frontend:</strong> Es la interfaz visual con la que interactúa el usuario en su pantalla. Se diseña para navegadores web o teléfonos móviles.</li>
+<li><strong>Backend:</strong> Es el servidor que procesa las reglas del negocio, la seguridad y las peticiones del usuario de forma oculta.</li>
+<li><strong>Base de datos:</strong> Es el sistema seguro donde se guarda toda la información, como perfiles de usuarios, textos o imágenes.</li>
+<li><strong>APIs:</strong> Funcionan como un puente de comunicación para que el frontend, el backend y otros servicios externos compartan datos al instante.</li>
+</ul>
+<p>Los productos finales los podemos encontrar como aplicaciones web o móviles, por ejemplo.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ud1_1.png" class="img-fluid figure-img"></p>
+<figcaption>Aplicaciones modernas</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p><strong>¿Qué parte tenemos que proteger?</strong></p>
+<p><strong>Todas</strong></p>
+</blockquote>
+</section>
+<section id="del-código-fuente-a-la-ejecución" class="level1">
+<h1>💻 2. Del código fuente a la ejecución</h1>
+<p>El código fuente es lo que escribe el desarrollador, por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">login</span>(user<span class="op">,</span> password) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pero una aplicación no termina aquí. Tenemos:</p>
+<blockquote class="blockquote">
+<p><strong>Código fuente -&gt; Transformación (dependiendo del lenguaje) -&gt; Ejecución -&gt; Aplicación </strong></p>
+</blockquote>
+<section id="lenguajes-compilados-e-interpretados" class="level2">
+<h2 class="anchored" data-anchor-id="lenguajes-compilados-e-interpretados">Lenguajes compilados e interpretados</h2>
+<section id="lenguajes-compilados" class="level3">
+<h3 class="anchored" data-anchor-id="lenguajes-compilados">Lenguajes Compilados</h3>
+<blockquote class="blockquote">
+<p>Código fuente → Compilador → Programa ejecutable → Ejecución</p>
+</blockquote>
+<p>Ejemplos: C, C++, Rust, Java (con matices), Kotlin (con matices)</p>
+</section>
+<section id="lenguajes-interpretados" class="level3">
+<h3 class="anchored" data-anchor-id="lenguajes-interpretados">Lenguajes Interpretados</h3>
+<blockquote class="blockquote">
+<p>Código fuente → Runtime → Ejecución</p>
+</blockquote>
+<p>JavaScript → Node.js (lado del servidor), navegador web (lado del cliente)</p>
+<p>Python → Python runtime</p>
+<p>Por ejemplo si JavaScript se puede ejecutar en el lado del servidor o en el navegador web y esto es fundamental tenerlo en cuenta para posteriormente ver cosas como:</p>
+<ul>
+<li>Vulnerabilidades</li>
+<li>Dependencias</li>
+<li>Configuración</li>
+<li>Contenedores</li>
+<li>Servidores…</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="seguridad-de-lenguajes-y-runtimes" class="level1">
+<h1>🍢 Seguridad de lenguajes y runtimes</h1>
+<blockquote class="blockquote">
+<p><strong>No todos los lenguajes tienen las mismas características de seguridad</strong></p>
+</blockquote>
+<p>Por ejemplo, en la <strong>gestión de memoria</strong>, algunos lenguajes permiten trabajar directamente con memoria y otros la gestionan automáticamente.</p>
+<p><strong>C/C++</strong>: + control ⇒ + responsabilidad.</p>
+<p><strong>JS/Python/Java:</strong> Gestión automática de la memoria.</p>
+<blockquote class="blockquote">
+<p>Esto no quiere decir que “JavaScript sea seguro”. <strong>Un lenguaje puede reducir determinados tipos de errores, pero ninguna tecnologían convierte automáticamente una aplicación en segura. </strong></p>
+</blockquote>
+<p>Por ejemplo, una aplicación JavaScript puede tener:</p>
+<ul>
+<li><strong>XSS</strong> (<em>Cross-Site Scripting</em>) es una vulnerabilidad de seguridad informática que permite a un atacante inyectar código malicioso (generalmente JS) en una página web legítima para que se ejecute en el navegador de otros usuarios.</li>
+<li>Problemas de autenticación</li>
+<li>Exposición de secretos</li>
+<li>Dependencias vulnerables</li>
+</ul>
+</section>
+<section id="arquitectura-y-comunicación" class="level1">
+<h1>📟 3. Arquitectura y comunicación</h1>
+<section id="arquitectura-cliente-servidor" class="level2">
+<h2 class="anchored" data-anchor-id="arquitectura-cliente-servidor">Arquitectura cliente-servidor</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/u1_4.png" class="img-fluid figure-img"></p>
+<figcaption>Arquitectura cliente-servidor</figcaption>
+</figure>
+</div>
+<p><strong>El Cliente:</strong> Es la aplicación o dispositivo del usuario (como un navegador web o una app en el móvil) que inicia la comunicación haciendo peticiones.</p>
+<p><strong>El Servidor:</strong> Es el equipo o programa remoto con mayores recursos encargado de procesar las solicitudes, gestionar bases de datos y devolver los datos requeridos.</p>
+<p><strong>Cómo Funciona</strong></p>
+<ol type="1">
+<li>El usuario interactúa con el <strong>cliente</strong> y realiza una acción o petición (por ejemplo, entrar a una página web).</li>
+<li>El cliente envía un mensaje a través de la red usando protocolos como <strong>HTTP o HTTPS</strong>.</li>
+<li>El <strong>servidor</strong> recibe la petición, hace el trabajo pesado (busca en la base de datos, procesa los datos) y genera una respuesta.</li>
+<li>El servidor envía la información de vuelta al cliente, que se encarga de mostrarla de forma visual en la pantalla.</li>
+</ol>
+</section>
+<section id="http-y-https" class="level2">
+<h2 class="anchored" data-anchor-id="http-y-https">HTTP y HTTPS</h2>
+<p>La diferencia principal entre <strong>HTTP</strong> y <strong>HTTPS</strong> es que <strong>el segundo cuenta con una capa de seguridad y cifrado para proteger los datos, mientras que el primero los transmite de forma abierta</strong>.</p>
+<p><strong>¿Qué es HTTP?</strong></p>
+<p>Significa <em>Hypertext Transfer Protocol</em> (Protocolo de Transferencia de Hipertexto).</p>
+<p>Envía la información en texto plano entre el navegador y el servidor.</p>
+<p>No ofrece cifrado, por lo que terceros pueden leer o robar los datos fácilmente si los interceptan.</p>
+<p><strong>¿Qué es HTTPS?</strong></p>
+<p>Significa <em>Hypertext Transfer Protocol Secure</em> (Protocolo de Transferencia de Hipertexto Seguro).</p>
+<p>Añade los protocolos de seguridad <strong>SSL o TLS</strong> para cifrar los datos intercambiados.</p>
+<p>Protege la información confidencial, como contraseñas o números de tarjetas de crédito.</p>
+<p>Valida la identidad del servidor web para evitar suplantaciones.</p>
+<blockquote class="blockquote">
+<p><strong>HTTPS</strong> protege la comunicación pero <strong>NO GARANTIZA</strong> que la aplicación sea segura.</p>
+</blockquote>
+</section>
+<section id="apis-rest" class="level2">
+<h2 class="anchored" data-anchor-id="apis-rest">APIs REST</h2>
+<p>Un <strong>API REST</strong> es un conjunto de reglas que permite que diferentes aplicaciones se comuniquen entre sí mediante HTTP/HTTPS.</p>
+<p>El acrónimo significa <em>Application Programming Interface</em> (Interfaz de programación de aplicaciones) y <em>REpresentational State Transfer</em> (Transferencia de estado representacional).</p>
+<blockquote class="blockquote">
+<p>Funciona como un puente o traductor para que un sistema pida datos o funciones a otro y obtenga una respuesta clara.</p>
+</blockquote>
+<section id="cómo-funciona" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-funciona">¿Cómo funciona?</h3>
+<p>Una API REST funciona mediante un modelo de cliente y servidor:</p>
+<ul>
+<li><strong>El cliente</strong>: Es quien hace la petición, como una aplicación móvil, una página web o tu navegador.</li>
+<li><strong>El servidor</strong>: Es el sistema que recibe la petición, procesa la información en el <em>backend</em> (como buscar en una base de datos) y devuelve un resultado.</li>
+</ul>
+<p>Los datos se suelen enviar y recibir en formato , que es un formato de texto ligero.</p>
+<p>### Request/response</p>
+<p><strong>Request (Solicitud / Petición):</strong> Es el mensaje que envía el cliente (por ejemplo, tu navegador web) pidiendo un recurso, datos o una acción al servidor. Incluye métodos como <code>GET</code> o <code>POST</code>, cabeceras y datos.</p>
+<p><strong>Response:</strong> Es el mensaje que el servidor devuelve al cliente tras procesar la solicitud. Incluye un código de estado (como 200 para éxito o 404 para no encontrado) y la información solicitada.</p>
+</section>
+<section id="métodos-y-códigos-básicos" class="level3">
+<h3 class="anchored" data-anchor-id="métodos-y-códigos-básicos">Métodos y códigos básicos</h3>
+<p><strong>Métodos HTTP básicos (Acciones)</strong></p>
+<p>Los métodos indican al servidor <strong>qué acción</strong> se desea realizar sobre un recurso.</p>
+<p>• <strong>GET:</strong> Solicita datos o información de un servidor. <strong>No modifica nada</strong> en el servidor, solo lee (por ejemplo, cargar una página web o ver un perfil). • <strong>POST:</strong> Envía datos al servidor para <strong>crear un nuevo recurso</strong> (por ejemplo, registrar un nuevo usuario o publicar un comentario). • <strong>PUT:</strong> Envía datos para <strong>actualizar por completo</strong> un recurso existente. Si no existe, a veces lo crea. • <strong>DELETE:</strong> Solicita la <strong>eliminación</strong> de un recurso específico en el servidor. • <strong>PATCH:</strong> Aplica <strong>modificaciones parciales</strong> a un recurso (a diferencia de PUT, no lo reemplaza entero).</p>
+<p><strong>Códigos de estado HTTP básicos (Respuestas)</strong></p>
+<p>Los códigos son números de tres dígitos que el servidor devuelve para indicar el <strong>resultado de la petición</strong>.</p>
+<p>Se dividen en grupos según su primer dígito:</p>
+<p><strong>🟢 2xx: Éxito (Todo salió bien)</strong> • <strong>200 OK:</strong> La petición fue exitosa y el servidor devuelve los datos solicitados. • <strong>201 Created:</strong> La petición fue exitosa y se ha <strong>creado un nuevo recurso</strong> (común tras un POST).</p>
+<p><strong>🟡 3xx: Redirección (Hay que ir a otro lado)</strong> • <strong>301 Moved Permanently:</strong> El recurso solicitado se ha mudado de forma permanente a una nueva dirección (URL). • <strong>302 Found:</strong> El recurso está temporalmente en otra dirección.</p>
+<p><strong>🔴 4xx: Errores del Cliente (El error está en tu petición)</strong> • <strong>400 Bad Request:</strong> El servidor no entiende la petición porque está mal redactada o corrupta. • <strong>401 Unauthorized:</strong> No tienes permiso para ver el recurso; necesitas <strong>iniciar sesión</strong>. • <strong>403 Forbidden:</strong> El servidor entiende quién eres, pero <strong>tienes prohibido</strong> el acceso a ese recurso. • <strong>404 Not Found:</strong> El recurso solicitado <strong>no existe</strong> o no se pudo encontrar en el servidor.</p>
+<p><strong>🟣 5xx: Errores del Servidor (El error es de la web/sistema)</strong> • <strong>500 Internal Server Error:</strong> El servidor encontró una condición inesperada que le impide cumplir con la petición (un fallo genérico en el código del servidor). • <strong>503 Service Unavailable:</strong> El servidor <strong>no está disponible</strong> temporalmente, generalmente por mantenimiento o sobrecarga.</p>
+</section>
+</section>
+<section id="json" class="level2">
+<h2 class="anchored" data-anchor-id="json">JSON</h2>
+<p><strong>JSON</strong> (JavaScript Object Notation) es técnicamente un formato ligero de intercambio de datos basado en texto plano, diseñado para ser fácil de leer y escribir por humanos, y fácil de interpretar y generar por computadoras.</p>
+<p>A pesar de que su nombre incluye “JavaScript” y nació como una simplificación de la sintaxis de objetos de ese lenguaje, hoy en día <strong>es un estándar completamente independiente del lenguaje</strong> y es compatible con prácticamente cualquier tecnología (Python, Java, PHP, C++, etc.).</p>
+<section id="estructura-técnica" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-técnica">Estructura técnica</h3>
+<p>Un archivo o cadena JSON está compuesto exclusivamente por dos estructuras de datos universales:</p>
+<ul>
+<li><strong>Colecciones de pares clave/valor</strong>: En la mayoría de los lenguajes, esto se traduce como un objeto, diccionario, hash table o registro.</li>
+<li><strong>Listas ordenadas de valores</strong>: En los lenguajes de programación, esto se traduce como un arreglo (array), lista o vector.</li>
+</ul>
+</section>
+<section id="ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"usuario_id"</span><span class="op">:</span> <span class="dv">10543</span><span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nombre"</span><span class="op">:</span> <span class="st">"Elena"</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"es_administrador"</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"telefonos"</span><span class="op">:</span> [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 600 000 000"</span><span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"+34 910 000 000"</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"configuracion"</span><span class="op">:</span> {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tema"</span><span class="op">:</span> <span class="st">"oscuro"</span><span class="op">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"notificaciones"</span><span class="op">:</span> <span class="kw">true</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ultimo_acceso"</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><strong>Los datos que llegan desde fuera no son confiables</strong></p>
+</blockquote>
+</section>
+</section>
+<section id="arquitectura-por-capas" class="level2">
+<h2 class="anchored" data-anchor-id="arquitectura-por-capas">Arquitectura por capas</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/u1_5.png" class="img-fluid figure-img"></p>
+<figcaption>Arquitectura 3 capas</figcaption>
+</figure>
+</div>
+<p>La <strong>arquitectura por capas</strong> (o Layered Architecture) es un patrón de diseño de software que consiste en dividir una aplicación en secciones horizontales, donde cada capa tiene un rol y una responsabilidad única. Se fundamenta en el principio de <strong>separación de responsabilidades</strong> (Separation of Concerns), lo que significa que cada nivel procesa una tarea específica y se comunica únicamente con sus capas adyacentes de manera jerárquica.</p>
+<section id="estructura-tradicional-arquitectura-de-3-capas" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-tradicional-arquitectura-de-3-capas">Estructura tradicional (arquitectura de 3 capas)</h3>
+<p>Aunque un sistema puede configurarse con múltiples niveles (N-capas), el modelo estándar de la industria organiza el software en tres capas lógicas esenciales:</p>
+<ul>
+<li><strong>Capa de Presentación</strong> (Interfaz de Usuario / UI): Es el punto de contacto directo con el usuario final. Se encarga de capturar las acciones del cliente, enviar los datos a la capa inferior y renderizar de forma visual la información de retorno (páginas web, apps móviles, HTML, etc.).</li>
+<li><strong>Capa de Lógica de Negocio</strong> (Capa de Aplicación / BLL): Actúa como el motor del sistema. Modela, calcula y procesa todas las reglas operativas, validaciones y transformaciones de datos requeridas por la empresa. Nunca accede directamente al almacenamiento.</li>
+<li><strong>Capa de Acceso a Datos</strong> (Persistencia / DAL): Su único objetivo es gestionar la comunicación con los almacenes de información (bases de datos SQL/NoSQL, archivos físicos o APIs de terceros). Recibe solicitudes de la capa de negocio para extraer, actualizar o eliminar registros.</li>
+</ul>
+</section>
+<section id="regla-de-acoplamiento-cerrado" class="level3">
+<h3 class="anchored" data-anchor-id="regla-de-acoplamiento-cerrado">Regla de acoplamiento cerrado</h3>
+<p>En una arquitectura limpia por capas, estas operan de forma <strong>cerrada</strong>. El flujo de datos viaja de forma estrictamente descendente: la capa de presentación solo puede llamar a la de negocio, y la de negocio solo a la de datos. Se prohíbe terminantemente “saltarse” niveles (por ejemplo, que la interfaz de usuario ejecute consultas SQL directas a la base de datos).</p>
+</section>
+</section>
+<section id="servidores-y-entornos-de-ejecución" class="level2">
+<h2 class="anchored" data-anchor-id="servidores-y-entornos-de-ejecución">Servidores y entornos de ejecución</h2>
+<blockquote class="blockquote">
+<p>Mi aplicación funciona en local, ¿qué necesita para funcionar en producción?</p>
+<p><strong>Qué funcione en mi ordenador no significa que esté preparada para producción</strong></p>
+</blockquote>
+<p>Ejemplo:</p>
+<p><strong>Mi equipo MACOS -&gt; Node.js -&gt; Aplicación</strong></p>
+<p><strong>Servidor -&gt; Node.js -&gt; Aplicación</strong></p>
+</section>
+</section>
+<section id="el-ecosistema-de-una-aplicación" class="level1">
+<h1>🌗 4. El ecosistema de una aplicación</h1>
+<section id="componentes-la-anatomía-del-software" class="level2">
+<h2 class="anchored" data-anchor-id="componentes-la-anatomía-del-software">Componentes (la anatomía del software)</h2>
+<p>Para proteger un sistema, primero debemos conocer sus partes. Un sistema no es solo un archivo ejecutable; es un conjunto de piezas interconectadas:</p>
+<ul>
+<li><strong>Frontend</strong> (Capa de Presentación): El código que se ejecuta en el cliente (navegador, app móvil). <em>Foco de seguridad</em>: Validación de datos en el cliente (que nunca sustituye a la del servidor) y protección contra ataques como XSS (Cross-Site Scripting).</li>
+<li><strong>Backend</strong> (Lógica de Negocio y APIs): El núcleo que procesa los datos y gestiona los servicios. <em>Foco de seguridad</em>: Autenticación, autorización (RBAC) y sanitización de entradas.</li>
+<li><strong>Almacenamiento y Persistencia</strong> (Bases de Datos, Caché): Dónde residen los datos (SQL, NoSQL, Redis). <em>Foco de seguridad</em>: Cifrado en reposo y en tránsito, y prevención de inyecciones (SQLi).</li>
+<li><strong>Servicios Periféricos y Middleware</strong>: Pasarelas de pago, servidores de mensajería (RabbitMQ, Kafka) o servicios de identidad (OAuth/OIDC).</li>
+</ul>
+</section>
+<section id="dependencias-el-software-de-terceros" class="level2">
+<h2 class="anchored" data-anchor-id="dependencias-el-software-de-terceros">Dependencias (el software de terceros)</h2>
+<p>Hoy en día, más del 80% del código de una aplicación moderna proviene de librerías de código abierto y frameworks (npm, PyPI, NuGet, Maven).</p>
+<section id="qué-es-una-dependencia" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-una-dependencia">¿Qué es una dependencia?</h3>
+<p>Código preescrito por terceros que integramos para no reinventar la rueda (ej. Express en Node, SQLAlchemy en Python).</p>
+</section>
+<section id="dependencias-transitivas" class="level3">
+<h3 class="anchored" data-anchor-id="dependencias-transitivas">Dependencias Transitivas</h3>
+<p>Las librerías que tus librerías necesitan. Un riesgo invisible si no se monitoriza.</p>
+</section>
+<section id="riesgos-de-seguridad-asociados" class="level3">
+<h3 class="anchored" data-anchor-id="riesgos-de-seguridad-asociados">Riesgos de Seguridad Asociados</h3>
+<ul>
+<li><strong>Vulnerabilidades conocidas (CVEs)</strong>: Fallos de seguridad descubiertos en versiones antiguas de una librería.</li>
+<li><strong>Ataques a la Cadena de Suministro (Supply Chain Attacks)</strong>: Inyección de código malicioso en repositorios públicos por el secuestro de la cuenta de un desarrollador legítimo.</li>
+</ul>
+</section>
+<section id="buenas-prácticas-de-producción-segura" class="level3">
+<h3 class="anchored" data-anchor-id="buenas-prácticas-de-producción-segura">Buenas Prácticas de Producción Segura</h3>
+<ul>
+<li><p>Uso de herramientas <strong>SCA (Software Composition Analysis)</strong> como npm audit, Snyk o OWASP Dependency-Check integradas en el pipeline.</p></li>
+<li><p>Fijar versiones exactas (lockfiles) para evitar sorpresas en el despliegue.</p></li>
+</ul>
+</section>
+</section>
+<section id="entornos-de-desarrollo-pruebas-y-producción" class="level2">
+<h2 class="anchored" data-anchor-id="entornos-de-desarrollo-pruebas-y-producción">Entornos de desarrollo, pruebas y producción</h2>
+<p>Una regla de oro en la puesta en producción segura es el aislamiento. El software debe pasar por distintas “cajas de arena” (<em>sandbox</em>) antes de llegar al usuario final.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/ud1_6.png" class="img-fluid figure-img"></p>
+<figcaption>Entornos</figcaption>
+</figure>
+</div>
+<section id="conceptos-clave-de-la-seguridad-en-entornos" class="level3">
+<h3 class="anchored" data-anchor-id="conceptos-clave-de-la-seguridad-en-entornos">Conceptos clave de la seguridad en entornos</h3>
+<ul>
+<li><strong>Principio de Menor Privilegio</strong>: Los desarrolladores no deben tener acceso a las credenciales ni a las bases de datos de producción.</li>
+<li><strong>Gestión Segura de Secretos</strong>: Prohibido guardar contraseñas, tokens de API o claves criptográficas en el código fuente (Git). Se deben inyectar en tiempo de ejecución usando gestores de secretos (Vault, AWS Secrets Manager, GitHub Secrets).</li>
+<li><strong>Paridad de Entornos</strong>: Los entornos de QA y Producción deben ser lo más idénticos posibles (mediante Contenedores/Docker e Infraestructura como Código - IaC) para evitar el clásico “en mi máquina sí funcionaba”.</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
