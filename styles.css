@@ -963,13 +963,60 @@
 @media (max-width: 991.98px) {
 
   #quarto-sidebar .sidebar-header {
-    padding-top: 8px !important;
-    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 95px !important;
+
+    text-align: center;
   }
 
-  #quarto-sidebar .sidebar-header::before,
+  /* FOTO */
+  #quarto-sidebar .sidebar-header::before {
+    display: block;
+
+    width: 72px;
+    height: 72px;
+
+    flex: 0 0 72px;
+
+    margin: 12px auto 10px auto;
+
+    border-radius: 50%;
+
+    background-image: url("images/inmagijon.jpg");
+    background-size: cover;
+    background-position: center;
+
+    border: 2px solid #ffffff;
+
+    box-shadow:
+      0 2px 7px rgba(0, 0, 0, 0.10);
+  }
+
+  /* NOMBRE + CARGO */
   #quarto-sidebar .sidebar-header::after {
-    display: none;
+    display: block;
+
+    content: "Inma Gijón\A Profesora de Informática · DAW";
+
+    position: static;
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 0 5px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    white-space: pre;
+
+    font-size: 0.68rem;
+    line-height: 1.5;
+    font-weight: 500;
+
+    color: var(--home-text-secondary);
   }
 
 }
