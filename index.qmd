@@ -9,7 +9,7 @@ title: "Programación Orientada a Objetos"
 <p>Un espacio para investigar, diseñar, desarrollar y presentar soluciones reales trabajando como un equipo profesional.</p>
 </div>
 <div class="home-hero-image">
-<img src="images/igijon-ia.jpeg" alt="Programación Orientada a Objetos con Python">
+<img src="images/python.jpeg" alt="Programación Orientada a Objetos con Python">
 </div>
 </div>
 
