@@ -878,16 +878,17 @@
   }
 
   .home-hero {
-    grid-template-columns: minmax(0, 1fr) 240px;
-
+    grid-template-columns: minmax(0, 1fr) 180px;
     column-gap: 30px;
 
     padding-top: 40px;
   }
 
   .home-hero-image {
-    width: 240px;
-    height: 300px;
+    width: 180px;
+    height: 220px;
+
+    border-radius: 14px;
   }
 
 }
@@ -906,7 +907,7 @@
 
     align-items: stretch;
 
-    gap: 30px;
+    gap: 24px;
 
     padding-top: 28px;
     padding-bottom: 32px;
@@ -921,12 +922,12 @@
   }
 
   .home-hero-image {
-    width: 100%;
-    max-width: 280px;
-
-    height: 340px;
+    width: 170px;
+    height: 210px;
 
     align-self: center;
+
+    border-radius: 14px;
   }
 
   .home-manifesto {
