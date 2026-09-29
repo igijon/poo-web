@@ -271,6 +271,8 @@ Indica:
 5. qué preguntas debería hacerme antes de programar.
 
 No rediseñes la solución completa.
+
+Si no sabes algo, no te lo inventes.
 ```
 
 Después compara:
