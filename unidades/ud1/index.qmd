@@ -2,6 +2,8 @@
 title: "UD1. Python profesional y modelo orientado a objetos"
 ---
 
+[Discord](https://discord.gg/XheWhsqpa)
+
 # 📕 ¿Por qué necesitamos los objetos?
 
 > **Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos...?**
@@ -575,7 +577,8 @@ git commit -m "Primer commit"
 ```bash
 git push -u origin main
 ```
- # 🐉 Clases en Python
+
+# 🐉 Clases en Python
 
 Una clase básica:
 
