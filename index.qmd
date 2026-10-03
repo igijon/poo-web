@@ -15,7 +15,7 @@ title: "Programación Orientada a Objetos"
 
 <div class="home-manifesto">
 <div class="home-manifesto-meta">Investigación · Diseño · Desarrollo · IA · Comunicación</div>
-<div class="home-manifesto-main">¿Cómo conseguimos que una aplicación pase de código a producción de forma segura utilizando automatización e IA?</div>
+<div class="home-manifesto-main">Aprender a programar con Python de forma profesional</div>
 </div>
 
 <div class="home-section-title">Tu espacio de trabajo</div>

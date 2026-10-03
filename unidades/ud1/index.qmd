@@ -598,3 +598,250 @@ print(type(tarea1))
 > Son objetos diferentes tarea1 != tarea2
 
 
+# 💉 Atributos
+
+Los atributos almacenan información asociada a un objeto.
+
+Podemos hacer:
+
+```py
+class Tarea:
+    pass
+
+tarea = Tarea()
+
+tarea.titulo = "Diseñar login"
+tarea.estado = "pendiente"
+tarea.responsable = "Ana"
+
+print(tarea.titulo)
+
+tarea.estado = "completada"
+print(tarea.estado)
+```
+
+# 🐹 Constructor, ¿por qué lo necesitamos?
+
+Aunque la solución anterior funciona, tiene un problema.
+
+Podemos crear:
+
+```py
+tarea1 = Tarea()
+
+tarea1.titulo = "Diseñar login"
+```
+
+y olvidarnos de `tarea1.estado` y `tarea1.responsable`. Esto provoca que el objeto no esté completo.
+
+Queremos que `Tarea` se cree correctamente desde el principio. Para ello utilizamos `__init__`.
+
+## El método `__init__`
+
+Podemos definir:
+
+```py
+class Tarea:
+    def __init__(self, titulo, esponsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+```
+
+Ahora:
+
+```py
+tarea1 = Tarea("Diseñar login", "Ana")
+```
+
+>`__init__` se ejecuta cuando creamos una instancia.
+
+por ejemplo al hacer:
+
+```py
+tarea = Tarea("Diseñar login", "Ana")
+```
+
+>En este momento, Python crea el objeto y ejecuta su método `__init__` para inicializarlo.
+
+# 🏯 ¿Qué es `self`?
+
+`self` es uno de los conceptos fundamentales de la POO en Python. Representa la instancia del objeto que se está creando o utilizando.
+
+Cuando escribimos:
+
+```py
+class Tarea:
+    def __init__(self, titulo):
+        self.titulo = titulo
+```
+
+>`self` representa la **instancia concreta sobre la que estamos trabajando**
+
+Si hacemos:
+
+```py
+tarea1 = Tarea("Diseñar login")
+tarea2 = Tarea("Crear API")
+```
+
+el `self` dentro de `__init__` se refiere a `tarea1` en la primera llamada y a `tarea2` en la segunda.
+
+>Por esto, `self.titulo` significa el atributo `titulo` de la instancia concreta que estamos creando o manipulando.
+
+# 🐈 Parámetro frente a atributo
+
+Observa este código:
+
+```py
+class Tarea:
+    def __init__(self, titulo):
+        self.titulo = titulo
+```
+
+Aquí aparecen dos elementos llamados `titulo`:
+
+1. **Parámetro**: `titulo` es un parámetro del método `__init__`. 
+2. **Atributo**: `self.titulo` es un atributo del objeto. Es una variable que pertenece a la instancia concreta y almacena información sobre ella.
+
+# 🐦 Métodos
+
+Un método es una función definida dentro de una clase que representa un comportamiento del objeto. Los métodos pueden acceder y modificar los atributos del objeto.
+
+```py
+class Tarea:
+    def __init__(self, titulo, responsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+
+    def completar(self):
+        self.estado = "completada"
+
+```
+Uso:
+
+```py
+tarea1 = Tarea("Diseñar login", "Ana")
+print(tarea1.estado)  # pendiente
+tarea1.completar()
+print(tarea1.estado)  # completada
+```
+
+El método `completar` cambia el estado de la tarea a "completada".
+
+## Métodos con parámetros
+
+Los métodos también pueden recibir información:
+
+```py
+class Tarea:
+    def __init__(self, titulo, responsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+    
+    def reasignar(self, nuevo_responsable):
+        self.responsable = nuevo_responsable
+```
+
+Podemos utilizarlo:
+
+```py
+tarea1 = Tarea("Diseñar login", "Ana")
+tarea1.reasignar("Luis")
+print(tarea1.responsable)  # Luis
+```
+
+>En este caso, `nuevo_responsable` es un **parámetro** del método `reasignar`, y `self.responsable` es el **atributo** de la instancia que estamos modificando.
+
+## `self` y los métodos de instancia
+
+Observa:
+
+```py
+class Tarea:
+    def __init__(self, titulo, responsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+    
+    def mostrar(self):
+        print(f"Título: {self.titulo}, Estado: {self.estado}, Responsable: {self.responsable}")
+```
+
+Cuando hacemos `tarea.mostrar()`, Python pasa automáticamente la instancia `tarea` como el primer argumento `self` al método `mostrar`. Esto permite que el método acceda a los atributos de esa instancia específica.
+
+# 🎛 Una clase completa
+
+```py
+class Tarea:
+    def __init__(self, titulo, responsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+
+    def completar(self):
+        self.estado = "completada"
+
+    def reasignar(self, nuevo_responsable):
+        self.responsable = nuevo_responsable
+
+    def mostrar(self):
+        print(f"Título: {self.titulo}, Estado: {self.estado}, Responsable: {self.responsable}")
+```
+
+Podemos crear una instancia:
+
+```py
+tarea = Tarea("Diseñar login", "Ana")
+tarea.mostrar()  # Título: Diseñar login, Estado: pendiente, Responsable: Ana
+tarea.completar()
+tarea.mostrar()  # Título: Diseñar login, Estado: completada, Responsable: Ana
+tarea.reasignar("Luis")
+tarea.mostrar()  # Título: Diseñar login, Estado: completada, Responsable: Luis
+```
+
+También podemos crear varias instancias:
+
+```py
+tarea1 = Tarea("Diseñar login", "Ana")
+tarea2 = Tarea("Crear API", "Luis")
+tarea3 = Tarea("Escribir documentación", "Marta")
+
+tarea1.completar()
+print(tarea1.estado)  # completada
+print(tarea2.estado)  # pendiente
+print(tarea3.estado)  # pendiente
+```
+
+# 📌 Referencias a objetos
+
+En Python, las variables que contienen objetos no almacenan el objeto en sí, sino una **referencia** al objeto en memoria. Esto significa que si asignamos un objeto a otra variable, ambas variables apuntarán al mismo objeto.
+
+> Esto será especialmente importante cuando trabajemos con:
+> - listas de objetos
+> - diccionarios de objetos
+> - composición de objetos (objetos que contienen otros objetos)
+> ...
+
+
+Por ahora, nos basta con comprender que una variable puede hacer referencia a un objeto.
+
+# 📊 UML: representar el diseño
+
+**UML (Unified Modeling Language)** es un lenguaje gráfico utilizado para modelar sistemas de software. Permite representar clases, objetos, relaciones y comportamientos de manera visual.
+
+En esta unidad utilizaremos **diagramas de clases UML** para representar nuestras clases y sus relaciones.
+
+Una clase puede representarse así:
+
+## Prueba PlantUML
+
+```{.plantuml}
+@startuml
+Alice -> Bob: Hola
+Bob --> Alice: Hola también
+@enduml
+```
+

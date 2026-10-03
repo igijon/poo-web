@@ -1,6 +1,9 @@
 project:
   type: website
 
+filters:
+  - diagram
+  
 website:
   title: "Programación Orientada a Objetos"
 
