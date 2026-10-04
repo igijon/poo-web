@@ -485,14 +485,12 @@ cd taskflow
 
 uv init
 ```
-Creamos un fichero `main.py`:
-```py
-print("Hola, Taskflow")
-```
 
 ```bash
-uv run main.py
+uv run taskflow
 ```
+
+![Ejecución proyecto](./images/4.png)
 
 
 Esto crea la siguiente estructura:
@@ -501,7 +499,31 @@ Esto crea la siguiente estructura:
 
 >**`uv` puede crear y gestionar entornos virtuales y proporciona además herramientas para gestionar el proyecto, sus dependencias y su ejecución. `venv` es la herramienta estándar incluida con Python para crear entornos virtuales.**
 
-![Hola mundo](./images/ud1_3.png)
+
+>Vamos a hacer una modificación importante. Por defecto, `uv`, nos crea cierta lógica en el fichero `__init__.py` que establece al crear el proyecto. Vamos a hacer algunos cambios iniciales:
+
+- Crearemos un fichero `main.py` y trasladaremos a éste fichero el siguiente código:
+
+`main.py`
+
+```py
+def main() -> None:
+    print("Hello from taskflow!")
+```
+
+El fichero `__init__.py` debe quedar **vacío**.
+
+- Modificamos el fichero `pyproject.toml` indicándole el nuevo punto de entrada de mi aplicación:
+
+```toml
+[project.scripts]
+taskflow = "taskflow:main.main"
+```
+
+(Antes teníamos `taskflow:main` en esa sección.)
+
+Para ejecutar mi proyecto seguiría haciendo `uv run taskflow` y debe funcionar mostrando el mensaje `Hello from taskflow!` en pantalla.
+
 
 ## Repositorios: Git
 
@@ -931,7 +953,8 @@ class Tarea {
 >- **Atributos y métodos protegidos**: se definen con un prefijo de guion bajo `_`, por ejemplo: `_estado`. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase.
 >- **Atributos y métodos privados**: se definen con un prefijo de doble guion bajo `__`, por ejemplo: `__responsable`. Esto activa el *name mangling* de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.
 
-### Name Mangling
+### Name Mangling
+
 
 ```py
 class Tarea:

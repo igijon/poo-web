@@ -274,7 +274,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#uml-representar-el-diseño" id="toc-uml-representar-el-diseño" class="nav-link" data-scroll-target="#uml-representar-el-diseño">📊 UML: representar el diseño</a>
   <ul class="collapse">
   <li><a href="#uml-y-python" id="toc-uml-y-python" class="nav-link" data-scroll-target="#uml-y-python">UML y Python</a></li>
-  <li><a href="#visibilidad-uml-y-python" id="toc-visibilidad-uml-y-python" class="nav-link" data-scroll-target="#visibilidad-uml-y-python">Visibilidad UML y Python</a></li>
+  <li><a href="#visibilidad-uml-y-python" id="toc-visibilidad-uml-y-python" class="nav-link" data-scroll-target="#visibilidad-uml-y-python">Visibilidad UML y Python</a>
+  <ul class="collapse">
+  <li><a href="#name-mangling" id="toc-name-mangling" class="nav-link" data-scroll-target="#name-mangling">Name Mangling</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -488,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Abstracción</strong>: Aislar los detalles complejos de un objeto y mostrar sólo las características esenciales. Ejemplo: Al manejar un auto, usas el volante y los pedales sin necesidad de entender cómo funciona el motor por dentro.</li>
 <li><strong>Encapsulamiento</strong>: Agrupar los datos (atributos) y las acciones (métodos) dentro de una misma clase, protegiendo el acceso externo no autorizado. Ejemplo: El saldo de una cuenta bancaria está oculto y sólo se puede modificar de forma segura mediente métodos controlados como <code>depositar()</code> o <code>retirar()</code>.</li>
 <li><strong>Herencia</strong>: Permitir que una nueva clase (hija) obtenga los atributos y métodos de otra clase existente (padre) para reutilizar código. Ejemplo: Una clase <code>CocheElectrico</code> puede heredar de la clase base <code>Coche</code> y añadir funciones propias como <code>cargar_bateria()</code>.</li>
-<li><strong>Polimorfismo</strong>: La capacidad de que un mismo método o función se comporte de manera distinta según el objeto que lo ejecute. Ejemplo: El método <code>acelerar()</code> funciona de forma diferente si lo ejecuta un <code>Coche</code>, una <code>Bicicleta</code> o un <code>Tren</code></li>
+<li><strong>Polimorfismo</strong>: La capacidad de que un mismo método o función se comporte de manera distinta según el objeto que lo ejecute. Ejemplo: El método <code>acelerar()</code> funciona de forma diferente si lo ejecuta un <code>Coche</code>, una <code>Bicicleta</code> o un <code>Tren</code>.</li>
 </ul>
 </section>
 <section id="el-modelo-mental-fundamental" class="level1">
@@ -637,9 +640,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> taskflow</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Creamos un fichero <code>main.py</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Hola, Taskflow"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run main.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run taskflow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/4.png" class="img-fluid figure-img"></p>
+<figcaption>Ejecución proyecto</figcaption>
+</figure>
+</div>
 <p>Esto crea la siguiente estructura:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -650,23 +657,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong><code>uv</code> puede crear y gestionar entornos virtuales y proporciona además herramientas para gestionar el proyecto, sus dependencias y su ejecución. <code>venv</code> es la herramienta estándar incluida con Python para crear entornos virtuales.</strong></p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./images/ud1_3.png" class="img-fluid figure-img"></p>
-<figcaption>Hola mundo</figcaption>
-</figure>
-</div>
+<blockquote class="blockquote">
+<p>Vamos a hacer una modificación importante. Por defecto, <code>uv</code>, nos crea cierta lógica en el fichero <code>__init__.py</code> que establece al crear el proyecto. Vamos a hacer algunos cambios iniciales:</p>
+</blockquote>
+<ul>
+<li>Crearemos un fichero <code>main.py</code> y trasladaremos a éste fichero el siguiente código:</li>
+</ul>
+<p><code>main.py</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main() <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello from taskflow!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El fichero <code>__init__.py</code> debe quedar <strong>vacío</strong>.</p>
+<ul>
+<li>Modificamos el fichero <code>pyproject.toml</code> indicándole el nuevo punto de entrada de mi aplicación:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[project.scripts]</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="dt">taskflow</span> <span class="op">=</span> <span class="st">"taskflow:main.main"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>(Antes teníamos <code>taskflow:main</code> en esa sección.)</p>
+<p>Para ejecutar mi proyecto seguiría haciendo <code>uv run taskflow</code> y debe funcionar mostrando el mensaje <code>Hello from taskflow!</code> en pantalla.</p>
 </section>
 </section>
 <section id="repositorios-git" class="level2">
 <h2 class="anchored" data-anchor-id="repositorios-git">Repositorios: Git</h2>
 <section id="qué-problema-resuelve-git" class="level3">
 <h3 class="anchored" data-anchor-id="qué-problema-resuelve-git">¿Qué problema resuelve Git?</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>taskflow_final.py</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>taskflow_final_v2.py</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>taskflow_final_v3.py</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo.py</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo_ahora_si.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>taskflow_final.py</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>taskflow_final_v2.py</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>taskflow_final_v3.py</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo.py</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>taskflow_final_definitivo_ahora_si.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <ul>
 <li><p>¿Cómo sabemos qué hemos cambiado?</p></li>
@@ -679,14 +697,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Git es un sistema de control de versiones. Permite registrar la evolución de un proyecto y recuperar versiones anteriores</strong></p>
 </blockquote>
 <p>En este módulo vamos a utilizar:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>Git</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>↓</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>Sistema de control de versiones</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>GitHub</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>↓</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>Servicio donde podemos alojar</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>repositorios Git y colaborar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>Git</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>↓</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>Sistema de control de versiones</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>GitHub</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>↓</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>Servicio donde podemos alojar</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>repositorios Git y colaborar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="instalaciones-necesarias" class="level3">
 <h3 class="anchored" data-anchor-id="instalaciones-necesarias">Instalaciones necesarias</h3>
@@ -705,37 +723,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Creamos un repositorio en Github</p></li>
 <li><p>Tenemos que inicializar Git en la carpeta local de nuestro proyecto</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Cambiamos el nombre de nuestra rama principal para asegurarnos que es <code>main</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Esto crea un directorio <code>.git</code></p>
 <ul>
 <li>Conectamos la carpeta local con el repositorio remoto de GitHub</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin <span class="pp">[</span><span class="ss">URL</span><span class="pp">-</span><span class="ss">HTTPS</span><span class="pp">-</span><span class="ss">del</span><span class="pp">-</span><span class="ss">repositorio</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin <span class="pp">[</span><span class="ss">URL</span><span class="pp">-</span><span class="ss">HTTPS</span><span class="pp">-</span><span class="ss">del</span><span class="pp">-</span><span class="ss">repositorio</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Preparamos y confirmamos nuestros archivos</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Primer commit"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Primer commit"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Subimos los cambios a GitHub</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 </section>
 <section id="clases-en-python" class="level1">
 <h1>🐉 Clases en Python</h1>
 <p>Una clase básica:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(tarea1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(tarea1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>Son objetos diferentes tarea1 != tarea2</p>
 </blockquote>
@@ -744,44 +762,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>💉 Atributos</h1>
 <p>Los atributos almacenan información asociada a un objeto.</p>
 <p>Podemos hacer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea()</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>tarea.titulo <span class="op">=</span> <span class="st">"Diseñar login"</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>tarea.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>tarea.responsable <span class="op">=</span> <span class="st">"Ana"</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.titulo)</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>tarea.estado <span class="op">=</span> <span class="st">"completada"</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea()</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>tarea.titulo <span class="op">=</span> <span class="st">"Diseñar login"</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>tarea.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>tarea.responsable <span class="op">=</span> <span class="st">"Ana"</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.titulo)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>tarea.estado <span class="op">=</span> <span class="st">"completada"</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="constructor-por-qué-lo-necesitamos" class="level1">
 <h1>🐹 Constructor, ¿por qué lo necesitamos?</h1>
 <p>Aunque la solución anterior funciona, tiene un problema.</p>
 <p>Podemos crear:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>tarea1.titulo <span class="op">=</span> <span class="st">"Diseñar login"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea()</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>tarea1.titulo <span class="op">=</span> <span class="st">"Diseñar login"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>y olvidarnos de <code>tarea1.estado</code> y <code>tarea1.responsable</code>. Esto provoca que el objeto no esté completo.</p>
 <p>Queremos que <code>Tarea</code> se cree correctamente desde el principio. Para ello utilizamos <code>__init__</code>.</p>
 <section id="el-método-__init__" class="level2">
 <h2 class="anchored" data-anchor-id="el-método-__init__">El método <code>__init__</code></h2>
 <p>Podemos definir:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, esponsable):</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, esponsable):</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ahora:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p><code>__init__</code> se ejecuta cuando creamos una instancia.</p>
 </blockquote>
 <p>por ejemplo al hacer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>En este momento, Python crea el objeto y ejecuta su método <code>__init__</code> para inicializarlo.</p>
 </blockquote>
@@ -791,15 +809,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>🏯 ¿Qué es <code>self</code>?</h1>
 <p><code>self</code> es uno de los conceptos fundamentales de la POO en Python. Representa la instancia del objeto que se está creando o utilizando.</p>
 <p>Cuando escribimos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p><code>self</code> representa la <strong>instancia concreta sobre la que estamos trabajando</strong></p>
 </blockquote>
 <p>Si hacemos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea(<span class="st">"Crear API"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea(<span class="st">"Crear API"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>el <code>self</code> dentro de <code>__init__</code> se refiere a <code>tarea1</code> en la primera llamada y a <code>tarea2</code> en la segunda.</p>
 <blockquote class="blockquote">
 <p>Por esto, <code>self.titulo</code> significa el atributo <code>titulo</code> de la instancia concreta que estamos creando o manipulando.</p>
@@ -808,9 +826,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="parámetro-frente-a-atributo" class="level1">
 <h1>🐈 Parámetro frente a atributo</h1>
 <p>Observa este código:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Aquí aparecen dos elementos llamados <code>titulo</code>:</p>
 <ol type="1">
 <li><strong>Parámetro</strong>: <code>titulo</code> es un parámetro del método <code>__init__</code>.</li>
@@ -820,35 +838,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="métodos" class="level1">
 <h1>🐦 Métodos</h1>
 <p>Un método es una función definida dentro de una clase que representa un comportamiento del objeto. Los métodos pueden acceder y modificar los atributos del objeto.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Uso:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># pendiente</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>tarea1.completar()</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># completada</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># pendiente</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>tarea1.completar()</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># completada</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>El método <code>completar</code> cambia el estado de la tarea a “completada”.</p>
 <section id="métodos-con-parámetros" class="level2">
 <h2 class="anchored" data-anchor-id="métodos-con-parámetros">Métodos con parámetros</h2>
 <p>Los métodos también pueden recibir información:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Podemos utilizarlo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>tarea1.reasignar(<span class="st">"Luis"</span>)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.responsable)  <span class="co"># Luis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>tarea1.reasignar(<span class="st">"Luis"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.responsable)  <span class="co"># Luis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>En este caso, <code>nuevo_responsable</code> es un <strong>parámetro</strong> del método <code>reasignar</code>, y <code>self.responsable</code> es el <strong>atributo</strong> de la instancia que estamos modificando.</p>
 </blockquote>
@@ -856,49 +874,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="self-y-los-métodos-de-instancia" class="level2">
 <h2 class="anchored" data-anchor-id="self-y-los-métodos-de-instancia"><code>self</code> y los métodos de instancia</h2>
 <p>Observa:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mostrar(<span class="va">self</span>):</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Título: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss">, Estado: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>estado<span class="sc">}</span><span class="ss">, Responsable: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>responsable<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Cuando hacemos <code>tarea.mostrar()</code>, Python pasa automáticamente la instancia <code>tarea</code> como el primer argumento <code>self</code> al método <code>mostrar</code>. Esto permite que el método acceda a los atributos de esa instancia específica.</p>
-</section>
-</section>
-<section id="una-clase-completa" class="level1">
-<h1>🎛 Una clase completa</h1>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span>
-<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
-<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span>
-<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mostrar(<span class="va">self</span>):</span>
-<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Título: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss">, Estado: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>estado<span class="sc">}</span><span class="ss">, Responsable: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>responsable<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mostrar(<span class="va">self</span>):</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Título: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss">, Estado: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>estado<span class="sc">}</span><span class="ss">, Responsable: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>responsable<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cuando hacemos <code>tarea.mostrar()</code>, Python pasa automáticamente la instancia <code>tarea</code> como el primer argumento <code>self</code> al método <code>mostrar</code>. Esto permite que el método acceda a los atributos de esa instancia específica.</p>
+</section>
+</section>
+<section id="una-clase-completa" class="level1">
+<h1>🎛 Una clase completa</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> mostrar(<span class="va">self</span>):</span>
+<span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Título: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss">, Estado: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>estado<span class="sc">}</span><span class="ss">, Responsable: </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>responsable<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Podemos crear una instancia:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: pendiente, Responsable: Ana</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>tarea.completar()</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: completada, Responsable: Ana</span></span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>tarea.reasignar(<span class="st">"Luis"</span>)</span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: completada, Responsable: Luis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: pendiente, Responsable: Ana</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>tarea.completar()</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: completada, Responsable: Ana</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>tarea.reasignar(<span class="st">"Luis"</span>)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>tarea.mostrar()  <span class="co"># Título: Diseñar login, Estado: completada, Responsable: Luis</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>También podemos crear varias instancias:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea(<span class="st">"Crear API"</span>, <span class="st">"Luis"</span>)</span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>tarea3 <span class="op">=</span> Tarea(<span class="st">"Escribir documentación"</span>, <span class="st">"Marta"</span>)</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>tarea1.completar()</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># completada</span></span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea2.estado)  <span class="co"># pendiente</span></span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea3.estado)  <span class="co"># pendiente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>tarea1 <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>, <span class="st">"Ana"</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>tarea2 <span class="op">=</span> Tarea(<span class="st">"Crear API"</span>, <span class="st">"Luis"</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>tarea3 <span class="op">=</span> Tarea(<span class="st">"Escribir documentación"</span>, <span class="st">"Marta"</span>)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>tarea1.completar()</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea1.estado)  <span class="co"># completada</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea2.estado)  <span class="co"># pendiente</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea3.estado)  <span class="co"># pendiente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="referencias-a-objetos" class="level1">
 <h1>📌 Referencias a objetos</h1>
@@ -919,17 +937,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Podemos pasar del diseño:</p>
 <img src="index_files/mediabag/868e0b1374cc2fdb8609169712907e551746c029.svg" class="img-fluid">
 <p>a Python:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <blockquote class="blockquote">
 <p>El objetivo de UML no es obligarnos a dibujar diagramas antes de cada clase sino ayudarnos a pensar en el diseño antes de escribir código. Nos permite <strong>visualizar la estructura y relaciones</strong> de nuestro sistema.</p>
 </blockquote>
@@ -945,75 +963,77 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones: - <strong>Atributos y métodos públicos</strong>: se definen normalmente, sin prefijo especial. - <strong>Atributos y métodos protegidos</strong>: se definen con un prefijo de guion bajo <code>_</code>, por ejemplo: <code>_estado</code>. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase. - <strong>Atributos y métodos privados</strong>: se definen con un prefijo de doble guion bajo <code>__</code>, por ejemplo: <code>__responsable</code>. Esto activa el <em>name mangling</em> de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.</p>
 </blockquote>
-<p>###&nbsp;Name Mangling</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__codigo_interno <span class="op">=</span> <span class="dv">12345</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="name-mangling" class="level3">
+<h3 class="anchored" data-anchor-id="name-mangling">Name Mangling</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__codigo_interno <span class="op">=</span> <span class="dv">12345</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Tenemos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>Tarea</span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>│</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>├── titulo</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>│     └── público</span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>│</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>├── _estado</span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>│     └── interno por convención</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>│</span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>└── __codigo_interno</span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>      └── name mangling</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>Tarea</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>├── titulo</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>│     └── público</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>├── _estado</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>│     └── interno por convención</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>└── __codigo_interno</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>      └── name mangling</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Desde fuera de la clase:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.titulo)</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea._estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.titulo)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea._estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Los dos funcionan, pero <code>_estado</code> es interno por convención y no debería ser accedido directamente.</p>
 <p>Sin embargo:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.__codigo_interno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.__codigo_interno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>No funciona, porque Python ha cambiado el nombre del atributo internamente a <code>_Tarea__codigo_interno</code>. Esto es lo que se llama <em>name mangling</em>.</p>
 <section id="cuándo-debo-utilizar-__" class="level4">
 <h4 class="anchored" data-anchor-id="cuándo-debo-utilizar-__">Cuándo debo utilizar <code>__</code></h4>
 <blockquote class="blockquote">
 <p><strong>No debemos utilizar <code>__</code>simplemente porque queremos proteger un atributo.</strong> El uso de <code>__</code> debería reservarse para casos donde realmente necesitamos que el nombre del atributo sea modificado por Python para evitar colisiones de nombres en clases heredadas.</p>
 </blockquote>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cuenta:</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ingresar(<span class="va">self</span>, cantidad):</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">+=</span> cantidad</span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> consultar_saldo(<span class="va">self</span>):</span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__saldo_interno</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>El código externo trabaja mediante métodos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cuenta <span class="op">=</span> Cuenta()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cuenta:</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>cuenta.ingresar(<span class="dv">100</span>)</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cuenta.consultar_saldo())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ingresar(<span class="va">self</span>, cantidad):</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">+=</span> cantidad</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> consultar_saldo(<span class="va">self</span>):</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__saldo_interno</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El código externo trabaja mediante métodos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>cuenta <span class="op">=</span> Cuenta()</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>cuenta.ingresar(<span class="dv">100</span>)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cuenta.consultar_saldo())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>En lugar de manipular directamente:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>cuenta.__saldo_interno <span class="op">=</span> <span class="op">-</span><span class="dv">500</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>cuenta.__saldo_interno <span class="op">=</span> <span class="op">-</span><span class="dv">500</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Pero incluso aquí hay que entender que <strong>name mangling no proporciona seguridad real</strong>.</p>
 </section>
 <section id="qué-ocurre-con-los-métodos" class="level4">
 <h4 class="anchored" data-anchor-id="qué-ocurre-con-los-métodos">¿Qué ocurre con los métodos?</h4>
 <p><strong>Exactamente lo mismo</strong>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __validar_estado(<span class="va">self</span>):</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Validando estado"</span>)</span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__validar_estado()</span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Tarea completada"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __validar_estado(<span class="va">self</span>):</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Validando estado"</span>)</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__validar_estado()</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Tarea completada"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>El método <code>__validar_estado</code> sufre <em>name mangling</em> y pasa internamente a <code>_Tarea__validar_estado</code>.</p>
 <blockquote class="blockquote">
 <p>Los métodos <code>__init__, __str__</code>…, no están sufriendo <em>name mangling</em> porque son <strong>métodos especiales de Python</strong>.</p>
 </blockquote>
 
 
+</section>
 </section>
 </section>
 </section>

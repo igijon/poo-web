@@ -34,7 +34,7 @@ Completa una tabla como esta:
 | Tarea	| | |
 	
 
-
+<br>
 
 Después responde:
 
@@ -125,6 +125,8 @@ Añadir una tarea a un proyecto
 
 Puedes utilizar esta tabla:
 
+<br>
+
 | Acción |	Objeto responsable | ¿Por qué? | 
 | - | - | - |
 | Completar una tarea	| | |
@@ -192,8 +194,6 @@ taskflow/
 └── src/
     └── taskflow/
         ├── __init__.py
-        └── main.py
-
 ```
 
 Crea primero la clase Tarea y a continuación el resto.
