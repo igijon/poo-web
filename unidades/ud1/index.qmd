@@ -169,8 +169,9 @@ En Python utilizamos habitualmente el término instancia para referirnos a un ob
 
 Por ejemplo:
 
-tarea1 = Tarea()
-tarea2 = Tarea()
+`tarea1 = Tarea()`
+
+`tarea2 = Tarea()`
 
 Podemos representarlo:
 
@@ -251,6 +252,13 @@ Pero probablemente no debería ser responsable de:
 
 > Una pregunta importante cuando diseñes una clase es:
 > **¿Tiene sentido que este objeto sea responsable de hacer esto?**
+
+# 🧬 Los cuatro pilares fundamentales de la POO
+
+- **Abstracción**: Aislar los detalles complejos de un objeto y mostrar sólo las características esenciales. Ejemplo: Al manejar un auto, usas el volante y los pedales sin necesidad de entender cómo funciona el motor por dentro.
+- **Encapsulamiento**: Agrupar los datos (atributos) y las acciones (métodos) dentro de una misma clase, protegiendo el acceso externo no autorizado. Ejemplo: El saldo de una cuenta bancaria está oculto y sólo se puede modificar de forma segura mediente métodos controlados como `depositar()` o `retirar()`.
+- **Herencia**: Permitir que una nueva clase (hija) obtenga los atributos y métodos de otra clase existente (padre) para reutilizar código. Ejemplo: Una clase `CocheElectrico` puede heredar de la clase base `Coche` y añadir funciones propias como `cargar_bateria()`.
+- **Polimorfismo**: La capacidad de que un mismo método o función se comporte de manera distinta según el objeto que lo ejecute. Ejemplo: El método `acelerar()` funciona de forma diferente si lo ejecuta un `Coche`, una `Bicicleta` o un `Tren`.
 
 # ✍ El modelo mental fundamental
 
@@ -836,12 +844,189 @@ En esta unidad utilizaremos **diagramas de clases UML** para representar nuestra
 
 Una clase puede representarse así:
 
-## Prueba PlantUML
+```{.plantuml}
+@startuml
+
+class Tarea {
+    - titulo: str
+    - descripcion: str
+    - completada: bool
+    - prioridad: int
+
+    + completar(): void
+    + reabrir(): void
+    + cambiar_prioridad(prioridad: int): void
+    + esta_completada(): bool
+}
+
+@enduml
+```
+## UML y Python
+
+Podemos pasar del diseño:
 
 ```{.plantuml}
 @startuml
-Alice -> Bob: Hola
-Bob --> Alice: Hola también
+
+class Tarea {
+    - titulo: str
+    - descripcion: str
+    - completada: bool
+    - prioridad: int
+
+    + completar(): void
+    + reabrir(): void
+    + cambiar_prioridad(prioridad: int): void
+    + esta_completada(): bool
+}
+
 @enduml
 ```
+a Python:
+
+```py
+class Tarea:
+    def __init__(self, titulo, responsable):
+        self.titulo = titulo
+        self.responsable = responsable
+        self.estado = "pendiente"
+    
+    def completar(self):
+        self.estado = "completada"
+
+    def reasignar(self, nuevo_responsable):
+        self.responsable = nuevo_responsable
+```
+
+>El objetivo de UML no es obligarnos a dibujar diagramas antes de cada clase sino ayudarnos a pensar en el diseño antes de escribir código. Nos permite **visualizar la estructura y relaciones** de nuestro sistema.
+
+## Visibilidad UML y Python
+
+En UML podemos encontrar:
+
+`+` público: accesible desde cualquier lugar (en algunas representaciones se puede mostrar con un círculo verde)
+
+`-` privado: accesible solo dentro de la clase (en algunas representaciones se puede mostrar con un símbolo rojo)
+
+`#` protegido: accesible dentro de la clase y sus subclases (en algunas representaciones se puede mostrar con un símbolo amarillo)
+
+Por ejemplo: 
+
+```{.plantuml}
+@startuml
+
+class Tarea {
+    + titulo: str
+    - estado: str
+    # responsable: str
+
+    + completar(): void
+}
+
+@enduml
+```
+
+>Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones:
+>- **Atributos y métodos públicos**: se definen normalmente, sin prefijo especial.
+>- **Atributos y métodos protegidos**: se definen con un prefijo de guion bajo `_`, por ejemplo: `_estado`. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase.
+>- **Atributos y métodos privados**: se definen con un prefijo de doble guion bajo `__`, por ejemplo: `__responsable`. Esto activa el *name mangling* de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.
+
+### Name Mangling
+
+```py
+class Tarea:
+
+    def __init__(self, titulo):
+        self.titulo = titulo
+        self._estado = "pendiente"
+        self.__codigo_interno = 12345
+```
+
+Tenemos:
+
+```txt
+Tarea
+│
+├── titulo
+│     └── público
+│
+├── _estado
+│     └── interno por convención
+│
+└── __codigo_interno
+      └── name mangling
+```
+
+Desde fuera de la clase:
+
+```py
+tarea = Tarea("Diseñar login")
+
+print(tarea.titulo)
+print(tarea._estado)
+```
+
+Los dos funcionan, pero `_estado` es interno por convención y no debería ser accedido directamente.
+
+Sin embargo:
+
+```py
+print(tarea.__codigo_interno)
+```
+
+No funciona, porque Python ha cambiado el nombre del atributo internamente a `_Tarea__codigo_interno`. Esto es lo que se llama *name mangling*.
+
+#### Cuándo debo utilizar `__`
+
+>**No debemos utilizar `__`simplemente porque queremos proteger un atributo.** El uso de `__` debería reservarse para casos donde realmente necesitamos que el nombre del atributo sea modificado por Python para evitar colisiones de nombres en clases heredadas.
+
+```py
+class Cuenta:
+
+    def __init__(self):
+        self.__saldo_interno = 0
+
+    def ingresar(self, cantidad):
+        self.__saldo_interno += cantidad
+
+    def consultar_saldo(self):
+        return self.__saldo_interno
+```
+
+El código externo trabaja mediante métodos:
+
+```py
+cuenta = Cuenta()
+
+cuenta.ingresar(100)
+
+print(cuenta.consultar_saldo())
+```
+
+En lugar de manipular directamente:
+
+```py
+cuenta.__saldo_interno = -500
+```
+
+Pero incluso aquí hay que entender que **name mangling no proporciona seguridad real**.
+
+#### ¿Qué ocurre con los métodos?
+
+**Exactamente lo mismo**.
+
+```py
+class Tarea:
+
+    def __validar_estado(self):
+        print("Validando estado")
+
+    def completar(self):
+        self.__validar_estado()
+        print("Tarea completada")
+```
+
+El método `__validar_estado` sufre *name mangling* y pasa internamente a `_Tarea__validar_estado`.
+
+>Los métodos `__init__, __str__`..., no están sufriendo *name mangling* porque son **métodos especiales de Python**.
 

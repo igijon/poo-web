@@ -1082,7 +1082,7 @@
     "href": "unidades/ud1/index.html#instancia",
     "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Instancia",
-    "text": "Instancia\nEn Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.\nPor ejemplo:\ntarea1 = Tarea() tarea2 = Tarea()\nPodemos representarlo:\n                CLASE\n                 Tarea\n                   │\n          ┌────────┴────────┐\n          ▼                 ▼\n       tarea1             tarea2\n      instancia          instancia\nLas dos instancias pertenecen a la misma clase, pero son objetos diferentes.\ntarea1 = Tarea()\ntarea2 = Tarea()\n\nprint(tarea1 is tarea2)\nResultado:\nFalse",
+    "text": "Instancia\nEn Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.\nPor ejemplo:\ntarea1 = Tarea()\ntarea2 = Tarea()\nPodemos representarlo:\n                CLASE\n                 Tarea\n                   │\n          ┌────────┴────────┐\n          ▼                 ▼\n       tarea1             tarea2\n      instancia          instancia\nLas dos instancias pertenecen a la misma clase, pero son objetos diferentes.\ntarea1 = Tarea()\ntarea2 = Tarea()\n\nprint(tarea1 is tarea2)\nResultado:\nFalse",
     "crumbs": [
       "📚 Unidades",
       "1-Python profesional y modelo orientado a objetos"
@@ -1357,6 +1357,28 @@
     "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "Prueba PlantUML",
     "text": "Prueba PlantUML",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#uml-y-python",
+    "href": "unidades/ud1/index.html#uml-y-python",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "UML y Python",
+    "text": "UML y Python\nPodemos pasar del diseño:\n\na Python:\nclass Tarea:\n    def __init__(self, titulo, responsable):\n        self.titulo = titulo\n        self.responsable = responsable\n        self.estado = \"pendiente\"\n    \n    def completar(self):\n        self.estado = \"completada\"\n\n    def reasignar(self, nuevo_responsable):\n        self.responsable = nuevo_responsable\n\nEl objetivo de UML no es obligarnos a dibujar diagramas antes de cada clase sino ayudarnos a pensar en el diseño antes de escribir código. Nos permite visualizar la estructura y relaciones de nuestro sistema.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#visibilidad-uml-y-python",
+    "href": "unidades/ud1/index.html#visibilidad-uml-y-python",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "Visibilidad UML y Python",
+    "text": "Visibilidad UML y Python\nEn UML podemos encontrar:\n+ público: accesible desde cualquier lugar (en algunas representaciones se puede mostrar con un círculo verde)\n- privado: accesible solo dentro de la clase (en algunas representaciones se puede mostrar con un símbolo rojo)\n# protegido: accesible dentro de la clase y sus subclases (en algunas representaciones se puede mostrar con un símbolo amarillo)\nPor ejemplo:\n\n\nAl trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones: - Atributos y métodos públicos: se definen normalmente, sin prefijo especial. - Atributos y métodos protegidos: se definen con un prefijo de guion bajo _, por ejemplo: _estado. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase. - Atributos y métodos privados: se definen con un prefijo de doble guion bajo __, por ejemplo: __responsable. Esto activa el name mangling de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.\n\n### Name Mangling\nclass Tarea:\n\n    def __init__(self, titulo):\n        self.titulo = titulo\n        self._estado = \"pendiente\"\n        self.__codigo_interno = 12345\nTenemos:\nTarea\n│\n├── titulo\n│     └── público\n│\n├── _estado\n│     └── interno por convención\n│\n└── __codigo_interno\n      └── name mangling\nDesde fuera de la clase:\ntarea = Tarea(\"Diseñar login\")\n\nprint(tarea.titulo)\nprint(tarea._estado)\nLos dos funcionan, pero _estado es interno por convención y no debería ser accedido directamente.\nSin embargo:\nprint(tarea.__codigo_interno)\nNo funciona, porque Python ha cambiado el nombre del atributo internamente a _Tarea__codigo_interno. Esto es lo que se llama name mangling.\n\nCuándo debo utilizar __\n\nNo debemos utilizar __simplemente porque queremos proteger un atributo. El uso de __ debería reservarse para casos donde realmente necesitamos que el nombre del atributo sea modificado por Python para evitar colisiones de nombres en clases heredadas.\n\nclass Cuenta:\n\n    def __init__(self):\n        self.__saldo_interno = 0\n\n    def ingresar(self, cantidad):\n        self.__saldo_interno += cantidad\n\n    def consultar_saldo(self):\n        return self.__saldo_interno\nEl código externo trabaja mediante métodos:\ncuenta = Cuenta()\n\ncuenta.ingresar(100)\n\nprint(cuenta.consultar_saldo())\nEn lugar de manipular directamente:\ncuenta.__saldo_interno = -500\nPero incluso aquí hay que entender que name mangling no proporciona seguridad real.\n\n\n¿Qué ocurre con los métodos?\nExactamente lo mismo.\nclass Tarea:\n\n    def __validar_estado(self):\n        print(\"Validando estado\")\n\n    def completar(self):\n        self.__validar_estado()\n        print(\"Tarea completada\")\nEl método __validar_estado sufre name mangling y pasa internamente a _Tarea__validar_estado.\n\nLos métodos __init__, __str__…, no están sufriendo name mangling porque son métodos especiales de Python.",
     "crumbs": [
       "📚 Unidades",
       "1-Python profesional y modelo orientado a objetos"

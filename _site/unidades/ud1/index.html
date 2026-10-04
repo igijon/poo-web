@@ -235,6 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#comportamiento" id="toc-comportamiento" class="nav-link" data-scroll-target="#comportamiento">Comportamiento</a></li>
   <li><a href="#responsabilidad" id="toc-responsabilidad" class="nav-link" data-scroll-target="#responsabilidad">Responsabilidad</a></li>
   </ul></li>
+  <li><a href="#los-cuatro-pilares-fundamentales-de-la-poo" id="toc-los-cuatro-pilares-fundamentales-de-la-poo" class="nav-link" data-scroll-target="#los-cuatro-pilares-fundamentales-de-la-poo">🧬 Los cuatro pilares fundamentales de la POO</a></li>
   <li><a href="#el-modelo-mental-fundamental" id="toc-el-modelo-mental-fundamental" class="nav-link" data-scroll-target="#el-modelo-mental-fundamental">✍ El modelo mental fundamental</a></li>
   <li><a href="#primer-contacto-con-python" id="toc-primer-contacto-con-python" class="nav-link" data-scroll-target="#primer-contacto-con-python">🐍 Primer contacto con Python</a>
   <ul class="collapse">
@@ -272,7 +273,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#referencias-a-objetos" id="toc-referencias-a-objetos" class="nav-link" data-scroll-target="#referencias-a-objetos">📌 Referencias a objetos</a></li>
   <li><a href="#uml-representar-el-diseño" id="toc-uml-representar-el-diseño" class="nav-link" data-scroll-target="#uml-representar-el-diseño">📊 UML: representar el diseño</a>
   <ul class="collapse">
-  <li><a href="#prueba-plantuml" id="toc-prueba-plantuml" class="nav-link" data-scroll-target="#prueba-plantuml">Prueba PlantUML</a></li>
+  <li><a href="#uml-y-python" id="toc-uml-y-python" class="nav-link" data-scroll-target="#uml-y-python">UML y Python</a></li>
+  <li><a href="#visibilidad-uml-y-python" id="toc-visibilidad-uml-y-python" class="nav-link" data-scroll-target="#visibilidad-uml-y-python">Visibilidad UML y Python</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -412,7 +414,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="instancia">Instancia</h2>
 <p>En Python utilizamos habitualmente el término instancia para referirnos a un objeto concreto creado a partir de una clase.</p>
 <p>Por ejemplo:</p>
-<p>tarea1 = Tarea() tarea2 = Tarea()</p>
+<p><code>tarea1 = Tarea()</code></p>
+<p><code>tarea2 = Tarea()</code></p>
 <p>Podemos representarlo:</p>
 <pre><code>                CLASE
                  Tarea
@@ -478,6 +481,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Una pregunta importante cuando diseñes una clase es: <strong>¿Tiene sentido que este objeto sea responsable de hacer esto?</strong></p>
 </blockquote>
 </section>
+</section>
+<section id="los-cuatro-pilares-fundamentales-de-la-poo" class="level1">
+<h1>🧬 Los cuatro pilares fundamentales de la POO</h1>
+<ul>
+<li><strong>Abstracción</strong>: Aislar los detalles complejos de un objeto y mostrar sólo las características esenciales. Ejemplo: Al manejar un auto, usas el volante y los pedales sin necesidad de entender cómo funciona el motor por dentro.</li>
+<li><strong>Encapsulamiento</strong>: Agrupar los datos (atributos) y las acciones (métodos) dentro de una misma clase, protegiendo el acceso externo no autorizado. Ejemplo: El saldo de una cuenta bancaria está oculto y sólo se puede modificar de forma segura mediente métodos controlados como <code>depositar()</code> o <code>retirar()</code>.</li>
+<li><strong>Herencia</strong>: Permitir que una nueva clase (hija) obtenga los atributos y métodos de otra clase existente (padre) para reutilizar código. Ejemplo: Una clase <code>CocheElectrico</code> puede heredar de la clase base <code>Coche</code> y añadir funciones propias como <code>cargar_bateria()</code>.</li>
+<li><strong>Polimorfismo</strong>: La capacidad de que un mismo método o función se comporte de manera distinta según el objeto que lo ejecute. Ejemplo: El método <code>acelerar()</code> funciona de forma diferente si lo ejecuta un <code>Coche</code>, una <code>Bicicleta</code> o un <code>Tren</code></li>
+</ul>
 </section>
 <section id="el-modelo-mental-fundamental" class="level1">
 <h1>✍ El modelo mental fundamental</h1>
@@ -901,11 +913,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>UML (Unified Modeling Language)</strong> es un lenguaje gráfico utilizado para modelar sistemas de software. Permite representar clases, objetos, relaciones y comportamientos de manera visual.</p>
 <p>En esta unidad utilizaremos <strong>diagramas de clases UML</strong> para representar nuestras clases y sus relaciones.</p>
 <p>Una clase puede representarse así:</p>
-<section id="prueba-plantuml" class="level2">
-<h2 class="anchored" data-anchor-id="prueba-plantuml">Prueba PlantUML</h2>
-<img src="index_files/mediabag/c70f27ec25dc00e14597e250c00cca096e2668d8.svg" class="img-fluid">
+<img src="index_files/mediabag/868e0b1374cc2fdb8609169712907e551746c029.svg" class="img-fluid">
+<section id="uml-y-python" class="level2">
+<h2 class="anchored" data-anchor-id="uml-y-python">UML y Python</h2>
+<p>Podemos pasar del diseño:</p>
+<img src="index_files/mediabag/868e0b1374cc2fdb8609169712907e551746c029.svg" class="img-fluid">
+<p>a Python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"completada"</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> reasignar(<span class="va">self</span>, nuevo_responsable):</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> nuevo_responsable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>El objetivo de UML no es obligarnos a dibujar diagramas antes de cada clase sino ayudarnos a pensar en el diseño antes de escribir código. Nos permite <strong>visualizar la estructura y relaciones</strong> de nuestro sistema.</p>
+</blockquote>
+</section>
+<section id="visibilidad-uml-y-python" class="level2">
+<h2 class="anchored" data-anchor-id="visibilidad-uml-y-python">Visibilidad UML y Python</h2>
+<p>En UML podemos encontrar:</p>
+<p><code>+</code> público: accesible desde cualquier lugar (en algunas representaciones se puede mostrar con un círculo verde)</p>
+<p><code>-</code> privado: accesible solo dentro de la clase (en algunas representaciones se puede mostrar con un símbolo rojo)</p>
+<p><code>#</code> protegido: accesible dentro de la clase y sus subclases (en algunas representaciones se puede mostrar con un símbolo amarillo)</p>
+<p>Por ejemplo:</p>
+<img src="index_files/mediabag/0d7ec6e518b62513337595a3dc12b071e6ab0782.svg" class="img-fluid">
+<blockquote class="blockquote">
+<p>Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones: - <strong>Atributos y métodos públicos</strong>: se definen normalmente, sin prefijo especial. - <strong>Atributos y métodos protegidos</strong>: se definen con un prefijo de guion bajo <code>_</code>, por ejemplo: <code>_estado</code>. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase. - <strong>Atributos y métodos privados</strong>: se definen con un prefijo de doble guion bajo <code>__</code>, por ejemplo: <code>__responsable</code>. Esto activa el <em>name mangling</em> de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.</p>
+</blockquote>
+<p>###&nbsp;Name Mangling</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo):</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._estado <span class="op">=</span> <span class="st">"pendiente"</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__codigo_interno <span class="op">=</span> <span class="dv">12345</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tenemos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>Tarea</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>├── titulo</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>│     └── público</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>├── _estado</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>│     └── interno por convención</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>│</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>└── __codigo_interno</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>      └── name mangling</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Desde fuera de la clase:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>tarea <span class="op">=</span> Tarea(<span class="st">"Diseñar login"</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.titulo)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea._estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Los dos funcionan, pero <code>_estado</code> es interno por convención y no debería ser accedido directamente.</p>
+<p>Sin embargo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tarea.__codigo_interno)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No funciona, porque Python ha cambiado el nombre del atributo internamente a <code>_Tarea__codigo_interno</code>. Esto es lo que se llama <em>name mangling</em>.</p>
+<section id="cuándo-debo-utilizar-__" class="level4">
+<h4 class="anchored" data-anchor-id="cuándo-debo-utilizar-__">Cuándo debo utilizar <code>__</code></h4>
+<blockquote class="blockquote">
+<p><strong>No debemos utilizar <code>__</code>simplemente porque queremos proteger un atributo.</strong> El uso de <code>__</code> debería reservarse para casos donde realmente necesitamos que el nombre del atributo sea modificado por Python para evitar colisiones de nombres en clases heredadas.</p>
+</blockquote>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cuenta:</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ingresar(<span class="va">self</span>, cantidad):</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__saldo_interno <span class="op">+=</span> cantidad</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> consultar_saldo(<span class="va">self</span>):</span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.__saldo_interno</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El código externo trabaja mediante métodos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>cuenta <span class="op">=</span> Cuenta()</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>cuenta.ingresar(<span class="dv">100</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cuenta.consultar_saldo())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En lugar de manipular directamente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>cuenta.__saldo_interno <span class="op">=</span> <span class="op">-</span><span class="dv">500</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pero incluso aquí hay que entender que <strong>name mangling no proporciona seguridad real</strong>.</p>
+</section>
+<section id="qué-ocurre-con-los-métodos" class="level4">
+<h4 class="anchored" data-anchor-id="qué-ocurre-con-los-métodos">¿Qué ocurre con los métodos?</h4>
+<p><strong>Exactamente lo mismo</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> __validar_estado(<span class="va">self</span>):</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Validando estado"</span>)</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> completar(<span class="va">self</span>):</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.__validar_estado()</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Tarea completada"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El método <code>__validar_estado</code> sufre <em>name mangling</em> y pasa internamente a <code>_Tarea__validar_estado</code>.</p>
+<blockquote class="blockquote">
+<p>Los métodos <code>__init__, __str__</code>…, no están sufriendo <em>name mangling</em> porque son <strong>métodos especiales de Python</strong>.</p>
+</blockquote>
 
 
+</section>
 </section>
 </section>
 
