@@ -294,15 +294,14 @@ MI DISEÑO
 # 📦 Entregables del laboratorio
 
 ```txt
-
 taskflow/
-├── .gitignore
-├── README.md
-├── pyproject.toml
 └── src/
     └── taskflow/
         ├── __init__.py
-        └── main.py
+        ├── main.py
+        ├── tarea.py
+        ├── usuario.py
+        └── proyecto.py
 └── doc/
     └── 01-analisis.md
     └── 02-modelo-uml.png
@@ -319,3 +318,42 @@ El documento 01-analisis.md debe recoger:
 6. Cambios realizados después de utilizar IA
    
 
+# Aclaraciones
+
+```txt
+__init__.py
+    ↓
+"Este directorio forma parte de un paquete Python"
+
+main.py
+    ↓
+"Desde aquí arranca nuestra aplicación"
+
+tarea.py
+    ↓
+"Define la clase Tarea"
+
+usuario.py
+    ↓
+"Define la clase Usuario"
+
+proyecto.py
+    ↓
+"Define la clase Proyecto"
+```
+
+En `main.py` para hacer uso de `Tarea` y poder crear instancias, por ejemplo, tendríamos que hacer:
+
+```py
+from taskflow.tarea import Tarea
+
+
+def main() -> None:
+    tarea = Tarea("Diseñar la página de inicio")
+
+    print(tarea.titulo)
+
+
+if __name__ == "__main__":
+    main()
+```
