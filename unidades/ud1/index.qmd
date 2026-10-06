@@ -672,7 +672,7 @@ Podemos definir:
 
 ```py
 class Tarea:
-    def __init__(self, titulo, esponsable):
+    def __init__(self, titulo, responsable):
         self.titulo = titulo
         self.responsable = responsable
         self.estado = "pendiente"
@@ -949,6 +949,7 @@ class Tarea {
 ```
 
 >Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones:
+
 >- **Atributos y métodos públicos**: se definen normalmente, sin prefijo especial.
 >- **Atributos y métodos protegidos**: se definen con un prefijo de guion bajo `_`, por ejemplo: `_estado`. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase.
 >- **Atributos y métodos privados**: se definen con un prefijo de doble guion bajo `__`, por ejemplo: `__responsable`. Esto activa el *name mangling* de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.
