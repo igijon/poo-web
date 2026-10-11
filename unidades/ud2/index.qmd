@@ -1,0 +1,375 @@
+---
+title: "UD2. Clases, objetos y encapsulación"
+---
+
+# 🚨 Enfoque
+
+>**¿Cómo diseñamos objetos que protejan su estado, mantengan sus reglas y podamos verificar que funcionan correctamente?**
+
+Hasta ahora teníamos:
+
+```py
+class Tarea:
+    def __init__(self, titulo, descripcion):
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.estado = "pendiente"
+        self.responsable = None
+
+    def iniciar(self):
+        self.estado = "en progreso"
+
+    def completar(self):
+        self.estado = "completada"
+```
+
+Pero tal y como lo tenemos podríamos hacer algo así:
+
+```py
+tarea = Tarea("Diseñar la página")
+
+tarea.estado = "banana"
+tarea.titulo = ""
+```
+
+El problema no es de sintaxis, el problema es de diseño: **el objeto no protege las reglas que debería cumplir**
+
+>Que Python permita ejecutar una instrucción no significa que la instrucción tenga sentido en nuestra aplicación.
+
+# 🔧 Del problema técnico a las reglas del dominio
+
+Recordando TaskFlow:
+
+>TaskFlow se utiliza para organizar tareas de un equipo de desarrollo. Los estados de una tarea son `pendiente`, `en progreso` y `completada`. Las tareas deben tener un título significativo y pueden no tener todavía una persona responsable.
+
+Debemos tener en cuenta una serie de cosas:
+
+| Propiedad | Regla propuesta | Ejemplo que la incumple |
+|---|---|---|
+| Título | No puede estar vacío ni contener solo espacios | `"   "` |
+| Estado | Debe pertenecer al conjunto de estados válidos | `"banana"` |
+| Responsable | Puede no estar asignado; si lo está, debe ser un usuario válido | `25` |
+| Descripción | Decidir si puede estar vacía según los requisitos | Depende de la regla acordada |
+
+# 🎢 Encapsulación: ¿Quién debe controlar el estado de un objeto?
+
+Si tenemos este código:
+
+`tarea.py`
+
+```py
+class Tarea:
+    def __init__(self, titulo, descripcion):
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.estado = "pendiente"
+        self.responsable = None
+
+    def iniciar(self):
+        self.estado = "en progreso"
+
+    def completar(self):
+        self.estado = "completada"
+```
+
+`main.py`
+
+```py
+from taskflow.tarea import Tarea
+
+
+def main() -> None:
+    tarea = Tarea(
+        "Diseñar la página de inicio",
+        "Preparar el diseño inicial"
+    )
+
+    tarea.iniciar()
+    print(tarea.estado)
+
+    tarea.estado = "banana"
+    print(tarea.estado)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+>¿Qué ocurre cuando modificamos `tarea.estado` desde `main.py`?
+
+>**La clase conoce las reglas de una tarea mejor que el código externo que la utiliza por eso conviene que la propia clase sea responsable de controlar su estado**
+
+## Interfaz pública e implementación interna
+
+**Una clase ofrece una interfaz**
+
+Imaginemos que queremos utilizar una tarea desde `main.py`.
+
+```py
+tarea = Tarea("Diseñar la página", "Preparar el diseño")
+
+tarea.iniciar()
+tarea.completar()
+```
+
+Desde fuera nos interesa saber qué podemos hacer con una tarea, pero no necesitamos conocer todos los detalles de cómo está implementada.
+
+Podemos distinguir dos partes:
+
+**Interfaz pública**
+
+Lo que otros componetnes del programa pueden utilizar directamente.
+
+```py
+tarea.iniciar()
+tarea.completar()
+```
+
+**Implemnetación interna**
+
+Los detalles que la clase utiliza para cumplir su responsabilidad.
+
+```py
+self._estado = "pendiente"
+```
+
+La distinción no significa que Python impida técnicamente acceder a todos los detalles internos. Significa que **diseñamos una forma clara y estable de utilizar nuestros objetos**, evitando que el resto del programa dependa de cómo están implementados.
+
+## Las convenciones de nombres en Python
+
+| Escritura | Significado | Ejemplo |
+|---|---|---|
+| `nombre` | Atributo o método público | `tarea.titulo` |
+| `_nombre` | Elemento interno por convención | `tarea._estado` |
+| `__nombre` | Activa el *name mangling* | `self.__codigo` |
+| `__nombre__` | Nombre especial definido por Python o por una API | `__init__`, `__str__` |
+
+### Un atrituto público
+
+```py
+class Usuario:
+    def __init__(self, nombre):
+        self.nombre = nombre
+```
+
+Se utiliza así:
+
+```py
+usuario = Usuario("Ana")
+
+print(usuario.nombre)
+usuario.nombre = "Lucía"
+```
+
+No existe ninguna restricción para modificarlo.
+
+### Un atributo interno por convención
+
+```py
+class Usuario:
+    def __init__(self, nombre):
+        self._nombre = nombre
+```
+
+La convención del guión bajo inicial indica que ese atributo está destinado al uso interno de la clase o sus hijos.
+
+Sin embargo, esto sigue siendo posible:
+
+```py
+usuario = Usuario("Ana")
+usuario._nombre = "Lucía"
+```
+
+Python no lo impide. El guión bajo comunica una intención a quienes utilizan el código, no establece una barrera de acceso.
+
+### Name mangling
+
+```py
+class Usuario:
+    def __init__(self, codigo):
+        self.__codigo = codigo
+```
+
+Python transforma internamente el nombre `__codigo` en `_Usuario__codigo`.
+
+Podemos comprobarlo:
+
+```py
+usuario = Usuario(100)
+
+print(usuario._Usuario__codigo)
+```
+
+El objetivo principal de *name mangling* es evitar colisiones accidentales de nombres, especialmente cuando interviene la herencia.
+
+**No es un mecanismo de seguridad ni una forma de garantizar que el atributo sea inaccesible**
+
+### ¿Y los métodos?
+
+Las mismas convenciones se aplican a los métodos:
+
+```py
+class Tarea:
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+    def _calcular_prioridad(self):
+        return 1
+
+    def completar(self):
+        print("Tarea completada")
+```
+
+- `completar()` es parte de la interfaz pública
+- `_calcular_prioridad()` se considera interno por convención
+- `__init__()` es un método especial, no un ejemplo de name mangling
+
+# 🌳 Propiedades y validación en Python
+
+**La propia clase, debe controlar las reglas que afectan a la coherencia de sus objetos.**
+
+Si partimos de:
+
+`tarea.py`
+
+```py
+class Tarea:
+    def __init__(self, titulo, descripcion):
+        self.titulo = titulo
+        self.descripcion = descripcion
+        self.estado = "pendiente"
+        self.responsable = None
+
+    def iniciar(self):
+        self.estado = "en progreso"
+
+    def completar(self):
+        self.estado = "completada"
+```
+
+`main.py`
+
+```py
+from taskflow.tarea import Tarea
+
+
+def main() -> None:
+    tarea = Tarea(
+        "Diseñar la página de inicio",
+        "Preparar el diseño inicial"
+    )
+
+    tarea.titulo = ""
+    tarea.estado = "banana"
+
+    print(f"Título: {tarea.titulo}")
+    print(f"Estado: {tarea.estado}")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## `@property`
+
+En Python podemos utilizar el decorador `@property` para ofrecer un atributo de consulta que obtiene su valor mediante un método.
+
+El código que utiliza la clase puede seguir siendo `tarea.titulo, aunque internamente se ejecute un método.
+
+### Consultar un atributo interno
+
+```py
+class Tarea:
+    def __init__(self, titulo):
+        self._titulo = titulo
+
+    @property
+    def titulo(self):
+        return self._titulo
+```
+
+`main.py`
+
+```py
+from taskflow.tarea import Tarea
+
+
+def main() -> None:
+    tarea = Tarea("Diseñar la página de inicio")
+
+    print(tarea.titulo)
+
+
+if __name__ == "__main__":
+    main()
+```
+>Aunque `titulo` parece un atributo normal, al consultarlo se ejecuta un método decorado con `@property`.
+
+### Comparación
+
+| Elemento              | Función                                                 | Ejemplo                 |
+| --------------------- | ------------------------------------------------------- | ----------------------- |
+| `self._titulo`        | Almacena el dato internamente                           | `self._titulo = titulo` |
+| `@property`           | Permite consultar el dato mediante una interfaz pública | `tarea.titulo`          |
+| `return self._titulo` | Devuelve el valor almacenado                            | `return self._titulo`   |
+
+**Idea importante:** `@property` no hace que el dato sea privado ni impide por sí solo que alguien lo modifique. Permite definir cómo se consulta el dato a través de la interfaz pública. La convención `_titulo` indica que el atributo está destinado al uso interno de la clase.
+
+---
+
+## Introducción a `@setter`: controlar las modificaciones
+
+En el ejemplo anterior, la consulta funciona, pero si intentamos ejecutar `tarea.titulo = "Nuevo título"`, Python lanzará un `AttributeError`: hemos definido una propiedad de solo lectura.
+
+Si queremos permitir la modificación, pero controlar qué valores se aceptan, añadimos un *setter*.
+
+### Validar el título de una tarea
+
+```python
+class Tarea:
+    def __init__(self, titulo):
+        self.titulo = titulo
+
+    @property
+    def titulo(self):
+        return self._titulo
+
+    @titulo.setter
+    def titulo(self, nuevo_titulo):
+        if not isinstance(nuevo_titulo, str):
+            raise ValueError("El título debe ser una cadena de texto")
+
+        if not nuevo_titulo.strip():
+            raise ValueError("El título no puede estar vacío")
+
+        self._titulo = nuevo_titulo.strip()
+```
+
+Observa dos detalles:
+
+- En el constructor usamos `self.titulo = titulo`. Esto llama al *setter*, por lo que la validación se aplica también al crear la tarea.
+- Dentro del *setter* asignamos el valor a `self._titulo`, no a `self.titulo`. Si asignáramos a `self.titulo`, volveríamos a llamar al *setter* y provocaríamos una recursión.
+
+### ¿Qué sucede con cada valor?
+
+| Valor recibido             | Resultado esperado                              | Motivo                    |
+| -------------------------- | ----------------------------------------------- | ------------------------- |
+| `"Preparar el diseño"`     | Se acepta                                       | Es texto no vacío         |
+| `"  Preparar el diseño  "` | Se acepta y se eliminan los espacios exteriores | Se utiliza `strip()`      |
+| `""`                       | Se rechaza                                      | El título está vacío      |
+| `"   "`                    | Se rechaza                                      | Solo contiene espacios    |
+| `25`                       | Se rechaza                                      | No es una cadena de texto |
+
+### ¿Qué es `raise ValueError`?
+
+`raise` permite lanzar una excepción cuando se incumple una condición. `ValueError` resulta apropiada cuando el tipo de dato puede ser correcto para la operación, pero su valor no cumple las reglas esperadas.
+
+```python
+if not nuevo_titulo.strip():
+    raise ValueError("El título no puede estar vacío")
+```
+
+Cuando se incumple la condición, la ejecución normal se interrumpe y se produce la excepción. Si nadie la captura, el programa termina mostrando el error.
+
+---
+

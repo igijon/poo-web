@@ -168,6 +168,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">1-Python profesional y modelo orientado a objetos</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2-Clases, objetos y encapsulación</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -304,7 +310,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="https://discord.gg/XheWhsqpa">Discord</a></p>
 <section id="por-qué-necesitamos-los-objetos" class="level1">
 <h1>📕 ¿Por qué necesitamos los objetos?</h1>
 <blockquote class="blockquote">
@@ -789,7 +794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="el-método-__init__">El método <code>__init__</code></h2>
 <p>Podemos definir:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Tarea:</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, esponsable):</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, responsable):</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.responsable <span class="op">=</span> responsable</span>
 <span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.estado <span class="op">=</span> <span class="st">"pendiente"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -961,7 +966,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Por ejemplo:</p>
 <img src="index_files/mediabag/0d7ec6e518b62513337595a3dc12b071e6ab0782.svg" class="img-fluid">
 <blockquote class="blockquote">
-<p>Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones: - <strong>Atributos y métodos públicos</strong>: se definen normalmente, sin prefijo especial. - <strong>Atributos y métodos protegidos</strong>: se definen con un prefijo de guion bajo <code>_</code>, por ejemplo: <code>_estado</code>. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase. - <strong>Atributos y métodos privados</strong>: se definen con un prefijo de doble guion bajo <code>__</code>, por ejemplo: <code>__responsable</code>. Esto activa el <em>name mangling</em> de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.</p>
+<p>Al trasladar esto a Python, debemos tener en cuenta que Python no tiene un sistema de visibilidad estricta como otros lenguajes. Sin embargo, podemos seguir ciertas convenciones:</p>
+</blockquote>
+<blockquote class="blockquote">
+<ul>
+<li><strong>Atributos y métodos públicos</strong>: se definen normalmente, sin prefijo especial.</li>
+<li><strong>Atributos y métodos protegidos</strong>: se definen con un prefijo de guion bajo <code>_</code>, por ejemplo: <code>_estado</code>. Esto indica que son internos y no deberían ser accedidos desde fuera de la clase.</li>
+<li><strong>Atributos y métodos privados</strong>: se definen con un prefijo de doble guion bajo <code>__</code>, por ejemplo: <code>__responsable</code>. Esto activa el <em>name mangling</em> de Python, dificultando su acceso desde fuera de la clase, pero no lo hace imposible.</li>
+</ul>
 </blockquote>
 <section id="name-mangling" class="level3">
 <h3 class="anchored" data-anchor-id="name-mangling">Name Mangling</h3>

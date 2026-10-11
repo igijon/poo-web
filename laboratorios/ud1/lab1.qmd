@@ -13,8 +13,6 @@ La aplicación debe permitir:
 - crear tareas;
 - asignar tareas a usuarios;
 - cambiar el estado de una tarea;
-- consultar las tareas de un proyecto;
-- consultar las tareas asignadas a una persona.
 
 Una tarea puede encontrarse en diferentes estados:
 

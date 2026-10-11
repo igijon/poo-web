@@ -18,13 +18,19 @@ website:
         contents:
           - text: "1-Python profesional y modelo orientado a objetos"
             href: unidades/ud1/index.qmd
+          - text: "2-Clases, objetos y encapsulación"
+            href: unidades/ud2/index.qmd
 
       - section: "🧪 Laboratorios"
         contents: 
-           - href: laboratorios/ud1/lab1.qmd
-             text: "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
-        #   - href: laboratorios/ud1/lab2.qmd
-        #     text: "UD1 · Lab 2 · ¿Qué estamos ejecutando realmente?"
+          - section: "UD1"
+            contents:
+              - href: laboratorios/ud1/lab1.qmd
+                text: "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
+          - section: "UD2"
+            contents:
+              - href: laboratorios/ud2/lab1.qmd
+                text: "UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto"
           
     
       - section: "🚀 Desafíos"

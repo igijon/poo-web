@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto – Programación Orientada a Objetos</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1bdbca75b362e6c5a8c09207907ff998.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">🧪 Laboratorios</li><li class="breadcrumb-item"><a href="../../laboratorios/ud2/lab1.html">UD2</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud2/lab1.html">UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Programación Orientada a Objetos</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Inicio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">📚 Unidades</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1-Python profesional y modelo orientado a objetos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../unidades/ud2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2-Clases, objetos y encapsulación</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">🧪 Laboratorios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">UD1</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud1/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD1 · Lab 1 · Taskflow. Pensar antes de programar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">UD2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">🚀 Desafíos</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../proyecto-final/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏆 Proyecto Final</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ia/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🤖 IA</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../recursos/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📦 Recursos</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../sobremi/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">😎 Sobre mí</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#smartspeaker-diseñar-y-proteger-un-objeto" id="toc-smartspeaker-diseñar-y-proteger-un-objeto" class="nav-link active" data-scroll-target="#smartspeaker-diseñar-y-proteger-un-objeto">SmartSpeaker: diseñar y proteger un objeto</a>
+  <ul class="collapse">
+  <li><a href="#contexto" id="toc-contexto" class="nav-link" data-scroll-target="#contexto">Contexto</a></li>
+  <li><a href="#parte-1.-analizamos-el-problema" id="toc-parte-1.-analizamos-el-problema" class="nav-link" data-scroll-target="#parte-1.-analizamos-el-problema">Parte 1. Analizamos el problema</a>
+  <ul class="collapse">
+  <li><a href="#primera-versión" id="toc-primera-versión" class="nav-link" data-scroll-target="#primera-versión">1.1. Primera versión</a></li>
+  <li><a href="#identificamos-los-problemas" id="toc-identificamos-los-problemas" class="nav-link" data-scroll-target="#identificamos-los-problemas">1.2. Identificamos los problemas</a></li>
+  <li><a href="#definimos-las-reglas-de-negocio" id="toc-definimos-las-reglas-de-negocio" class="nav-link" data-scroll-target="#definimos-las-reglas-de-negocio">1.3. Definimos las reglas de negocio</a></li>
+  </ul></li>
+  <li><a href="#parte-2.-diseñamos-la-interfaz-pública" id="toc-parte-2.-diseñamos-la-interfaz-pública" class="nav-link" data-scroll-target="#parte-2.-diseñamos-la-interfaz-pública">Parte 2. Diseñamos la interfaz pública</a>
+  <ul class="collapse">
+  <li><a href="#diseña-la-interfaz" id="toc-diseña-la-interfaz" class="nav-link" data-scroll-target="#diseña-la-interfaz">2.1. Diseña la interfaz</a></li>
+  <li><a href="#justifica-tus-decisiones" id="toc-justifica-tus-decisiones" class="nav-link" data-scroll-target="#justifica-tus-decisiones">2.2. Justifica tus decisiones</a></li>
+  </ul></li>
+  <li><a href="#parte-3.-implementamos-la-clase" id="toc-parte-3.-implementamos-la-clase" class="nav-link" data-scroll-target="#parte-3.-implementamos-la-clase">Parte 3. Implementamos la clase</a>
+  <ul class="collapse">
+  <li><a href="#requisito-1.-validar-el-nombre" id="toc-requisito-1.-validar-el-nombre" class="nav-link" data-scroll-target="#requisito-1.-validar-el-nombre">Requisito 1. Validar el nombre</a></li>
+  <li><a href="#requisito-2.-validar-el-volumen" id="toc-requisito-2.-validar-el-volumen" class="nav-link" data-scroll-target="#requisito-2.-validar-el-volumen">Requisito 2. Validar el volumen</a></li>
+  <li><a href="#requisito-3.-controlar-el-estado" id="toc-requisito-3.-controlar-el-estado" class="nav-link" data-scroll-target="#requisito-3.-controlar-el-estado">Requisito 3. Controlar el estado</a></li>
+  <li><a href="#requisito-4.-mantener-una-interfaz-clara" id="toc-requisito-4.-mantener-una-interfaz-clara" class="nav-link" data-scroll-target="#requisito-4.-mantener-una-interfaz-clara">Requisito 4. Mantener una interfaz clara</a></li>
+  </ul></li>
+  <li><a href="#parte-4.-comprobamos-el-comportamiento" id="toc-parte-4.-comprobamos-el-comportamiento" class="nav-link" data-scroll-target="#parte-4.-comprobamos-el-comportamiento">Parte 4. Comprobamos el comportamiento</a>
+  <ul class="collapse">
+  <li><a href="#pruebas-válidas" id="toc-pruebas-válidas" class="nav-link" data-scroll-target="#pruebas-válidas">4.1. Pruebas válidas</a></li>
+  <li><a href="#pruebas-inválidas" id="toc-pruebas-inválidas" class="nav-link" data-scroll-target="#pruebas-inválidas">4.2. Pruebas inválidas</a></li>
+  <li><a href="#registra-los-resultados" id="toc-registra-los-resultados" class="nav-link" data-scroll-target="#registra-los-resultados">4.3. Registra los resultados</a></li>
+  </ul></li>
+  <li><a href="#parte-5.-ia-como-revisora-del-diseño" id="toc-parte-5.-ia-como-revisora-del-diseño" class="nav-link" data-scroll-target="#parte-5.-ia-como-revisora-del-diseño">Parte 5. IA como revisora del diseño</a>
+  <ul class="collapse">
+  <li><a href="#prompt-de-revisión" id="toc-prompt-de-revisión" class="nav-link" data-scroll-target="#prompt-de-revisión">Prompt de revisión</a></li>
+  <li><a href="#actividad-de-verificación" id="toc-actividad-de-verificación" class="nav-link" data-scroll-target="#actividad-de-verificación">Actividad de verificación</a></li>
+  </ul></li>
+  <li><a href="#parte-6.-entrega-y-reflexión-final" id="toc-parte-6.-entrega-y-reflexión-final" class="nav-link" data-scroll-target="#parte-6.-entrega-y-reflexión-final">Parte 6. Entrega y reflexión final</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">🧪 Laboratorios</li><li class="breadcrumb-item"><a href="../../laboratorios/ud2/lab1.html">UD2</a></li><li class="breadcrumb-item"><a href="../../laboratorios/ud2/lab1.html">UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="smartspeaker-diseñar-y-proteger-un-objeto" class="level1">
+<h1>SmartSpeaker: diseñar y proteger un objeto</h1>
+<section id="contexto" class="level2">
+<h2 class="anchored" data-anchor-id="contexto">Contexto</h2>
+<p>Una empresa está desarrollando una aplicación para controlar altavoces inteligentes. Antes de conectar los dispositivos a una aplicación gráfica o a una API, necesita implementar la clase Python que representa cada altavoz.</p>
+<p>La primera versión funciona, pero permite situaciones incoherentes: altavoces sin nombre, volúmenes negativos y estados que no tienen sentido.</p>
+<p>Tu trabajo consiste en analizar el problema, diseñar una interfaz pública y desarrollar una clase que controle sus propios datos.</p>
+<p><strong>Restricciones del laboratorio:</strong></p>
+<ul>
+<li>Solo se implementará una clase: <code>Altavoz</code>.</li>
+<li>La validación se realizará con las herramientas de Python estudiadas.</li>
+<li>La IA podrá ayudarte a analizar reglas y revisar el diseño, pero tendrás que verificar personalmente el comportamiento.</li>
+</ul>
+</section>
+<section id="parte-1.-analizamos-el-problema" class="level2">
+<h2 class="anchored" data-anchor-id="parte-1.-analizamos-el-problema">Parte 1. Analizamos el problema</h2>
+<section id="primera-versión" class="level3">
+<h3 class="anchored" data-anchor-id="primera-versión">1.1. Primera versión</h3>
+<p>Crea un archivo <code>altavoz.py</code> con la siguiente implementación:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Altavoz:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre, volumen):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.volumen <span class="op">=</span> volumen</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.encendido <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> encender(<span class="va">self</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.encendido <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> apagar(<span class="va">self</span>):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.encendido <span class="op">=</span> <span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Crea un archivo <code>main.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> altavoz <span class="im">import</span> Altavoz</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main() <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    altavoz <span class="op">=</span> Altavoz(<span class="st">"Salón"</span>, <span class="dv">30</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.nombre)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.volumen)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.encendido)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    altavoz.nombre <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    altavoz.volumen <span class="op">=</span> <span class="op">-</span><span class="dv">50</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    altavoz.encendido <span class="op">=</span> <span class="st">"quizá"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.nombre)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.volumen)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(altavoz.encendido)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ejecuta el programa y observa el resultado.</p>
+</section>
+<section id="identificamos-los-problemas" class="level3">
+<h3 class="anchored" data-anchor-id="identificamos-los-problemas">1.2. Identificamos los problemas</h3>
+<p>Responde a estas preguntas:</p>
+<ol type="1">
+<li>¿Qué ocurre cuando el nombre está vacío?</li>
+<li>¿Qué ocurre cuando el volumen es negativo?</li>
+<li>¿Podemos asignar un texto al atributo <code>encendido</code>?</li>
+<li>¿Quién debería ser responsable de evitar estos valores: el código que utiliza la clase o la propia clase?</li>
+<li>¿Qué problemas podría provocar que cualquier parte del programa modificase directamente el estado del altavoz?</li>
+</ol>
+</section>
+<section id="definimos-las-reglas-de-negocio" class="level3">
+<h3 class="anchored" data-anchor-id="definimos-las-reglas-de-negocio">1.3. Definimos las reglas de negocio</h3>
+<p>Completa la siguiente tabla antes de modificar el código.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Regla que debe cumplir</th>
+<th>Ejemplo inválido</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nombre</td>
+<td>Debe ser una cadena de texto no vacía ni formada solo por espacios</td>
+<td><code>""</code></td>
+</tr>
+<tr class="even">
+<td>Volumen</td>
+<td>Debe ser un número entero entre 0 y 100, ambos incluidos</td>
+<td><code>-5</code></td>
+</tr>
+<tr class="odd">
+<td>Estado</td>
+<td>Solo puede representar si el altavoz está encendido o apagado</td>
+<td><code>"quizá"</code></td>
+</tr>
+<tr class="even">
+<td>Encendido</td>
+<td>Debe cambiarse mediante una operación del objeto</td>
+<td><code>altavoz.encendido = True</code></td>
+</tr>
+</tbody>
+</table>
+<p>El último ejemplo representa un problema de diseño: queremos que el resto del programa utilice operaciones como <code>encender()</code> y <code>apagar()</code>, en lugar de modificar directamente el estado.</p>
+</section>
+</section>
+<section id="parte-2.-diseñamos-la-interfaz-pública" class="level2">
+<h2 class="anchored" data-anchor-id="parte-2.-diseñamos-la-interfaz-pública">Parte 2. Diseñamos la interfaz pública</h2>
+<p>Antes de programar, decide qué elementos podrá utilizar directamente otro componente de la aplicación y cuáles estarán destinados al funcionamiento interno de la clase.</p>
+<p>Recuerda las convenciones de Python:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Escritura</th>
+<th>Significado</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>nombre</code></td>
+<td>Elemento público</td>
+<td><code>altavoz.nombre</code></td>
+</tr>
+<tr class="even">
+<td><code>_nombre</code></td>
+<td>Elemento interno por convención</td>
+<td><code>self._volumen</code></td>
+</tr>
+<tr class="odd">
+<td><code>__nombre</code></td>
+<td>Activa el <em>name mangling</em></td>
+<td><code>self.__codigo</code></td>
+</tr>
+<tr class="even">
+<td><code>__nombre__</code></td>
+<td>Nombre especial de Python o de una API</td>
+<td><code>__init__</code></td>
+</tr>
+</tbody>
+</table>
+<section id="diseña-la-interfaz" class="level3">
+<h3 class="anchored" data-anchor-id="diseña-la-interfaz">2.1. Diseña la interfaz</h3>
+<p>Completa la tabla:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>¿Público o interno?</th>
+<th>¿Cómo debería utilizarse?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nombre del altavoz</td>
+<td>Por decidir</td>
+<td>Consultar y modificar con validación</td>
+</tr>
+<tr class="even">
+<td>Volumen</td>
+<td>Por decidir</td>
+<td>Consultar y modificar con validación</td>
+</tr>
+<tr class="odd">
+<td>Estado de encendido</td>
+<td>Por decidir</td>
+<td>Consultar, pero no modificar directamente</td>
+</tr>
+<tr class="even">
+<td>Operación para encender</td>
+<td>Por decidir</td>
+<td>Cambiar el estado</td>
+</tr>
+<tr class="odd">
+<td>Operación para apagar</td>
+<td>Por decidir</td>
+<td>Cambiar el estado</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="justifica-tus-decisiones" class="level3">
+<h3 class="anchored" data-anchor-id="justifica-tus-decisiones">2.2. Justifica tus decisiones</h3>
+<p>Explica brevemente:</p>
+<ul>
+<li>Por qué el volumen necesita validación.</li>
+<li>Por qué no queremos que se modifique directamente el estado de encendido.</li>
+<li>Qué diferencia existe entre utilizar <code>_volumen</code> y utilizar una propiedad pública llamada <code>volumen</code>.</li>
+</ul>
+<p>No se trata de ocultar los datos por ocultarlos: se trata de diseñar una interfaz que permita utilizar el objeto sin saltarse sus reglas.</p>
+</section>
+</section>
+<section id="parte-3.-implementamos-la-clase" class="level2">
+<h2 class="anchored" data-anchor-id="parte-3.-implementamos-la-clase">Parte 3. Implementamos la clase</h2>
+<p>Modifica <code>altavoz.py</code> para cumplir los requisitos siguientes.</p>
+<section id="requisito-1.-validar-el-nombre" class="level3">
+<h3 class="anchored" data-anchor-id="requisito-1.-validar-el-nombre">Requisito 1. Validar el nombre</h3>
+<ul>
+<li>Debe ser una cadena de texto.</li>
+<li>No puede estar vacío ni contener únicamente espacios.</li>
+<li>Se eliminarán los espacios exteriores antes de almacenar el nombre.</li>
+</ul>
+</section>
+<section id="requisito-2.-validar-el-volumen" class="level3">
+<h3 class="anchored" data-anchor-id="requisito-2.-validar-el-volumen">Requisito 2. Validar el volumen</h3>
+<ul>
+<li>Debe ser un número entero.</li>
+<li>Su valor estará comprendido entre 0 y 100, ambos incluidos.</li>
+<li>La misma validación debe aplicarse tanto al crear el objeto como al modificar el volumen.</li>
+</ul>
+</section>
+<section id="requisito-3.-controlar-el-estado" class="level3">
+<h3 class="anchored" data-anchor-id="requisito-3.-controlar-el-estado">Requisito 3. Controlar el estado</h3>
+<ul>
+<li>Un altavoz nuevo comienza apagado.</li>
+<li>El estado podrá consultarse mediante <code>altavoz.estado</code>.</li>
+<li>El resto del programa no debe poder cambiarlo mediante una asignación ordinaria a <code>altavoz.estado</code>.</li>
+<li>El método <code>encender()</code> permitirá encender el dispositivo.</li>
+<li>El método <code>apagar()</code> permitirá apagarlo.</li>
+</ul>
+</section>
+<section id="requisito-4.-mantener-una-interfaz-clara" class="level3">
+<h3 class="anchored" data-anchor-id="requisito-4.-mantener-una-interfaz-clara">Requisito 4. Mantener una interfaz clara</h3>
+<p>El código que utiliza la clase debería poder escribir:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>altavoz <span class="op">=</span> Altavoz(<span class="st">"Salón"</span>, <span class="dv">30</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.nombre)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.volumen)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.estado)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>altavoz.volumen <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>altavoz.encender()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>altavoz.apagar()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No debería necesitar acceder a los atributos internos para utilizar las operaciones habituales.</p>
+</section>
+</section>
+<section id="parte-4.-comprobamos-el-comportamiento" class="level2">
+<h2 class="anchored" data-anchor-id="parte-4.-comprobamos-el-comportamiento">Parte 4. Comprobamos el comportamiento</h2>
+<p>Crea un archivo <code>pruebas_manuales.py</code>. No utilizaremos todavía <code>pytest</code>: en esta actividad queremos comprobar manualmente los resultados y preparar el terreno para automatizarlos pronto.</p>
+<section id="pruebas-válidas" class="level3">
+<h3 class="anchored" data-anchor-id="pruebas-válidas">4.1. Pruebas válidas</h3>
+<p>Comprueba las siguientes situaciones:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Operación</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>V01</td>
+<td>Crear un altavoz con nombre <code>"Salón"</code> y volumen <code>30</code></td>
+<td>Se crea correctamente</td>
+</tr>
+<tr class="even">
+<td>V02</td>
+<td>Consultar el nombre</td>
+<td>Devuelve <code>"Salón"</code></td>
+</tr>
+<tr class="odd">
+<td>V03</td>
+<td>Consultar el volumen</td>
+<td>Devuelve <code>30</code></td>
+</tr>
+<tr class="even">
+<td>V04</td>
+<td>Consultar el estado inicial</td>
+<td>Devuelve <code>"apagado"</code></td>
+</tr>
+<tr class="odd">
+<td>V05</td>
+<td>Cambiar el volumen a <code>50</code></td>
+<td>Se acepta</td>
+</tr>
+<tr class="even">
+<td>V06</td>
+<td>Cambiar el volumen a <code>0</code></td>
+<td>Se acepta</td>
+</tr>
+<tr class="odd">
+<td>V07</td>
+<td>Cambiar el volumen a <code>100</code></td>
+<td>Se acepta</td>
+</tr>
+<tr class="even">
+<td>V08</td>
+<td>Ejecutar <code>encender()</code></td>
+<td>El estado pasa a <code>"encendido"</code></td>
+</tr>
+<tr class="odd">
+<td>V09</td>
+<td>Ejecutar <code>apagar()</code></td>
+<td>El estado pasa a <code>"apagado"</code></td>
+</tr>
+<tr class="even">
+<td>V10</td>
+<td>Crear un altavoz con nombre <code>"  Cocina  "</code></td>
+<td>Se almacena <code>"Cocina"</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pruebas-inválidas" class="level3">
+<h3 class="anchored" data-anchor-id="pruebas-inválidas">4.2. Pruebas inválidas</h3>
+<p>Comprueba cada caso por separado.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Operación</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>I01</td>
+<td>Crear un altavoz con nombre <code>""</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="even">
+<td>I02</td>
+<td>Crear un altavoz con nombre <code>"   "</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="odd">
+<td>I03</td>
+<td>Crear un altavoz con nombre <code>25</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="even">
+<td>I04</td>
+<td>Crear un altavoz con volumen <code>-1</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="odd">
+<td>I05</td>
+<td>Crear un altavoz con volumen <code>101</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="even">
+<td>I06</td>
+<td>Asignar <code>altavoz.volumen = 25.5</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="odd">
+<td>I07</td>
+<td>Asignar <code>altavoz.volumen = "alto"</code></td>
+<td><code>ValueError</code></td>
+</tr>
+<tr class="even">
+<td>I08</td>
+<td>Asignar <code>altavoz.estado = "encendido"</code></td>
+<td><code>AttributeError</code></td>
+</tr>
+</tbody>
+</table>
+<p>No es necesario probar todos los casos con un único programa. Puedes ejecutar cada comprobación por separado para identificar fácilmente la excepción que se produce.</p>
+</section>
+<section id="registra-los-resultados" class="level3">
+<h3 class="anchored" data-anchor-id="registra-los-resultados">4.3. Registra los resultados</h3>
+<p>Crea una tabla con tres columnas: ID, resultado obtenido y ¿coincide con el esperado?</p>
+<p>Si una prueba falla, no cambies inmediatamente el resultado esperado para hacerla coincidir con el programa. Primero investiga si el error está en la implementación.</p>
+</section>
+</section>
+<section id="parte-5.-ia-como-revisora-del-diseño" class="level2">
+<h2 class="anchored" data-anchor-id="parte-5.-ia-como-revisora-del-diseño">Parte 5. IA como revisora del diseño</h2>
+<p>Cuando tengas una primera versión funcional, utiliza la IA para revisar el código.</p>
+<section id="prompt-de-revisión" class="level3">
+<h3 class="anchored" data-anchor-id="prompt-de-revisión">Prompt de revisión</h3>
+<pre class="text"><code>Estoy desarrollando una clase Altavoz en Python.
+
+La clase debe cumplir estas reglas:
+- El nombre debe ser una cadena no vacía ni formada solo por espacios.
+- Se eliminan los espacios exteriores del nombre.
+- El volumen debe ser un entero entre 0 y 100, incluidos.
+- El estado inicial debe ser "apagado".
+- El estado solo se modifica mediante los métodos encender() y apagar().
+- El nombre y el volumen se consultan mediante propiedades.
+- Los valores inválidos deben provocar ValueError.
+- El estado no debe disponer de un setter público.
+
+Revisa el código que te proporciono.
+
+1. Comprueba cada requisito por separado.
+2. Busca errores de validación.
+3. Comprueba que los setters no provocan recursión.
+4. Señala posibles problemas de diseño.
+5. Propón casos de prueba que todavía no haya comprobado.
+
+No reescribas la clase completa.
+No afirmes que el código funciona sin haberlo ejecutado.
+No introduzcas listas, diccionarios, herencia ni conceptos que todavía no hemos estudiado.
+
+Código:
+[PEGA AQUÍ TU IMPLEMENTACIÓN]</code></pre>
+</section>
+<section id="actividad-de-verificación" class="level3">
+<h3 class="anchored" data-anchor-id="actividad-de-verificación">Actividad de verificación</h3>
+<p>Selecciona dos recomendaciones de la IA y decide si son correctas.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Recomendación de la IA</th>
+<th>¿La acepto?</th>
+<th>Justificación</th>
+<th>¿Cómo la he verificado?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Recomendación 1</td>
+<td>Sí / No</td>
+<td>Explicación</td>
+<td>Prueba o análisis del código</td>
+</tr>
+<tr class="even">
+<td>Recomendación 2</td>
+<td>Sí / No</td>
+<td>Explicación</td>
+<td>Prueba o análisis del código</td>
+</tr>
+</tbody>
+</table>
+<p>La IA no sustituye a las pruebas: sus propuestas deben contrastarse con los requisitos y con el comportamiento real del programa.</p>
+</section>
+</section>
+<section id="parte-6.-entrega-y-reflexión-final" class="level2">
+<h2 class="anchored" data-anchor-id="parte-6.-entrega-y-reflexión-final">Parte 6. Entrega y reflexión final</h2>
+<p>Entrega el proyecto con esta estructura:</p>
+<pre class="text"><code>smart-speaker/
+├── altavoz.py
+├── main.py
+├── pruebas_manuales.py
+└── docs/
+    └── laboratorio.md</code></pre>
+<p>El documento <code>docs/laboratorio.md</code> debe incluir:</p>
+<ol type="1">
+<li>Las reglas de negocio identificadas.</li>
+<li>La tabla de diseño de la interfaz pública.</li>
+<li>Una explicación de las propiedades utilizadas.</li>
+<li>Los resultados de las pruebas válidas e inválidas.</li>
+<li>Dos recomendaciones de la IA y la decisión tomada sobre ellas.</li>
+<li>Una reflexión final: ¿qué ventajas tiene que la clase controle sus propias reglas?</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
