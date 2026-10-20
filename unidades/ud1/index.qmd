@@ -6,7 +6,7 @@ title: "UD1. Python profesional y modelo orientado a objetos"
 
 Antes de construir aplicaciones orientadas a objetos, necesitamos comprender algunas cosas.
 
-No necesitas saber programar para comenzar. Vamos a aprender a leer pequeños fragmenteos de código y a descubrir cómo Python trabaja con la información.
+No necesitas saber programar para comenzar. Vamos a aprender a leer pequeños fragmentos de código y a descubrir cómo Python trabaja con la información.
 
 ## ¿Qué es un programa?
 
@@ -104,6 +104,7 @@ def mostrar_tarea(...):
 ```
 
 >Rápidamente aparecen las preguntas:
+>
 > - ¿A qué proyecto pertenece la tarea?
 > 
 > - ¿Quién es responsable?
