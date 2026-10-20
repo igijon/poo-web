@@ -2,6 +2,78 @@
 title: "UD1. Python profesional y modelo orientado a objetos"
 ---
 
+# 💻 ¿Mi primer programa en Python?
+
+Antes de construir aplicaciones orientadas a objetos, necesitamos comprender algunas cosas.
+
+No necesitas saber programar para comenzar. Vamos a aprender a leer pequeños fragmenteos de código y a descubrir cómo Python trabaja con la información.
+
+## ¿Qué es un programa?
+
+Un **programa** es un conjunto de instrucciones que un ordenador ejecuta para realizar una tarea.
+
+Por ejemplo, podemos pedirle a Python que muestre un mensaje:
+
+```py
+print("Hola, mundo")
+```
+
+Al ejecutar el programa, veremos:
+
+```txt
+Hola, mundo
+```
+
+La instrucción `print()` permite mostrar información en la pantalla.
+
+
+## Las instrucciones se ejecutan "en orden"
+
+Observa este programa:
+
+```py
+print("Preparando el proyecto")
+print("Creando la primera tarea")
+print("Proyecto iniciado")
+```
+
+Por defecto, Python ejecuta estas instrucciones de arriba hacia abajo.
+
+## Las variables permiten guardar información
+
+Imagina que estamos creando un programa para gestionar tareas de un proyecto. Si queremos guardar el título podemos hacer algo así:
+
+```py
+titulo = "Diseñar la página de inicio"
+print(titulo)
+```
+
+En este ejemplo:
+
+- `titulo` es el nombre de la variable
+- `"Diseñar la página de inicio"` es el texto que almacenamos.
+- `print(titulo)` muestra el valor guardado.
+
+## Los valores pueden ser de distintos tipos
+
+En una tarea podemos guardar información diferente:
+
+```py
+titulo = "Preparar documentación"
+horas = 3
+completada = False
+
+print(titulo)
+print(horas)
+print(completada)
+```
+
+- `str`: representa texto
+- `int`: representa número enteros
+- `bool`: representa un valor verdadero o falso.
+
+>**Todo esto lo veréis en otros módulos del curso de especialización, es sólo una toma de contacto antes de comenzar a pensar en Programación Orientada a Objetos**
+
 # 📕 ¿Por qué necesitamos los objetos?
 
 > **Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos...?**
