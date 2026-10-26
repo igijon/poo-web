@@ -231,6 +231,7 @@ git log --oneline
 ```
 Tu repositorio debe permitir observar cómo ha evolucionado el diseño.
 
+
 ## Parte 9. La IA como analista
 
 En este laboratorio vamos a utilizar IA, pero **no para que nos diseñe y programe TaskFlow**.
@@ -355,3 +356,11 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 ```
+# ➕ Ampliación
+
+Investiga cómo podríamos:
+
+- Listar las tareas de un responsable en concreto
+- Listar los proyectos y las tareas asociadas
+
+ 
