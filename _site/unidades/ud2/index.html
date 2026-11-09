@@ -214,7 +214,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../laboratorios/ud2/lab1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">UD2 · Lab 1 · ¿Qué estamos ejecutando realmente?</span></a>
+ <span class="menu-text">UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest</span></a>
   </div>
 </li>
       </ul>
@@ -285,6 +291,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#qué-sucede-con-cada-valor" id="toc-qué-sucede-con-cada-valor" class="nav-link" data-scroll-target="#qué-sucede-con-cada-valor">¿Qué sucede con cada valor?</a></li>
   <li><a href="#qué-es-raise-valueerror" id="toc-qué-es-raise-valueerror" class="nav-link" data-scroll-target="#qué-es-raise-valueerror">¿Qué es <code>raise ValueError</code>?</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#primeros-test-automatizados-con-pytest" id="toc-primeros-test-automatizados-con-pytest" class="nav-link" data-scroll-target="#primeros-test-automatizados-con-pytest">✓ Primeros test automatizados con <code>pytest</code></a>
+  <ul class="collapse">
+  <li><a href="#por-qué-necesitamos-pruebas-automatizadas" id="toc-por-qué-necesitamos-pruebas-automatizadas" class="nav-link" data-scroll-target="#por-qué-necesitamos-pruebas-automatizadas">¿Por qué necesitamos pruebas automatizadas?</a></li>
+  <li><a href="#pruebas-manuales-y-automatizadas" id="toc-pruebas-manuales-y-automatizadas" class="nav-link" data-scroll-target="#pruebas-manuales-y-automatizadas">Pruebas manuales y automatizadas</a></li>
+  <li><a href="#qué-es-pytest" id="toc-qué-es-pytest" class="nav-link" data-scroll-target="#qué-es-pytest">¿Qué es pytest?</a>
+  <ul class="collapse">
+  <li><a href="#nuestro-primer-ejemplo" id="toc-nuestro-primer-ejemplo" class="nav-link" data-scroll-target="#nuestro-primer-ejemplo">Nuestro primer ejemplo</a></li>
+  </ul></li>
+  <li><a href="#preparamos-pytest-en-nuestro-proyecto" id="toc-preparamos-pytest-en-nuestro-proyecto" class="nav-link" data-scroll-target="#preparamos-pytest-en-nuestro-proyecto">Preparamos pytest en nuestro proyecto</a>
+  <ul class="collapse">
+  <li><a href="#paso-1.-instalar-pytest" id="toc-paso-1.-instalar-pytest" class="nav-link" data-scroll-target="#paso-1.-instalar-pytest">Paso 1. Instalar pytest</a></li>
+  <li><a href="#paso-2.-comprobar-la-instalación" id="toc-paso-2.-comprobar-la-instalación" class="nav-link" data-scroll-target="#paso-2.-comprobar-la-instalación">Paso 2. Comprobar la instalación</a></li>
+  <li><a href="#paso-3.-organizar-el-proyecto" id="toc-paso-3.-organizar-el-proyecto" class="nav-link" data-scroll-target="#paso-3.-organizar-el-proyecto">Paso 3. Organizar el proyecto</a></li>
+  <li><a href="#convenciones-de-pytest" id="toc-convenciones-de-pytest" class="nav-link" data-scroll-target="#convenciones-de-pytest">Convenciones de pytest</a></li>
+  </ul></li>
+  <li><a href="#nuestra-primera-prueba-con-smartspeaker" id="toc-nuestra-primera-prueba-con-smartspeaker" class="nav-link" data-scroll-target="#nuestra-primera-prueba-con-smartspeaker">Nuestra primera prueba con SmartSpeaker</a>
+  <ul class="collapse">
+  <li><a href="#paso-1.-revisar-la-clase-altavoz" id="toc-paso-1.-revisar-la-clase-altavoz" class="nav-link" data-scroll-target="#paso-1.-revisar-la-clase-altavoz">Paso 1. Revisar la clase Altavoz</a></li>
+  <li><a href="#paso-2.-crear-nuestro-primer-test" id="toc-paso-2.-crear-nuestro-primer-test" class="nav-link" data-scroll-target="#paso-2.-crear-nuestro-primer-test">Paso 2. Crear nuestro primer test</a></li>
+  <li><a href="#paso-3.-ejecutar-la-prueba" id="toc-paso-3.-ejecutar-la-prueba" class="nav-link" data-scroll-target="#paso-3.-ejecutar-la-prueba">Paso 3. Ejecutar la prueba</a></li>
+  <li><a href="#qué-significa-assert" id="toc-qué-significa-assert" class="nav-link" data-scroll-target="#qué-significa-assert">¿Qué significa assert?</a></li>
+  </ul></li>
+  <li><a href="#cómo-se-organiza-una-prueba-arrange-act-assert" id="toc-cómo-se-organiza-una-prueba-arrange-act-assert" class="nav-link" data-scroll-target="#cómo-se-organiza-una-prueba-arrange-act-assert">Cómo se organiza una prueba: Arrange – Act – Assert</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -719,9 +749,373 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"El título no puede estar vacío"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Cuando se incumple la condición, la ejecución normal se interrumpe y se produce la excepción. Si nadie la captura, el programa termina mostrando el error.</p>
 <hr>
-
-
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Atención
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Estamos preparados para realizar el <a href="https://igijon.github.io/poo-web/laboratorios/ud2/lab1.html">Laboratorio 1</a></p>
+</div>
+</div>
 </section>
+</section>
+</section>
+<section id="primeros-test-automatizados-con-pytest" class="level1">
+<h1>✓ Primeros test automatizados con <code>pytest</code></h1>
+<section id="por-qué-necesitamos-pruebas-automatizadas" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-necesitamos-pruebas-automatizadas">¿Por qué necesitamos pruebas automatizadas?</h2>
+<p>Hemos implementado anteriormente la clase <code>Altavoz</code>. Entre otras cosas, establecimos que:</p>
+<ul>
+<li>El nombre no puede estar vacío.</li>
+<li>El volumen debe ser un entero entre 0 y 100.</li>
+<li>El altavoz comienza apagado.</li>
+<li>El estado cambia mediante los métodos <code>encender()</code> y <code>apagar()</code>.</li>
+</ul>
+<p>Para comprobar que estas reglas se cumplen, hemos realizado pruebas manuales.</p>
+<p>Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> altavoz <span class="im">import</span> Altavoz</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>altavoz <span class="op">=</span> Altavoz(<span class="st">"Salón"</span>, <span class="dv">30</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.nombre)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.volumen)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.estado)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>altavoz.encender()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Una persona tiene que ejecutar el programa, observar los resultados y decidir si son correctos.</p>
+<p>Pero imaginemos que mañana modificamos el constructor o añadimos una funcionalidad. ¿Cómo sabemos que seguimos cumpliendo todas las reglas anteriores?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>(Mis notas) Preguntas para iniciar el debate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>¿Tenemos que repetir todas las comprobaciones cada vez que cambiamos el código?</li>
+<li>¿Qué ocurre si olvidamos comprobar alguna funcionalidad?</li>
+<li>¿Podríamos guardar las comprobaciones en el propio proyecto?</li>
+<li>¿Podría Python ejecutar esas comprobaciones automáticamente?</li>
+</ol>
+</div>
+</div>
+<p>La idea que buscamos es que <strong>podemos escribir código cuyo objetivo no sea resolver una funcionalidad de la aplicación, sino comprobar que otra parte del código funciona correctamente</strong>.</p>
+</section>
+<section id="pruebas-manuales-y-automatizadas" class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-manuales-y-automatizadas">Pruebas manuales y automatizadas</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pruebas manuales</th>
+<th>Pruebas automatizadas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Una persona ejecuta el programa y observa el resultado</td>
+<td>Una función ejecuta una comprobación</td>
+</tr>
+<tr class="even">
+<td>Hay que repetir las operaciones manualmente</td>
+<td>Se pueden ejecutar todas las pruebas con un comando</td>
+</tr>
+<tr class="odd">
+<td>Las comprobaciones pueden olvidarse</td>
+<td>Las comprobaciones quedan guardadas en el proyecto</td>
+</tr>
+<tr class="even">
+<td>Son útiles para explorar el comportamiento</td>
+<td>Son útiles para verificar comportamientos conocidos</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p><em>Una prueba automatizada tampoco demuestra que el programa esté libre de errores. Comprueba que, para los casos que hemos definido, el comportamiento coincide con lo esperado.</em></p>
+</blockquote>
+<hr>
+</section>
+<section id="qué-es-pytest" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-pytest">¿Qué es pytest?</h2>
+<p><code>pytest</code> es una herramienta de testing para Python que permite:</p>
+<ul>
+<li>Descubrir automáticamente las funciones de prueba.</li>
+<li>Ejecutarlas.</li>
+<li>Comprobar si los resultados son los esperados.</li>
+<li>Mostrar información cuando una prueba falla.</li>
+</ul>
+<p>No necesitamos crear una estructura compleja ni aprender una sintaxis especial para escribir las primeras pruebas. Podemos utilizar funciones normales de Python y la instrucción <code>assert</code>.</p>
+<section id="nuestro-primer-ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="nuestro-primer-ejemplo">Nuestro primer ejemplo</h3>
+<p>Vamos a crear un proyecto con un único fichero <code>operaciones.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sumar(a, b):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En <code>main.py</code> vamos a comprobar que funciona:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nombre<span class="op">-</span>paquete.operaciones <span class="im">import</span> sumar</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main() <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> sumar(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(resultado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>El resultado esperado es <code>8</code></p>
+</blockquote>
+<p>Vamos a crear nuestro primer test automatizado. Creamos la carpeta <code>tests</code> y dentro, el archivo <code>test_operaciones.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>proyecto/</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>├── src/nombre-paquete/</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>│   ├── __init__.py</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>│   └── operaciones.py</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>│   └── main.py</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>└── tests/</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    └── test_operaciones.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Escribimos el primer test:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nombre<span class="op">-</span>paquete.operaciones <span class="im">import</span> sumar</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_dos_numeros():</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> sumar(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> resultado <span class="op">==</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para ejecutar los test hacemos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Explicamos los elementos: - test_: indica a pytest que es una función de prueba. - sumar_dos_numeros: describe qué estamos comprobando. - resultado: almacena el valor devuelto por la función. - assert: comprueba que una condición se cumple. - resultado == 8: es la condición que esperamos que sea verdadera.</p>
+<p><strong>¿Qué ocurre cuando el test falla?</strong></p>
+<p>Modificamos deliberadamente la función:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sumar(a, b):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">-</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si volvemos a ejecutar las pruebas con <code>uv run pytest</code>, veremos un fallo.</p>
+<p>Podemos <strong>ampliar los casos de prueba</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_dos_numeros_positivos():</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="dv">3</span>, <span class="dv">5</span>) <span class="op">==</span> <span class="dv">8</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_dos_numeros_negativos():</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">5</span>) <span class="op">==</span> <span class="op">-</span><span class="dv">8</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_numero_positivo_y_negativo():</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="dv">10</span>, <span class="op">-</span><span class="dv">4</span>) <span class="op">==</span> <span class="dv">6</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_con_cero():</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="dv">7</span>, <span class="dv">0</span>) <span class="op">==</span> <span class="dv">7</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_dos_ceros():</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si da error en la ejecución de pytest, comprueba: - Que el nombre del paquete coincide con la ruta de importación. - Añade <code>pytest</code> como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> pytest</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="preparamos-pytest-en-nuestro-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="preparamos-pytest-en-nuestro-proyecto">Preparamos pytest en nuestro proyecto</h2>
+<p>Vamos a trabajar sobre el proyecto <code>SmartSpeaker</code> creado en el laboratorio anterior.</p>
+<section id="paso-1.-instalar-pytest" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1.-instalar-pytest">Paso 1. Instalar pytest</h3>
+<p>Desde el terminal, situándonos en la raíz del proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La opción <code>--dev</code> indica que <code>pytest</code> es una dependencia de desarrollo: la necesitamos para trabajar y comprobar el proyecto, pero no para ejecutar la aplicación como producto final.</p>
+</section>
+<section id="paso-2.-comprobar-la-instalación" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2.-comprobar-la-instalación">Paso 2. Comprobar la instalación</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Debería aparecer la versión instalada.</p>
+</section>
+<section id="paso-3.-organizar-el-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3.-organizar-el-proyecto">Paso 3. Organizar el proyecto</h3>
+<p>Vamos a separar el código de la aplicación y el código de las pruebas.</p>
+<p>Dentro de <code>tests/</code> crearemos el archivo <code>test_altavoz.py</code>.</p>
+<p>La estructura quedará así:</p>
+<pre class="text"><code>smart-speaker/
+├── src/smart_speaker/
+│   └── ...
+└── tests/
+    └── test_altavoz.py</code></pre>
+</section>
+<section id="convenciones-de-pytest" class="level3">
+<h3 class="anchored" data-anchor-id="convenciones-de-pytest">Convenciones de pytest</h3>
+<p><code>pytest</code> utiliza convenciones para localizar las pruebas automáticamente.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Convención</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Archivo de pruebas</td>
+<td>Empieza por <code>test_</code> o termina en <code>_test.py</code></td>
+<td><code>test_altavoz.py</code></td>
+</tr>
+<tr class="even">
+<td>Función de prueba</td>
+<td>Empieza por <code>test_</code></td>
+<td><code>test_altavoz_empieza_apagado()</code></td>
+</tr>
+<tr class="odd">
+<td>Comprobación</td>
+<td>Se utiliza <code>assert</code></td>
+<td><code>assert altavoz.estado == "apagado"</code></td>
+</tr>
+<tr class="even">
+<td>Ejecución</td>
+<td>Se lanza desde el terminal</td>
+<td><code>uv run pytest</code></td>
+</tr>
+</tbody>
+</table>
+<p>No es necesario registrar manualmente cada prueba. Si respetamos estas convenciones, <code>pytest</code> puede encontrarlas.</p>
+<hr>
+</section>
+</section>
+<section id="nuestra-primera-prueba-con-smartspeaker" class="level2">
+<h2 class="anchored" data-anchor-id="nuestra-primera-prueba-con-smartspeaker">Nuestra primera prueba con SmartSpeaker</h2>
+<p>Vamos a comprobar que un altavoz nuevo se crea con el nombre que le hemos proporcionado.</p>
+<section id="paso-1.-revisar-la-clase-altavoz" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1.-revisar-la-clase-altavoz">Paso 1. Revisar la clase Altavoz</h3>
+<p>En <code>altavoz.py</code> debemos tener una implementación equivalente a esta:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Altavoz:</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre: <span class="bu">str</span>, volumen: <span class="bu">int</span>):</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.volumen <span class="op">=</span> volumen</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._estado <span class="op">=</span> <span class="st">"apagado"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> nombre(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._nombre</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>   ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p>Esto es un ejemplo, debes utilizar tu implementación.</p>
+</blockquote>
+</section>
+<section id="paso-2.-crear-nuestro-primer-test" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2.-crear-nuestro-primer-test">Paso 2. Crear nuestro primer test</h3>
+<p>Creamos <code>tests/test_altavoz.py</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> altavoz <span class="im">import</span> Altavoz</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_altavoz_se_crea_con_nombre():</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    altavoz <span class="op">=</span> Altavoz(<span class="st">"Salón"</span>, <span class="dv">30</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> altavoz.nombre <span class="op">==</span> <span class="st">"Salón"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="paso-3.-ejecutar-la-prueba" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3.-ejecutar-la-prueba">Paso 3. Ejecutar la prueba</h3>
+<p>Desde la raíz del proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si todo está correctamente configurado, debería aparecer un resultado similar a este:</p>
+<pre class="text"><code>============================= test session starts ==============================
+collected 1 item
+
+tests/test_altavoz.py .                                                   [100%]
+
+============================== 1 passed ========================================</code></pre>
+<p>El punto (<code>.</code>) representa una prueba superada.</p>
+<p><strong>Una prueba que pasa significa que la condición comprobada se cumple. No significa que hayamos comprobado toda la clase.</strong></p>
+</section>
+<section id="qué-significa-assert" class="level3">
+<h3 class="anchored" data-anchor-id="qué-significa-assert">¿Qué significa assert?</h3>
+<p><code>assert</code> comprueba si una expresión es verdadera.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> altavoz.nombre <span class="op">==</span> <span class="st">"Salón"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Podemos interpretar esta instrucción así:</p>
+<blockquote class="blockquote">
+<p>Comprueba que el nombre del altavoz es exactamente “Salón”. Si no lo es, la prueba debe fallar.</p>
+</blockquote>
+<p>Ejemplos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">5</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">"Salón"</span> <span class="op">==</span> <span class="st">"Salón"</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="va">True</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">10</span> <span class="op">&gt;</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Todas estas condiciones son verdaderas.</p>
+<p>En cambio:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>provocaría un fallo.</p>
+<hr>
+</section>
+</section>
+<section id="cómo-se-organiza-una-prueba-arrange-act-assert" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-se-organiza-una-prueba-arrange-act-assert">Cómo se organiza una prueba: Arrange – Act – Assert</h2>
+<p>Aunque una prueba puede ser una función sencilla, es conveniente organizarla para que sea fácil de leer.</p>
+<p>Una estructura habitual es <strong>Arrange – Act – Assert</strong> (preparar, actuar y comprobar).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fase</th>
+<th>Qué hacemos</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arrange</td>
+<td>Preparamos los datos y objetos necesarios</td>
+<td><code>altavoz = Altavoz("Salón", 30)</code></td>
+</tr>
+<tr class="even">
+<td>Act</td>
+<td>Ejecutamos la operación que queremos comprobar</td>
+<td><code>altavoz.encender()</code></td>
+</tr>
+<tr class="odd">
+<td>Assert</td>
+<td>Comprobamos el resultado</td>
+<td><code>assert altavoz.estado == "encendido"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplo completo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_encender_altavoz():</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Arrange</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    altavoz <span class="op">=</span> Altavoz(<span class="st">"Salón"</span>, <span class="dv">30</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Act</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    altavoz.encender()</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assert</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> altavoz.estado <span class="op">==</span> <span class="st">"encendido"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No es obligatorio escribir comentarios en todas las pruebas, pero esta estructura ayuda a identificar qué estamos preparando, qué comportamiento estamos ejecutando y qué resultado esperamos.</p>
+<hr>
+
+
 </section>
 </section>
 

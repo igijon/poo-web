@@ -31,6 +31,8 @@ website:
             contents:
               - href: laboratorios/ud2/lab1.qmd
                 text: "UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto"
+              - href: laboratorios/ud2/lab2.qmd
+                text: "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
           
     
       - section: "🚀 Desafíos"

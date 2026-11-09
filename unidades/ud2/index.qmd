@@ -373,3 +373,358 @@ Cuando se incumple la condición, la ejecución normal se interrumpe y se produc
 
 ---
 
+::: {.callout-tip}
+## Atención
+Estamos preparados para realizar el [Laboratorio 1](https://igijon.github.io/poo-web/laboratorios/ud2/lab1.html)
+::::
+
+# ✓ Primeros test automatizados con `pytest`
+
+## ¿Por qué necesitamos pruebas automatizadas?
+
+Hemos implementado anteriormente la clase `Altavoz`. Entre otras cosas, establecimos que:
+
+- El nombre no puede estar vacío.
+- El volumen debe ser un entero entre 0 y 100.
+- El altavoz comienza apagado.
+- El estado cambia mediante los métodos `encender()` y `apagar()`.
+
+Para comprobar que estas reglas se cumplen, hemos realizado pruebas manuales.
+
+Por ejemplo:
+
+```python
+from altavoz import Altavoz
+
+altavoz = Altavoz("Salón", 30)
+
+print(altavoz.nombre)
+print(altavoz.volumen)
+print(altavoz.estado)
+
+altavoz.encender()
+
+print(altavoz.estado)
+```
+
+Una persona tiene que ejecutar el programa, observar los resultados y decidir si son correctos.
+
+Pero imaginemos que mañana modificamos el constructor o añadimos una funcionalidad. ¿Cómo sabemos que seguimos cumpliendo todas las reglas anteriores?
+
+:::{.content-visible when-profile="docente"}
+:::{.callout-tip}
+### (Mis notas) Preguntas para iniciar el debate
+
+1. ¿Tenemos que repetir todas las comprobaciones cada vez que cambiamos el código?
+2. ¿Qué ocurre si olvidamos comprobar alguna funcionalidad?
+3. ¿Podríamos guardar las comprobaciones en el propio proyecto?
+4. ¿Podría Python ejecutar esas comprobaciones automáticamente?
+:::
+:::
+
+La idea que buscamos es que **podemos escribir código cuyo objetivo no sea resolver una funcionalidad de la aplicación, sino comprobar que otra parte del código funciona correctamente**.
+
+## Pruebas manuales y automatizadas
+
+| Pruebas manuales | Pruebas automatizadas |
+|---|---|
+| Una persona ejecuta el programa y observa el resultado | Una función ejecuta una comprobación |
+| Hay que repetir las operaciones manualmente | Se pueden ejecutar todas las pruebas con un comando |
+| Las comprobaciones pueden olvidarse | Las comprobaciones quedan guardadas en el proyecto |
+| Son útiles para explorar el comportamiento | Son útiles para verificar comportamientos conocidos |
+
+>*Una prueba automatizada tampoco demuestra que el programa esté libre de errores. Comprueba que, para los casos que hemos definido, el comportamiento coincide con lo esperado.*
+
+---
+
+## ¿Qué es pytest?
+
+`pytest` es una herramienta de testing para Python que permite:
+
+- Descubrir automáticamente las funciones de prueba.
+- Ejecutarlas.
+- Comprobar si los resultados son los esperados.
+- Mostrar información cuando una prueba falla.
+
+No necesitamos crear una estructura compleja ni aprender una sintaxis especial para escribir las primeras pruebas. Podemos utilizar funciones normales de Python y la instrucción `assert`.
+
+### Nuestro primer ejemplo
+
+Vamos a crear un proyecto con un único fichero `operaciones.py`:
+
+```python
+def sumar(a, b):
+    return a + b
+```
+
+En `main.py` vamos a comprobar que funciona:
+
+```python
+from nombre-paquete.operaciones import sumar
+
+def main() -> None:
+    resultado = sumar(3, 5)
+    print(resultado)
+```
+>El resultado esperado es `8`
+
+Vamos a crear nuestro primer test automatizado. Creamos la carpeta `tests` y dentro, el archivo `test_operaciones.py`:
+
+```txt
+proyecto/
+├── src/nombre-paquete/
+│   ├── __init__.py
+│   └── operaciones.py
+│   └── main.py
+└── tests/
+    └── test_operaciones.py
+```
+Escribimos el primer test:
+
+```python
+from nombre-paquete.operaciones import sumar
+
+def test_sumar_dos_numeros():
+    resultado = sumar(3, 5)
+
+    assert resultado == 8
+```
+
+Para ejecutar los test hacemos:
+
+```bash
+uv run pytest
+```
+
+Explicamos los elementos:
+- test_: indica a pytest que es una función de prueba.
+- sumar_dos_numeros: describe qué estamos comprobando.
+- resultado: almacena el valor devuelto por la función.
+- assert: comprueba que una condición se cumple.
+- resultado == 8: es la condición que esperamos que sea verdadera.
+
+**¿Qué ocurre cuando el test falla?**
+
+Modificamos deliberadamente la función:
+
+```python
+def sumar(a, b):
+    return a - b
+```
+
+Si volvemos a ejecutar las pruebas con `uv run pytest`, veremos un fallo.
+
+Podemos **ampliar los casos de prueba**:
+
+```python
+def test_sumar_dos_numeros_positivos():
+    assert sumar(3, 5) == 8
+
+
+def test_sumar_dos_numeros_negativos():
+    assert sumar(-3, -5) == -8
+
+
+def test_sumar_numero_positivo_y_negativo():
+    assert sumar(10, -4) == 6
+
+
+def test_sumar_con_cero():
+    assert sumar(7, 0) == 7
+
+
+def test_sumar_dos_ceros():
+    assert sumar(0, 0) == 0
+```
+:::{.callout-caution}
+Si da error en la ejecución de pytest, comprueba:
+- Que el nombre del paquete coincide con la ruta de importación.
+- Añade `pytest` como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.
+```bash
+conda deactivate
+uv add --dev pytest
+uv run pytest
+```
+:::
+
+---
+
+## Preparamos pytest en nuestro proyecto
+
+
+Vamos a trabajar sobre el proyecto `SmartSpeaker` creado en el laboratorio anterior.
+
+### Paso 1. Instalar pytest
+
+Desde el terminal, situándonos en la raíz del proyecto:
+
+```bash
+uv add --dev pytest
+```
+
+La opción `--dev` indica que `pytest` es una dependencia de desarrollo: la necesitamos para trabajar y comprobar el proyecto, pero no para ejecutar la aplicación como producto final.
+
+### Paso 2. Comprobar la instalación
+
+```bash
+uv run pytest --version
+```
+
+Debería aparecer la versión instalada.
+
+### Paso 3. Organizar el proyecto
+
+Vamos a separar el código de la aplicación y el código de las pruebas.
+
+
+Dentro de `tests/` crearemos el archivo `test_altavoz.py`.
+
+La estructura quedará así:
+
+```text
+smart-speaker/
+├── src/smart_speaker/
+│   └── ...
+└── tests/
+    └── test_altavoz.py
+```
+
+### Convenciones de pytest
+
+`pytest` utiliza convenciones para localizar las pruebas automáticamente.
+
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Archivo de pruebas | Empieza por `test_` o termina en `_test.py` | `test_altavoz.py` |
+| Función de prueba | Empieza por `test_` | `test_altavoz_empieza_apagado()` |
+| Comprobación | Se utiliza `assert` | `assert altavoz.estado == "apagado"` |
+| Ejecución | Se lanza desde el terminal | `uv run pytest` |
+
+No es necesario registrar manualmente cada prueba. Si respetamos estas convenciones, `pytest` puede encontrarlas.
+
+---
+
+## Nuestra primera prueba con SmartSpeaker
+
+Vamos a comprobar que un altavoz nuevo se crea con el nombre que le hemos proporcionado.
+
+### Paso 1. Revisar la clase Altavoz
+
+En `altavoz.py` debemos tener una implementación equivalente a esta:
+
+```python
+class Altavoz:
+    def __init__(self, nombre: str, volumen: int):
+        self.nombre = nombre
+        self.volumen = volumen
+        self._estado = "apagado"
+
+    @property
+    def nombre(self) -> str:
+        return self._nombre
+
+   ...
+```
+
+>Esto es un ejemplo, debes utilizar tu implementación.
+
+### Paso 2. Crear nuestro primer test
+
+Creamos `tests/test_altavoz.py`:
+
+```python
+from altavoz import Altavoz
+
+
+def test_altavoz_se_crea_con_nombre():
+    altavoz = Altavoz("Salón", 30)
+
+    assert altavoz.nombre == "Salón"
+```
+
+### Paso 3. Ejecutar la prueba
+
+Desde la raíz del proyecto:
+
+```bash
+uv run pytest
+```
+
+Si todo está correctamente configurado, debería aparecer un resultado similar a este:
+
+```text
+============================= test session starts ==============================
+collected 1 item
+
+tests/test_altavoz.py .                                                   [100%]
+
+============================== 1 passed ========================================
+```
+
+El punto (`.`) representa una prueba superada.
+
+**Una prueba que pasa significa que la condición comprobada se cumple. No significa que hayamos comprobado toda la clase.**
+
+### ¿Qué significa assert?
+
+`assert` comprueba si una expresión es verdadera.
+
+```python
+assert altavoz.nombre == "Salón"
+```
+
+Podemos interpretar esta instrucción así:
+
+> Comprueba que el nombre del altavoz es exactamente "Salón". Si no lo es, la prueba debe fallar.
+
+Ejemplos:
+
+```python
+assert 5 == 5
+assert "Salón" == "Salón"
+assert True
+assert 10 > 5
+```
+
+Todas estas condiciones son verdaderas.
+
+En cambio:
+
+```python
+assert 5 == 3
+```
+
+provocaría un fallo.
+
+---
+
+## Cómo se organiza una prueba: Arrange – Act – Assert
+
+Aunque una prueba puede ser una función sencilla, es conveniente organizarla para que sea fácil de leer.
+
+Una estructura habitual es **Arrange – Act – Assert** (preparar, actuar y comprobar).
+
+| Fase | Qué hacemos | Ejemplo |
+|---|---|---|
+| Arrange | Preparamos los datos y objetos necesarios | `altavoz = Altavoz("Salón", 30)` |
+| Act | Ejecutamos la operación que queremos comprobar | `altavoz.encender()` |
+| Assert | Comprobamos el resultado | `assert altavoz.estado == "encendido"` |
+
+Ejemplo completo:
+
+```python
+def test_encender_altavoz():
+    # Arrange
+    altavoz = Altavoz("Salón", 30)
+
+    # Act
+    altavoz.encender()
+
+    # Assert
+    assert altavoz.estado == "encendido"
+```
+
+No es obligatorio escribir comentarios en todas las pruebas, pero esta estructura ayuda a identificar qué estamos preparando, qué comportamiento estamos ejecutando y qué resultado esperamos.
+
+---
+

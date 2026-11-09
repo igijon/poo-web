@@ -258,7 +258,7 @@
     "href": "unidades/ud1/index.html",
     "title": "UD1. Python profesional y modelo orientado a objetos",
     "section": "",
-    "text": "Tenemos que desarrollar una aplicación para gestionar proyectos en una empresa de software. ¿Cómo representamos usuarios, proyectos, tareas, equipos…?\n\nAl principio, podríamos resolverlo con variables y funciones:\ntarea_1_titulo = \"Diseñar login\"\ntarea_1_estado = \"pendiente\"\ntarea_1_responsable = \"Ana\"\n\ntarea_2_titulo = \"Crear API\"\ntarea_2_estado = \"en progreso\"\ntarea_2_responsable = \"Luis\"\nY funciones:\ndef completar_tarea(...):\n    ...\n\ndef cambiar_responsable(...):\n    ...\n\ndef mostrar_tarea(...):\n    ...\n\nRápidamente aparecen las preguntas: - ¿A qué proyecto pertenece la tarea?\n\n¿Quién es responsable?\n¿Qué ocurre si tenemos 200 tareas?\n¿Cómo evitamos mezclar los datos?\n¿Dónde colocamos las operaciones relacionadas con una tarea?",
+    "text": "Antes de construir aplicaciones orientadas a objetos, necesitamos comprender algunas cosas.\nNo necesitas saber programar para comenzar. Vamos a aprender a leer pequeños fragmentos de código y a descubrir cómo Python trabaja con la información.\n\n\nUn programa es un conjunto de instrucciones que un ordenador ejecuta para realizar una tarea.\nPor ejemplo, podemos pedirle a Python que muestre un mensaje:\nprint(\"Hola, mundo\")\nAl ejecutar el programa, veremos:\nHola, mundo\nLa instrucción print() permite mostrar información en la pantalla.\n\n\n\nObserva este programa:\nprint(\"Preparando el proyecto\")\nprint(\"Creando la primera tarea\")\nprint(\"Proyecto iniciado\")\nPor defecto, Python ejecuta estas instrucciones de arriba hacia abajo.\n\n\n\nImagina que estamos creando un programa para gestionar tareas de un proyecto. Si queremos guardar el título podemos hacer algo así:\ntitulo = \"Diseñar la página de inicio\"\nprint(titulo)\nEn este ejemplo:\n\ntitulo es el nombre de la variable\n\"Diseñar la página de inicio\" es el texto que almacenamos.\nprint(titulo) muestra el valor guardado.\n\n\n\n\nEn una tarea podemos guardar información diferente:\ntitulo = \"Preparar documentación\"\nhoras = 3\ncompletada = False\n\nprint(titulo)\nprint(horas)\nprint(completada)\n\nstr: representa texto\nint: representa número enteros\nbool: representa un valor verdadero o falso.\n\n\nTodo esto lo veréis en otros módulos del curso de especialización, es sólo una toma de contacto antes de comenzar a pensar en Programación Orientada a Objetos",
     "crumbs": [
       "📚 Unidades",
       "1-Python profesional y modelo orientado a objetos"
@@ -327,6 +327,7 @@
     "text": "Imagina que una pequeña empresa necesita una aplicación para organizar sus proyectos de desarrollo.\nLa aplicación debe permitir:\n\ncrear proyectos;\nregistrar usuarios;\ncrear tareas;\nasignar tareas a usuarios;\ncambiar el estado de una tarea;\n\nUna tarea puede encontrarse en diferentes estados:\nPENDIENTE → EN PROGRESO → COMPLETADA\n\nNuestro objetivo es únicamente diseñar el modelo de objetos y realizar una primera implementación en Python.\n\n\n\nAntes de escribir código, identifica las entidades importantes del problema.\nCompleta una tabla como esta:\n\n\n\nPosible objeto\n¿Por qué existe?\n¿Qué información necesita?\n\n\n\n\nProyecto\n\n\n\n\nTarea\n\n\n\n\n\n\nDespués responde:\n¿Qué otras entidades podrían existir?\n¿Cuáles son realmente necesarias?\n¿Cuáles son solamente datos o características de otras entidades?\nNo busques todavía una única respuesta correcta.\nLo importante es justificar tus decisiones.\n\n\n\n\nEl estado de un objeto es la información que describe cómo se encuentra en un momento determinado.\n\nPara cada objeto que hayas identificado, determina qué información necesita conocer.\nPor ejemplo:\nTAREA\nEstado: - título - descripción - estado - responsable\n\nNo incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?\n\n\n\n\nAhora vamos a cambiar la pregunta.\nYa no queremos saber qué tiene cada objeto.\nQueremos saber qué puede hacer.\nPor ejemplo:\nTAREA\nPuede:\n\ncompletar\niniciar\nreasignarse\n\nPiensa en comportamientos para cada objeto.\n\nRegla: Expresa los comportamientos como acciones.\n\n\n\n\nAhora viene una de las decisiones más importantes de la POO.\n\n¿Quién debería encargarse de cada acción?\n\nSupongamos que queremos completar una tarea.\nTenemos varias posibilidades:\nTarea\nUsuario\nProyecto\nmain.py\n¿Quién debería ser responsable?\nJustifica tu decisión.\nHaz lo mismo con:\nAsignar una tarea\nCambiar el estado de una tarea\nrear un proyecto\nAñadir una tarea a un proyecto\nPuedes utilizar esta tabla:\n\n\n\n\nAcción\nObjeto responsable\n¿Por qué?\n\n\n\n\nCompletar una tarea\n\n\n\n\nIniciar una tarea\n\n \n\n\nAsignar responsable\n\n \n\n\nCrear proyecto\n\n \n\n\nAñadir tarea al proyecto\n\n\n\n\n\n\n\n\nAhora reúne tus decisiones.\nConstruye un primer modelo conceptual:\n             PROYECTO\n                 │\n                 │ contiene\n                 ▼\n               TAREA\n                 │\n                 │ asignada a\n                 ▼\n              USUARIO\nAñade la información y comportamientos que hayas decidido.\n\n\n\nPor ejemplo:\n┌─────────────────────────────┐\n│           Tarea             │\n├─────────────────────────────┤\n│ - titulo: str               │\n│ - descripcion: str          │\n│ - estado: str               │\n│ - responsable: Usuario      │\n├─────────────────────────────┤\n│ + iniciar(): None           │\n│ + completar(): None         │\n│ + reasignar(): None         │\n└─────────────────────────────┘\nHaz lo mismo para el resto de objetos que hayas determinado.\n\nNo es necesario representar todavía las relaciones UML posibles.\n\n\n\n\nAhora sí podemos programar.\nCrea el proyecto utilizando el entorno profesional que hemos visto en clase.\nLa estructura inicial será:\ntaskflow/\n├── .gitignore\n├── README.md\n├── pyproject.toml\n└── src/\n    └── taskflow/\n        ├── __init__.py\nCrea primero la clase Tarea y a continuación el resto.\nCrea también el repositorio correspondiente en Github.\n\n\n\nDurante el laboratorio utiliza Git para registrar la evolución del proyecto.\nNo esperes hasta el final.\nRealiza commits cuando completes partes significativas.\nPor ejemplo:\ngit add .\ngit commit -m \"chore: crear proyecto TaskFlow\"\nDespués:\ngit add .\ngit commit -m \"feat: crear clase Tarea\"\nY posteriormente:\ngit add .\ngit commit -m \"feat: implementar comportamiento de Tarea\"\nFinalmente:\ngit push\nConsulta el historial:\ngit log --oneline\nTu repositorio debe permitir observar cómo ha evolucionado el diseño.\n## Parte 9. La IA como analista\nEn este laboratorio vamos a utilizar IA, pero no para que nos diseñe y programe TaskFlow.\nPrimero realiza tu propio análisis.\nDespués puedes utilizar una IA para contrastarlo.\nUtiliza un prompt como:\nEstoy diseñando una aplicación de gestión de proyectos\nllamada TaskFlow.\n\nHe identificado estos objetos:\n\n- Proyecto\n- Usuario\n- Tarea\n\nPara cada uno he definido este estado:\n[PEGA AQUÍ TU PROPUESTA]\n\nY estos comportamientos:\n[PEGA AQUÍ TU PROPUESTA]\n\nAnaliza mi diseño como si fueras un analista de software.\n\nNo escribas código.\n\nIndica:\n1. qué decisiones parecen coherentes;\n2. qué responsabilidades podrían estar mal asignadas;\n3. qué información podría faltar;\n4. qué información podría sobrar;\n5. qué preguntas debería hacerme antes de programar.\n\nNo rediseñes la solución completa.\n\nSi no sabes algo, no te lo inventes.\nDespués compara:\nMI DISEÑO\n     │\n     ├── Coincidencias\n     │\n     ├── Diferencias\n     │\n     └── Decisiones que cambio\n\nLa IA no sustituye tu diseño.\n\n\nLa utilizamos para hacer preguntas y detectar posibles problemas.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1228,6 +1229,7 @@
     "text": "Antes de escribir código, identifica las entidades importantes del problema.\nCompleta una tabla como esta:\n\n\n\nPosible objeto\n¿Por qué existe?\n¿Qué información necesita?\n\n\n\n\nProyecto\n\n\n\n\nTarea\n\n\n\n\n\n\nDespués responde:\n¿Qué otras entidades podrían existir?\n¿Cuáles son realmente necesarias?\n¿Cuáles son solamente datos o características de otras entidades?\nNo busques todavía una única respuesta correcta.\nLo importante es justificar tus decisiones.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1239,6 +1241,7 @@
     "text": "El estado de un objeto es la información que describe cómo se encuentra en un momento determinado.\n\nPara cada objeto que hayas identificado, determina qué información necesita conocer.\nPor ejemplo:\nTAREA\nEstado: - título - descripción - estado - responsable\n\nNo incluyas información simplemente porque pueda resultar útil. ¿La aplicación necesita realmente conocer ese dato para funcionar?",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1250,6 +1253,7 @@
     "text": "Ahora vamos a cambiar la pregunta.\nYa no queremos saber qué tiene cada objeto.\nQueremos saber qué puede hacer.\nPor ejemplo:\nTAREA\nPuede:\n\ncompletar\niniciar\nreasignarse\n\nPiensa en comportamientos para cada objeto.\n\nRegla: Expresa los comportamientos como acciones.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1261,6 +1265,7 @@
     "text": "Ahora viene una de las decisiones más importantes de la POO.\n\n¿Quién debería encargarse de cada acción?\n\nSupongamos que queremos completar una tarea.\nTenemos varias posibilidades:\nTarea\nUsuario\nProyecto\nmain.py\n¿Quién debería ser responsable?\nJustifica tu decisión.\nHaz lo mismo con:\nAsignar una tarea\nCambiar el estado de una tarea\nrear un proyecto\nAñadir una tarea a un proyecto\nPuedes utilizar esta tabla:\n\n\n\n\nAcción\nObjeto responsable\n¿Por qué?\n\n\n\n\nCompletar una tarea\n\n\n\n\nIniciar una tarea\n\n \n\n\nAsignar responsable\n\n \n\n\nCrear proyecto\n\n \n\n\nAñadir tarea al proyecto",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1272,6 +1277,7 @@
     "text": "Ahora reúne tus decisiones.\nConstruye un primer modelo conceptual:\n             PROYECTO\n                 │\n                 │ contiene\n                 ▼\n               TAREA\n                 │\n                 │ asignada a\n                 ▼\n              USUARIO\nAñade la información y comportamientos que hayas decidido.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1283,6 +1289,7 @@
     "text": "Por ejemplo:\n┌─────────────────────────────┐\n│           Tarea             │\n├─────────────────────────────┤\n│ - titulo: str               │\n│ - descripcion: str          │\n│ - estado: str               │\n│ - responsable: Usuario      │\n├─────────────────────────────┤\n│ + iniciar(): None           │\n│ + completar(): None         │\n│ + reasignar(): None         │\n└─────────────────────────────┘\nHaz lo mismo para el resto de objetos que hayas determinado.\n\nNo es necesario representar todavía las relaciones UML posibles.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1294,6 +1301,7 @@
     "text": "Ahora sí podemos programar.\nCrea el proyecto utilizando el entorno profesional que hemos visto en clase.\nLa estructura inicial será:\ntaskflow/\n├── .gitignore\n├── README.md\n├── pyproject.toml\n└── src/\n    └── taskflow/\n        ├── __init__.py\nCrea primero la clase Tarea y a continuación el resto.\nCrea también el repositorio correspondiente en Github.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1305,6 +1313,7 @@
     "text": "Durante el laboratorio utiliza Git para registrar la evolución del proyecto.\nNo esperes hasta el final.\nRealiza commits cuando completes partes significativas.\nPor ejemplo:\ngit add .\ngit commit -m \"chore: crear proyecto TaskFlow\"\nDespués:\ngit add .\ngit commit -m \"feat: crear clase Tarea\"\nY posteriormente:\ngit add .\ngit commit -m \"feat: implementar comportamiento de Tarea\"\nFinalmente:\ngit push\nConsulta el historial:\ngit log --oneline\nTu repositorio debe permitir observar cómo ha evolucionado el diseño.\n## Parte 9. La IA como analista\nEn este laboratorio vamos a utilizar IA, pero no para que nos diseñe y programe TaskFlow.\nPrimero realiza tu propio análisis.\nDespués puedes utilizar una IA para contrastarlo.\nUtiliza un prompt como:\nEstoy diseñando una aplicación de gestión de proyectos\nllamada TaskFlow.\n\nHe identificado estos objetos:\n\n- Proyecto\n- Usuario\n- Tarea\n\nPara cada uno he definido este estado:\n[PEGA AQUÍ TU PROPUESTA]\n\nY estos comportamientos:\n[PEGA AQUÍ TU PROPUESTA]\n\nAnaliza mi diseño como si fueras un analista de software.\n\nNo escribas código.\n\nIndica:\n1. qué decisiones parecen coherentes;\n2. qué responsabilidades podrían estar mal asignadas;\n3. qué información podría faltar;\n4. qué información podría sobrar;\n5. qué preguntas debería hacerme antes de programar.\n\nNo rediseñes la solución completa.\n\nSi no sabes algo, no te lo inventes.\nDespués compara:\nMI DISEÑO\n     │\n     ├── Coincidencias\n     │\n     ├── Diferencias\n     │\n     └── Decisiones que cambio\n\nLa IA no sustituye tu diseño.\n\n\nLa utilizamos para hacer preguntas y detectar posibles problemas.",
     "crumbs": [
       "🧪 Laboratorios",
+      "UD1",
       "UD1 · Lab 1 · Taskflow. Pensar antes de programar"
     ]
   },
@@ -1488,7 +1497,7 @@
     "href": "unidades/ud2/index.html#introducción-a-setter-controlar-las-modificaciones",
     "title": "UD2. Clases, objetos y encapsulación",
     "section": "Introducción a @setter: controlar las modificaciones",
-    "text": "Introducción a @setter: controlar las modificaciones\nEn el ejemplo anterior, la consulta funciona, pero si intentamos ejecutar tarea.titulo = \"Nuevo título\", Python lanzará un AttributeError: hemos definido una propiedad de solo lectura.\nSi queremos permitir la modificación, pero controlar qué valores se aceptan, añadimos un setter.\n\nValidar el título de una tarea\nclass Tarea:\n    def __init__(self, titulo):\n        self.titulo = titulo\n\n    @property\n    def titulo(self):\n        return self._titulo\n\n    @titulo.setter\n    def titulo(self, nuevo_titulo):\n        if not isinstance(nuevo_titulo, str):\n            raise ValueError(\"El título debe ser una cadena de texto\")\n\n        if not nuevo_titulo.strip():\n            raise ValueError(\"El título no puede estar vacío\")\n\n        self._titulo = nuevo_titulo.strip()\nObserva dos detalles:\n\nEn el constructor usamos self.titulo = titulo. Esto llama al setter, por lo que la validación se aplica también al crear la tarea.\nDentro del setter asignamos el valor a self._titulo, no a self.titulo. Si asignáramos a self.titulo, volveríamos a llamar al setter y provocaríamos una recursión.\n\n\n\n¿Qué sucede con cada valor?\n\n\n\n\n\n\n\n\nValor recibido\nResultado esperado\nMotivo\n\n\n\n\n\"Preparar el diseño\"\nSe acepta\nEs texto no vacío\n\n\n\"  Preparar el diseño  \"\nSe acepta y se eliminan los espacios exteriores\nSe utiliza strip()\n\n\n\"\"\nSe rechaza\nEl título está vacío\n\n\n\"   \"\nSe rechaza\nSolo contiene espacios\n\n\n25\nSe rechaza\nNo es una cadena de texto\n\n\n\n\n\n¿Qué es raise ValueError?\nraise permite lanzar una excepción cuando se incumple una condición. ValueError resulta apropiada cuando el tipo de dato puede ser correcto para la operación, pero su valor no cumple las reglas esperadas.\nif not nuevo_titulo.strip():\n    raise ValueError(\"El título no puede estar vacío\")\nCuando se incumple la condición, la ejecución normal se interrumpe y se produce la excepción. Si nadie la captura, el programa termina mostrando el error.",
+    "text": "Introducción a @setter: controlar las modificaciones\nEn el ejemplo anterior, la consulta funciona, pero si intentamos ejecutar tarea.titulo = \"Nuevo título\", Python lanzará un AttributeError: hemos definido una propiedad de solo lectura.\nSi queremos permitir la modificación, pero controlar qué valores se aceptan, añadimos un setter.\n\nValidar el título de una tarea\nclass Tarea:\n    def __init__(self, titulo):\n        self.titulo = titulo\n\n    @property\n    def titulo(self):\n        return self._titulo\n\n    @titulo.setter\n    def titulo(self, nuevo_titulo):\n        if not isinstance(nuevo_titulo, str):\n            raise ValueError(\"El título debe ser una cadena de texto\")\n\n        if not nuevo_titulo.strip():\n            raise ValueError(\"El título no puede estar vacío\")\n\n        self._titulo = nuevo_titulo.strip()\nObserva dos detalles:\n\nEn el constructor usamos self.titulo = titulo. Esto llama al setter, por lo que la validación se aplica también al crear la tarea.\nDentro del setter asignamos el valor a self._titulo, no a self.titulo. Si asignáramos a self.titulo, volveríamos a llamar al setter y provocaríamos una recursión.\n\n\n\n¿Qué sucede con cada valor?\n\n\n\n\n\n\n\n\nValor recibido\nResultado esperado\nMotivo\n\n\n\n\n\"Preparar el diseño\"\nSe acepta\nEs texto no vacío\n\n\n\"  Preparar el diseño  \"\nSe acepta y se eliminan los espacios exteriores\nSe utiliza strip()\n\n\n\"\"\nSe rechaza\nEl título está vacío\n\n\n\"   \"\nSe rechaza\nSolo contiene espacios\n\n\n25\nSe rechaza\nNo es una cadena de texto\n\n\n\n\n\n¿Qué es raise ValueError?\nraise permite lanzar una excepción cuando se incumple una condición. ValueError resulta apropiada cuando el tipo de dato puede ser correcto para la operación, pero su valor no cumple las reglas esperadas.\nif not nuevo_titulo.strip():\n    raise ValueError(\"El título no puede estar vacío\")\nCuando se incumple la condición, la ejecución normal se interrumpe y se produce la excepción. Si nadie la captura, el programa termina mostrando el error.\n\n\n\n\n\n\n\nTipAtención\n\n\n\nEstamos preparados para realizar el Laboratorio 1",
     "crumbs": [
       "📚 Unidades",
       "2-Clases, objetos y encapsulación"
@@ -1531,8 +1540,8 @@
     "objectID": "unidades/ud2/index.html#entregable",
     "href": "unidades/ud2/index.html#entregable",
     "title": "UD2. Clases, objetos y encapsulación",
-    "section": "9. Entregable",
-    "text": "9. Entregable\nEl alumnado actualizará el repositorio TaskFlow con:\n\nLa implementación de Tarea con la propiedad titulo validada.\nLas pruebas manuales realizadas y sus resultados.\nUn documento docs/ud2/sesion-03-propiedades.md que incluya las reglas de validación, los casos de prueba y una breve reflexión sobre el uso de la IA.",
+    "section": "12. Entregable",
+    "text": "12. Entregable\nEl repositorio SmartSpeaker debe incluir:\n\nLa clase Altavoz desarrollada en la sesión anterior.\nEl directorio tests/.\nEl archivo tests/test_altavoz.py con las pruebas implementadas.\nUn documento docs/ud2/sesion-04-testing.md que incluya:\n\nLas pruebas realizadas y qué comportamiento comprueba cada una.\nUn ejemplo de fallo intencionado y su corrección.\nDos pruebas propuestas con ayuda de IA y verificadas por el alumnado.\nUna breve reflexión sobre las limitaciones de las pruebas actuales.",
     "crumbs": [
       "📚 Unidades",
       "2-Clases, objetos y encapsulación"
@@ -1542,8 +1551,8 @@
     "objectID": "unidades/ud2/index.html#resumen-conceptual",
     "href": "unidades/ud2/index.html#resumen-conceptual",
     "title": "UD2. Clases, objetos y encapsulación",
-    "section": "10. Resumen conceptual",
-    "text": "10. Resumen conceptual\n\n\n\n\n\n\n\nConcepto\nPara qué sirve\n\n\n\n\n@property\nDefine una interfaz de consulta para un atributo\n\n\n@nombre.setter\nPermite controlar las modificaciones de una propiedad\n\n\n_nombre\nIndica por convención que un atributo está destinado al uso interno\n\n\nraise ValueError\nRechaza un valor que incumple una regla\n\n\nPropiedad de solo lectura\nPermite consultar un valor sin ofrecer un setter público\n\n\nCaso de prueba\nComprueba el comportamiento esperado ante una entrada concreta\n\n\n\nConexión con la siguiente sesión: ya sabemos establecer reglas y comprobar manualmente los resultados. En la sesión 4 introduciremos pytest para automatizar esas comprobaciones y detectar regresiones cuando evolucione TaskFlow.",
+    "section": "13. Resumen conceptual",
+    "text": "13. Resumen conceptual\n\n\n\n\n\n\n\nConcepto\nSignificado\n\n\n\n\nTesting automatizado\nEjecutar comprobaciones mediante código\n\n\npytest\nHerramienta que descubre y ejecuta pruebas Python\n\n\nassert\nComprueba si una condición se cumple\n\n\nFunción de prueba\nFunción que verifica un comportamiento\n\n\nTest que pasa\nLa condición comprobada se cumple\n\n\nTest que falla\nLa condición no se cumple o se produce un error durante la prueba\n\n\nArrange – Act – Assert\nEstructura para organizar una prueba\n\n\nRegresión\nError que aparece cuando un cambio rompe un comportamiento que antes funcionaba\n\n\n\nConexión con la siguiente sesión: ya sabemos escribir y ejecutar pruebas automatizadas para comprobar comportamientos válidos. En la sesión 5 trabajaremos con pruebas negativas, valores límite y excepciones utilizando pytest.raises.",
     "crumbs": [
       "📚 Unidades",
       "2-Clases, objetos y encapsulación"
@@ -1687,6 +1696,274 @@
       "🧪 Laboratorios",
       "UD2",
       "UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#por-qué-necesitamos-pruebas-automatizadas",
+    "href": "unidades/ud2/index.html#por-qué-necesitamos-pruebas-automatizadas",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "¿Por qué necesitamos pruebas automatizadas?",
+    "text": "¿Por qué necesitamos pruebas automatizadas?\nHemos implementado anteriormente la clase Altavoz. Entre otras cosas, establecimos que:\n\nEl nombre no puede estar vacío.\nEl volumen debe ser un entero entre 0 y 100.\nEl altavoz comienza apagado.\nEl estado cambia mediante los métodos encender() y apagar().\n\nPara comprobar que estas reglas se cumplen, hemos realizado pruebas manuales.\nPor ejemplo:\nfrom altavoz import Altavoz\n\naltavoz = Altavoz(\"Salón\", 30)\n\nprint(altavoz.nombre)\nprint(altavoz.volumen)\nprint(altavoz.estado)\n\naltavoz.encender()\n\nprint(altavoz.estado)\nUna persona tiene que ejecutar el programa, observar los resultados y decidir si son correctos.\nPero imaginemos que mañana modificamos el constructor o añadimos una funcionalidad. ¿Cómo sabemos que seguimos cumpliendo todas las reglas anteriores?\n\n\n\n\n\n\nTip(Mis notas) Preguntas para iniciar el debate\n\n\n\n\n¿Tenemos que repetir todas las comprobaciones cada vez que cambiamos el código?\n¿Qué ocurre si olvidamos comprobar alguna funcionalidad?\n¿Podríamos guardar las comprobaciones en el propio proyecto?\n¿Podría Python ejecutar esas comprobaciones automáticamente?\n\n\n\nLa idea que buscamos es que podemos escribir código cuyo objetivo no sea resolver una funcionalidad de la aplicación, sino comprobar que otra parte del código funciona correctamente.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#qué-es-pytest",
+    "href": "unidades/ud2/index.html#qué-es-pytest",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "¿Qué es pytest?",
+    "text": "¿Qué es pytest?\npytest es una herramienta de testing para Python que permite:\n\nDescubrir automáticamente las funciones de prueba.\nEjecutarlas.\nComprobar si los resultados son los esperados.\nMostrar información cuando una prueba falla.\n\nNo necesitamos crear una estructura compleja ni aprender una sintaxis especial para escribir las primeras pruebas. Podemos utilizar funciones normales de Python y la instrucción assert.\n\nNuestro primer ejemplo\nVamos a crear un proyecto con un único fichero operaciones.py:\ndef sumar(a, b):\n    return a + b\nEn main.py vamos a comprobar que funciona:\nfrom nombre-paquete.operaciones import sumar\n\ndef main() -&gt; None:\n    resultado = sumar(3, 5)\n    print(resultado)\n\nEl resultado esperado es 8\n\nVamos a crear nuestro primer test automatizado. Creamos la carpeta tests y dentro, el archivo test_operaciones.py:\nproyecto/\n├── src/nombre-paquete/\n│   ├── __init__.py\n│   └── operaciones.py\n│   └── main.py\n└── tests/\n    └── test_operaciones.py\nEscribimos el primer test:\nfrom nombre-paquete.operaciones import sumar\n\ndef test_sumar_dos_numeros():\n    resultado = sumar(3, 5)\n\n    assert resultado == 8\nPara ejecutar los test hacemos:\nuv run pytest\nExplicamos los elementos: - test_: indica a pytest que es una función de prueba. - sumar_dos_numeros: describe qué estamos comprobando. - resultado: almacena el valor devuelto por la función. - assert: comprueba que una condición se cumple. - resultado == 8: es la condición que esperamos que sea verdadera.\n¿Qué ocurre cuando el test falla?\nModificamos deliberadamente la función:\ndef sumar(a, b):\n    return a - b\nSi volvemos a ejecutar las pruebas con uv run pytest, veremos un fallo.\nPodemos ampliar los casos de prueba:\ndef test_sumar_dos_numeros_positivos():\n    assert sumar(3, 5) == 8\n\n\ndef test_sumar_dos_numeros_negativos():\n    assert sumar(-3, -5) == -8\n\n\ndef test_sumar_numero_positivo_y_negativo():\n    assert sumar(10, -4) == 6\n\n\ndef test_sumar_con_cero():\n    assert sumar(7, 0) == 7\n\n\ndef test_sumar_dos_ceros():\n    assert sumar(0, 0) == 0\n\n\n\n\n\n\nCaution\n\n\n\nSi da error en la ejecución de pytest, comprueba: - Que el nombre del paquete coincide con la ruta de importación. - Añade pytest como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.\nconda deactivate\nuv add --dev pytest\nuv run pytest",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#preparamos-pytest-en-nuestro-proyecto",
+    "href": "unidades/ud2/index.html#preparamos-pytest-en-nuestro-proyecto",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Preparamos pytest en nuestro proyecto",
+    "text": "Preparamos pytest en nuestro proyecto\nVamos a trabajar sobre el proyecto SmartSpeaker creado en el laboratorio anterior.\n\nPaso 1. Instalar pytest\nDesde el terminal, situándonos en la raíz del proyecto:\nuv add --dev pytest\nLa opción --dev indica que pytest es una dependencia de desarrollo: la necesitamos para trabajar y comprobar el proyecto, pero no para ejecutar la aplicación como producto final.\n\n\nPaso 2. Comprobar la instalación\nuv run pytest --version\nDebería aparecer la versión instalada.\n\n\nPaso 3. Organizar el proyecto\nVamos a separar el código de la aplicación y el código de las pruebas.\nDentro de tests/ crearemos el archivo test_altavoz.py.\nLa estructura quedará así:\nsmart-speaker/\n├── src/smart_speaker/\n│   └── ...\n└── tests/\n    └── test_altavoz.py\n\n\nConvenciones de pytest\npytest utiliza convenciones para localizar las pruebas automáticamente.\n\n\n\n\n\n\n\n\nElemento\nConvención\nEjemplo\n\n\n\n\nArchivo de pruebas\nEmpieza por test_ o termina en _test.py\ntest_altavoz.py\n\n\nFunción de prueba\nEmpieza por test_\ntest_altavoz_empieza_apagado()\n\n\nComprobación\nSe utiliza assert\nassert altavoz.estado == \"apagado\"\n\n\nEjecución\nSe lanza desde el terminal\nuv run pytest\n\n\n\nNo es necesario registrar manualmente cada prueba. Si respetamos estas convenciones, pytest puede encontrarlas.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#nuestra-primera-prueba-con-smartspeaker",
+    "href": "unidades/ud2/index.html#nuestra-primera-prueba-con-smartspeaker",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Nuestra primera prueba con SmartSpeaker",
+    "text": "Nuestra primera prueba con SmartSpeaker\nVamos a comprobar que un altavoz nuevo se crea con el nombre que le hemos proporcionado.\n\nPaso 1. Revisar la clase Altavoz\nEn altavoz.py debemos tener una implementación equivalente a esta:\nclass Altavoz:\n    def __init__(self, nombre: str, volumen: int):\n        self.nombre = nombre\n        self.volumen = volumen\n        self._estado = \"apagado\"\n\n    @property\n    def nombre(self) -&gt; str:\n        return self._nombre\n\n   ...\n\nEsto es un ejemplo, debes utilizar tu implementación.\n\n\n\nPaso 2. Crear nuestro primer test\nCreamos tests/test_altavoz.py:\nfrom altavoz import Altavoz\n\n\ndef test_altavoz_se_crea_con_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.nombre == \"Salón\"\n\n\nPaso 3. Ejecutar la prueba\nDesde la raíz del proyecto:\nuv run pytest\nSi todo está correctamente configurado, debería aparecer un resultado similar a este:\n============================= test session starts ==============================\ncollected 1 item\n\ntests/test_altavoz.py .                                                   [100%]\n\n============================== 1 passed ========================================\nEl punto (.) representa una prueba superada.\nUna prueba que pasa significa que la condición comprobada se cumple. No significa que hayamos comprobado toda la clase.\n\n\n¿Qué significa assert?\nassert comprueba si una expresión es verdadera.\nassert altavoz.nombre == \"Salón\"\nPodemos interpretar esta instrucción así:\n\nComprueba que el nombre del altavoz es exactamente “Salón”. Si no lo es, la prueba debe fallar.\n\nEjemplos:\nassert 5 == 5\nassert \"Salón\" == \"Salón\"\nassert True\nassert 10 &gt; 5\nTodas estas condiciones son verdaderas.\nEn cambio:\nassert 5 == 3\nprovocaría un fallo.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#cómo-se-organiza-una-prueba-arrange-act-assert",
+    "href": "unidades/ud2/index.html#cómo-se-organiza-una-prueba-arrange-act-assert",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Cómo se organiza una prueba: Arrange – Act – Assert",
+    "text": "Cómo se organiza una prueba: Arrange – Act – Assert\nAunque una prueba puede ser una función sencilla, es conveniente organizarla para que sea fácil de leer.\nUna estructura habitual es Arrange – Act – Assert (preparar, actuar y comprobar).\n\n\n\n\n\n\n\n\nFase\nQué hacemos\nEjemplo\n\n\n\n\nArrange\nPreparamos los datos y objetos necesarios\naltavoz = Altavoz(\"Salón\", 30)\n\n\nAct\nEjecutamos la operación que queremos comprobar\naltavoz.encender()\n\n\nAssert\nComprobamos el resultado\nassert altavoz.estado == \"encendido\"\n\n\n\nEjemplo completo:\ndef test_encender_altavoz():\n    # Arrange\n    altavoz = Altavoz(\"Salón\", 30)\n\n    # Act\n    altavoz.encender()\n\n    # Assert\n    assert altavoz.estado == \"encendido\"\nNo es obligatorio escribir comentarios en todas las pruebas, pero esta estructura ayuda a identificar qué estamos preparando, qué comportamiento estamos ejecutando y qué resultado esperamos.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#ampliamos-las-pruebas-de-smartspeaker",
+    "href": "unidades/ud2/index.html#ampliamos-las-pruebas-de-smartspeaker",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Ampliamos las pruebas de SmartSpeaker",
+    "text": "Ampliamos las pruebas de SmartSpeaker\nDuración: 15 minutos\nAhora vamos a comprobar distintos comportamientos de la clase.\nAñade las siguientes funciones a tests/test_altavoz.py:\nfrom altavoz import Altavoz\n\n\ndef test_altavoz_se_crea_con_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.nombre == \"Salón\"\n\n\ndef test_altavoz_se_crea_con_volumen():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.volumen == 30\n\n\ndef test_altavoz_empieza_apagado():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.estado == \"apagado\"\n\n\ndef test_nombre_elimina_espacios_exteriores():\n    altavoz = Altavoz(\"  Cocina  \", 20)\n\n    assert altavoz.nombre == \"Cocina\"\n\n\ndef test_se_puede_modificar_el_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    altavoz.nombre = \"Cocina\"\n\n    assert altavoz.nombre == \"Cocina\"\n\n\ndef test_se_puede_modificar_el_volumen():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    altavoz.volumen = 60\n\n    assert altavoz.volumen == 60\n\n\ndef test_encender_altavoz():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    altavoz.encender()\n\n    assert altavoz.estado == \"encendido\"\n\n\ndef test_apagar_altavoz():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    altavoz.encender()\n    altavoz.apagar()\n\n    assert altavoz.estado == \"apagado\"\nEjecuta todas las pruebas:\nuv run pytest\nSi la implementación es correcta, deberían pasar las ocho pruebas.\n\n¿Qué estamos comprobando?\n\n\n\n\n\n\n\nPrueba\nComportamiento verificado\n\n\n\n\ntest_altavoz_se_crea_con_nombre\nSe conserva el nombre inicial\n\n\ntest_altavoz_se_crea_con_volumen\nSe conserva el volumen inicial\n\n\ntest_altavoz_empieza_apagado\nEl estado inicial es correcto\n\n\ntest_nombre_elimina_espacios_exteriores\nSe normaliza el nombre\n\n\ntest_se_puede_modificar_el_nombre\nLa propiedad permite cambiar el nombre\n\n\ntest_se_puede_modificar_el_volumen\nLa propiedad permite cambiar el volumen\n\n\ntest_encender_altavoz\nEl método enciende el altavoz\n\n\ntest_apagar_altavoz\nEl método apaga el altavoz\n\n\n\nObserva que cada prueba comprueba un comportamiento concreto. Si una falla, será más sencillo localizar el problema.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#provocamos-un-fallo-intencionado",
+    "href": "unidades/ud2/index.html#provocamos-un-fallo-intencionado",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "9. Provocamos un fallo intencionado",
+    "text": "9. Provocamos un fallo intencionado\nDuración: 15 minutos\nUna parte importante del aprendizaje consiste en interpretar los fallos.\nVamos a provocar uno deliberadamente.\n\nPaso 1. Modificamos el estado inicial\nEn altavoz.py, cambiamos temporalmente:\nself._estado = \"apagado\"\npor:\nself._estado = \"encendido\"\n\n\nPaso 2. Ejecutamos las pruebas\nuv run pytest\nUna de las pruebas debería fallar:\nFAILED tests/test_altavoz.py::test_altavoz_empieza_apagado\n\nassert 'encendido' == 'apagado'\nEl formato exacto del mensaje puede variar según la versión de pytest, pero la información será equivalente.\n\n\nPaso 3. Interpretamos el fallo\nEl alumnado debe localizar:\n\nEl nombre de la prueba que ha fallado.\nEl archivo donde se encuentra.\nLa condición que se estaba comprobando.\nEl valor esperado.\nEl valor obtenido.\n\n\n\nPaso 4. Corregimos el error\nRestauramos el estado inicial:\nself._estado = \"apagado\"\nY volvemos a ejecutar:\nuv run pytest\nAhora las ocho pruebas deberían pasar.\n\n\nReflexión\n\n¿Qué error hemos detectado?\n¿Lo habríamos descubierto si no hubiéramos ejecutado manualmente esa funcionalidad?\n¿Por qué es útil conservar esta prueba aunque ya hayamos corregido el error?\n¿Qué ocurriría si en el futuro alguien volviera a modificar el estado inicial por equivocación?\n\nLa prueba queda en el proyecto y permitirá detectar automáticamente si ese comportamiento vuelve a romperse.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#ia-como-revisora-de-pruebas",
+    "href": "unidades/ud2/index.html#ia-como-revisora-de-pruebas",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "10. IA como revisora de pruebas",
+    "text": "10. IA como revisora de pruebas\nDuración: 12 minutos\nLa IA puede ayudarnos a identificar comportamientos que todavía no estamos comprobando.\nSin embargo, no debe decidir por nosotros si una prueba es correcta ni debemos asumir que ha ejecutado nuestro código.\n\nPrompt para revisar las pruebas\nEstoy desarrollando una clase Altavoz en Python y utilizo pytest.\n\nTe proporciono la implementación de la clase y las pruebas que he escrito.\n\nQuiero que actúes como revisor de testing.\n\n1. Indica qué comportamiento comprueba cada prueba.\n2. Detecta comportamientos importantes que todavía no están comprobados.\n3. Propón cuatro pruebas adicionales.\n4. Para cada prueba indica qué operación realizaría y qué resultado debería obtener.\n5. Evita repetir pruebas que comprueben exactamente lo mismo.\n6. No modifiques mi clase.\n7. No afirmes que las pruebas pasan si no las has ejecutado.\n\nNo introduzcas todavía fixtures, parametrización, mocks ni conceptos\navanzados de pytest.\n\nCódigo de Altavoz:\n[PEGA AQUÍ altavoz.py]\n\nPruebas actuales:\n[PEGA AQUÍ test_altavoz.py]\n\n\nActividad\n\n\n\n\n\n\n\nPaso\nAcción\n\n\n\n\n1\nEnviar a la IA la clase y las pruebas actuales\n\n\n2\nRevisar las cuatro propuestas\n\n\n3\nElegir dos pruebas que aporten comprobaciones nuevas\n\n\n4\nImplementarlas en test_altavoz.py\n\n\n5\nEjecutar uv run pytest\n\n\n6\nRegistrar si las pruebas pasan y si ha sido necesario corregir alguna propuesta\n\n\n\nEn esta sesión nos centraremos en pruebas de comportamientos válidos. Las pruebas negativas y la comprobación de excepciones se trabajarán con más profundidad en la siguiente sesión.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#ticket-de-salida",
+    "href": "unidades/ud2/index.html#ticket-de-salida",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "11. Ticket de salida",
+    "text": "11. Ticket de salida\nDuración: 8 minutos\nResponde individualmente:\n\n¿Qué diferencia hay entre ejecutar el programa y ejecutar una prueba automatizada?\n¿Para qué sirve pytest?\n¿Qué función cumple assert?\n¿Qué convenciones permiten a pytest descubrir las pruebas?\n¿Qué significa que una prueba pase? ¿Y que falle?\n¿Por qué es conveniente que cada prueba compruebe un comportamiento concreto?\n¿Qué error hemos detectado al modificar el estado inicial del altavoz?",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#qué-es-un-programa",
+    "href": "unidades/ud1/index.html#qué-es-un-programa",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "",
+    "text": "Un programa es un conjunto de instrucciones que un ordenador ejecuta para realizar una tarea.\nPor ejemplo, podemos pedirle a Python que muestre un mensaje:\nprint(\"Hola, mundo\")\nAl ejecutar el programa, veremos:\nHola, mundo\nLa instrucción print() permite mostrar información en la pantalla.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#las-instrucciones-se-ejecutan-en-orden",
+    "href": "unidades/ud1/index.html#las-instrucciones-se-ejecutan-en-orden",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "",
+    "text": "Observa este programa:\nprint(\"Preparando el proyecto\")\nprint(\"Creando la primera tarea\")\nprint(\"Proyecto iniciado\")\nPor defecto, Python ejecuta estas instrucciones de arriba hacia abajo.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#las-variables-permiten-guardar-información",
+    "href": "unidades/ud1/index.html#las-variables-permiten-guardar-información",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "",
+    "text": "Imagina que estamos creando un programa para gestionar tareas de un proyecto. Si queremos guardar el título podemos hacer algo así:\ntitulo = \"Diseñar la página de inicio\"\nprint(titulo)\nEn este ejemplo:\n\ntitulo es el nombre de la variable\n\"Diseñar la página de inicio\" es el texto que almacenamos.\nprint(titulo) muestra el valor guardado.",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud1/index.html#los-valores-pueden-ser-de-distintos-tipos",
+    "href": "unidades/ud1/index.html#los-valores-pueden-ser-de-distintos-tipos",
+    "title": "UD1. Python profesional y modelo orientado a objetos",
+    "section": "",
+    "text": "En una tarea podemos guardar información diferente:\ntitulo = \"Preparar documentación\"\nhoras = 3\ncompletada = False\n\nprint(titulo)\nprint(horas)\nprint(completada)\n\nstr: representa texto\nint: representa número enteros\nbool: representa un valor verdadero o falso.\n\n\nTodo esto lo veréis en otros módulos del curso de especialización, es sólo una toma de contacto antes de comenzar a pensar en Programación Orientada a Objetos",
+    "crumbs": [
+      "📚 Unidades",
+      "1-Python profesional y modelo orientado a objetos"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#atención",
+    "href": "unidades/ud2/index.html#atención",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Atención",
+    "text": "Atención\nEstamos preparados para realizar el Laboratorio 1",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "unidades/ud2/index.html#pruebas-manuales-y-automatizadas",
+    "href": "unidades/ud2/index.html#pruebas-manuales-y-automatizadas",
+    "title": "UD2. Clases, objetos y encapsulación",
+    "section": "Pruebas manuales y automatizadas",
+    "text": "Pruebas manuales y automatizadas\n\n\n\n\n\n\n\nPruebas manuales\nPruebas automatizadas\n\n\n\n\nUna persona ejecuta el programa y observa el resultado\nUna función ejecuta una comprobación\n\n\nHay que repetir las operaciones manualmente\nSe pueden ejecutar todas las pruebas con un comando\n\n\nLas comprobaciones pueden olvidarse\nLas comprobaciones quedan guardadas en el proyecto\n\n\nSon útiles para explorar el comportamiento\nSon útiles para verificar comportamientos conocidos\n\n\n\n\nUna prueba automatizada tampoco demuestra que el programa esté libre de errores. Comprueba que, para los casos que hemos definido, el comportamiento coincide con lo esperado.",
+    "crumbs": [
+      "📚 Unidades",
+      "2-Clases, objetos y encapsulación"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#fase-2.-pruebas-automatizadas-con-pytest",
+    "href": "laboratorios/ud2/lab2.html#fase-2.-pruebas-automatizadas-con-pytest",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "Fase 2. Pruebas automatizadas con pytest",
+    "text": "Fase 2. Pruebas automatizadas con pytest\n\n1. Contexto\nEn la primera fase del laboratorio has diseñado e implementado una clase Altavoz que representa un altavoz inteligente.\nHas definido sus atributos, establecido qué información puede consultarse y modificado y programado mecanismos para controlar su estado y validar los datos introducidos.\nSin embargo, ¿cómo puedes comprobar que la clase se comporta correctamente? ¿Cómo puedes detectar si una modificación rompe algo que antes funcionaba?\nEn esta fase incorporarás pruebas automatizadas con pytest para verificar el comportamiento de tu clase.\nNo se trata únicamente de comprobar que el programa funciona con un ejemplo, sino de diseñar diferentes situaciones que permitan detectar errores y comprobar que se respetan las reglas establecidas.\n\n\n2. Objetivos\nAl finalizar esta fase deberás ser capaz de:\n\nInstalar y configurar pytest en un proyecto Python gestionado con uv.\nCrear y ejecutar pruebas automatizadas.\nUtilizar assert para comprobar resultados.\nDiseñar pruebas para comprobar propiedades y métodos.\nComprobar que se rechazan los datos no válidos.\nInterpretar los resultados de ejecución de pytest.\nUtilizar IA como apoyo para identificar casos de prueba, sin delegar en ella la implementación ni la validación de las pruebas.\n\n\n\n3. Preparación del proyecto\nAñade pytest como dependencia de desarrollo:\nuv add --dev pytest\nComprueba que se ha instalado correctamente:\nuv run pytest --version\nOrganiza el proyecto con una estructura similar a esta:\nsmart-speaker/\n├── .gitignore\n├── pyproject.toml\n├── uv.lock\n├── altavoz.py\n├── main.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    └── laboratorio.md\nEl archivo altavoz.py debe contener la clase desarrollada en la primera fase.\nEl archivo test_altavoz.py contendrá las pruebas automatizadas. Recuerda que pytest identifica por defecto los archivos cuyos nombres empiezan por test_ y las funciones de prueba cuyos nombres también empiezan por test_.\n\n\n4. Primeras pruebas\nAntes de diseñar toda la batería de pruebas, crea una prueba sencilla que compruebe que el altavoz se construye correctamente.\nPor ejemplo, si has creado un altavoz llamado Salón, puedes comprobar que su propiedad nombre devuelve ese valor.\nfrom altavoz import Altavoz\n\n\ndef test_altavoz_se_crea_con_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.nombre == \"Salón\"\nEjecuta las pruebas desde la raíz del proyecto:\nuv run pytest\nAnaliza el resultado obtenido.\nDebes identificar: - Cuántas pruebas se han ejecutado. - Cuántas han superado la comprobación. - Qué información aparece cuando una prueba falla.\n\n\n5. Diseño de la batería de pruebas\nAhora debes diseñar una batería de pruebas que permita comprobar los requisitos de tu clase Altavoz.\nNo tienes que limitarte a copiar los ejemplos anteriores. Debes identificar qué comportamiento quieres comprobar, qué datos necesitas y cuál debería ser el resultado esperado.\n\n5.1. Pruebas de creación\nComprueba que un altavoz se crea correctamente.\nComo mínimo, debes verificar:\n\nQue se almacena correctamente el nombre.\nQue se almacena correctamente el volumen inicial.\nQue el estado inicial es apagado.\n\n\n\n5.2. Pruebas de propiedades\nComprueba que las propiedades permiten consultar y modificar correctamente los datos cuando corresponda.\nTen en cuenta las reglas establecidas en la primera fase:\n\nEl nombre debe ser una cadena no vacía.\nLos espacios al principio y al final del nombre deben eliminarse.\nEl volumen debe ser un número entero entre 0 y 100, ambos incluidos.\nEl estado debe poder consultarse, pero no modificarse directamente mediante su propiedad pública.\n\nDiseña pruebas que permitan comprobar tanto los casos válidos como los inválidos.\n\n\n5.3. Pruebas de comportamiento\nComprueba que los métodos de la clase modifican correctamente el estado del altavoz.\nComo mínimo, debes probar:\n\nQue encender() cambia el estado a encendido.\nQue apagar() cambia el estado a apagado.\nQue puedes apagar un altavoz después de haberlo encendido.\n\nPiensa si existen otros comportamientos que merezca la pena comprobar.\n\n\n5.4. Pruebas de validación y errores\nUna parte importante de las pruebas consiste en comprobar que el programa rechaza correctamente los datos que incumplen las reglas.\nDiseña pruebas para situaciones como:\n\n\n\nPropiedad\nDato de prueba\nComportamiento esperado\n\n\n\n\nNombre\n\"\"\nRechazar\n\n\nNombre\n\"   \"\nRechazar\n\n\nNombre\n25\nRechazar\n\n\nVolumen\n-1\nRechazar\n\n\nVolumen\n101\nRechazar\n\n\nVolumen\n\"50\"\nRechazar\n\n\nVolumen\nTrue\nRechazar\n\n\n\nPara comprobar que se produce una excepción, pytest proporciona pytest.raises().\nEjemplo:\nimport pytest\n\ndef test_nombre_vacio_no_es_valido():\n    with pytest.raises(ValueError):\n        Altavoz(\"\", 30)\nLa prueba solo se considera superada si se produce la excepción esperada.\nInvestiga cómo utilizar pytest.raises() para completar el resto de pruebas de validación.\nImportante: no basta con que el programa genere cualquier error. Debes comprobar que genera el tipo de excepción esperado.\n\n\n\n6. Prueba de robustez: provoca un fallo\nUna vez que tengas varias pruebas implementadas, realiza este experimento:\n\nEjecuta toda la batería de pruebas y comprueba que funciona.\nModifica temporalmente la implementación de Altavoz para introducir un error.\nEjecuta de nuevo pytest.\nIdentifica qué pruebas detectan el problema.\nExplica por qué esas pruebas han fallado.\nRestaura el código y comprueba que vuelven a superarse.\n\nPuedes introducir un error en una validación, en el valor inicial del estado o en alguno de los métodos.\nEl objetivo es comprobar que los tests permiten detectar regresiones, es decir, errores que aparecen cuando modificamos código que anteriormente funcionaba.\n\n\n7. IA como asistente de diseño de pruebas\nUtiliza una herramienta de IA para revisar la cobertura de tus pruebas.\nPuedes utilizar este prompt:\nEstoy desarrollando una clase Python llamada Altavoz.\n\nLa clase tiene las siguientes reglas:\n\n- El nombre debe ser una cadena no vacía y se eliminan los espacios exteriores.\n- El volumen debe ser un entero entre 0 y 100, ambos incluidos.\n- El estado inicial es \"apagado\".\n- El estado solo puede modificarse mediante los métodos encender() y apagar().\n- Los datos no válidos deben provocar ValueError.\n\nHe implementado pruebas automatizadas con pytest.\n\nVoy a proporcionarte el código de la clase y mis pruebas.\n\nQuiero que:\n\n1. Identifiques qué requisitos están cubiertos por las pruebas.\n2. Detectes comportamientos que no se están comprobando.\n3. Propongas nuevos casos de prueba positivos y negativos.\n4. Señales posibles errores en mis pruebas.\n\nNo reescribas el código ni las pruebas.\nNo afirmes que una prueba funciona si no la has ejecutado.\nExplica por qué cada caso de prueba propuesto sería útil.\nCompara las propuestas de la IA con tus pruebas actuales.\nNo tienes que incorporar automáticamente todas sus sugerencias: debes valorar si son pertinentes y justificarlas.\n\n\n8. Entregables\nLa entrega debe mantener esta estructura:\nsmart-speaker/\n├── altavoz.py\n├── main.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    ├── laboratorio.md\n    └── pruebas.md\nDebes entregar:\n\n\n\n\n\n\n\nArchivo\nContenido\n\n\n\n\naltavoz.py\nImplementación de la clase Altavoz\n\n\ntests/test_altavoz.py\nBatería de pruebas automatizadas\n\n\ndocs/pruebas.md\nDocumentación del diseño de las pruebas y análisis de resultados\n\n\ndocs/laboratorio.md\nDocumentación de la primera fase del laboratorio\n\n\n\nEl documento pruebas.md debe incluir:\n\nRelación de requisitos comprobados.\nDescripción de los principales casos de prueba.\nCaptura o salida de una ejecución correcta de pytest.\nEjemplo de una prueba que haya fallado al introducir un error deliberadamente.\nExplicación de qué ha permitido detectar ese fallo.\nReflexión sobre las sugerencias de la IA: cuáles has incorporado y cuáles has descartado, justificando las decisiones.\n\n\n\n9. Criterios de finalización\nConsideraremos terminada esta fase cuando:\n\nLa batería de pruebas se ejecute correctamente.\nSe comprueben los requisitos principales de la clase.\nExistan pruebas positivas y negativas.\nSe compruebe el comportamiento de los métodos.\nSe hayan provocado y analizado fallos intencionados.\nLa documentación permita entender qué se ha probado y qué resultados se han obtenido.\n\nRecuerda: que todos los tests pasen no demuestra que el programa esté libre de errores. Significa que, para los casos que has diseñado, el comportamiento observado coincide con el esperado."
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html",
+    "href": "laboratorios/ud2/lab2.html",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "En la primera fase del laboratorio has diseñado e implementado una clase Altavoz que representa un altavoz inteligente.\nHas definido sus atributos, establecido qué información puede consultarse y modificado y programado mecanismos para controlar su estado y validar los datos introducidos.\nSin embargo, ¿cómo puedes comprobar que la clase se comporta correctamente? ¿Cómo puedes detectar si una modificación rompe algo que antes funcionaba?\nEn esta fase incorporarás pruebas automatizadas con pytest para verificar el comportamiento de tu clase.\nNo se trata únicamente de comprobar que el programa funciona con un ejemplo, sino de diseñar diferentes situaciones que permitan detectar errores y comprobar que se respetan las reglas establecidas.\n\n\n\nAñade pytest como dependencia de desarrollo:\nuv add --dev pytest\nComprueba que se ha instalado correctamente:\nuv run pytest --version\nOrganiza el proyecto con una estructura similar a esta:\nsmart-speaker/\n├── .gitignore\n├── pyproject.toml\n├── uv.lock\n├── src/smart-speaker/\n│   ├── altavoz.py\n│   └── main.py\n│   └── __init__.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    └── laboratorio.md\nEl archivo altavoz.py debe contener la clase desarrollada en la primera fase.\nEl archivo test_altavoz.py contendrá las pruebas automatizadas. Recuerda que pytest identifica por defecto los archivos cuyos nombres empiezan por test_ y las funciones de prueba cuyos nombres también empiezan por test_.\n\n\n\nAntes de diseñar toda la batería de pruebas, crea una prueba sencilla que compruebe que el altavoz se construye correctamente.\nPor ejemplo, si has creado un altavoz llamado Salón, puedes comprobar que su propiedad nombre devuelve ese valor.\nfrom altavoz import Altavoz\n\n\ndef test_altavoz_se_crea_con_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.nombre == \"Salón\"\nEjecuta las pruebas desde la raíz del proyecto:\nuv run pytest\nAnaliza el resultado obtenido.\nDebes identificar: - Cuántas pruebas se han ejecutado. - Cuántas han superado la comprobación. - Qué información aparece cuando una prueba falla.\n\n\n\nAhora debes diseñar una batería de pruebas que permita comprobar los requisitos de tu clase Altavoz.\nNo tienes que limitarte a copiar los ejemplos anteriores. Debes identificar qué comportamiento quieres comprobar, qué datos necesitas y cuál debería ser el resultado esperado.\n\n\nComprueba que un altavoz se crea correctamente.\nComo mínimo, debes verificar:\n\nQue se almacena correctamente el nombre.\nQue se almacena correctamente el volumen inicial.\nQue el estado inicial es apagado.\n\n\n\n\nComprueba que las propiedades permiten consultar y modificar correctamente los datos cuando corresponda.\nTen en cuenta las reglas establecidas en la primera fase:\n\nEl nombre debe ser una cadena no vacía.\nLos espacios al principio y al final del nombre deben eliminarse.\nEl volumen debe ser un número entero entre 0 y 100, ambos incluidos.\nEl estado debe poder consultarse, pero no modificarse directamente mediante su propiedad pública.\n\nDiseña pruebas que permitan comprobar tanto los casos válidos como los inválidos.\n\n\n\nComprueba que los métodos de la clase modifican correctamente el estado del altavoz.\nComo mínimo, debes probar:\n\nQue encender() cambia el estado a encendido.\nQue apagar() cambia el estado a apagado.\nQue puedes apagar un altavoz después de haberlo encendido.\n\nPiensa si existen otros comportamientos que merezca la pena comprobar.\n\n\n\nUna parte importante de las pruebas consiste en comprobar que el programa rechaza correctamente los datos que incumplen las reglas.\nDiseña pruebas para situaciones como:\n\n\n\nPropiedad\nDato de prueba\nComportamiento esperado\n\n\n\n\nNombre\n\"\"\nRechazar\n\n\nNombre\n\"   \"\nRechazar\n\n\nNombre\n25\nRechazar\n\n\nVolumen\n-1\nRechazar\n\n\nVolumen\n101\nRechazar\n\n\nVolumen\n\"50\"\nRechazar\n\n\nVolumen\nTrue\nRechazar\n\n\n\nPara comprobar que se produce una excepción, pytest proporciona pytest.raises().\nEjemplo:\nimport pytest\n\ndef test_nombre_vacio_no_es_valido():\n    with pytest.raises(ValueError):\n        Altavoz(\"\", 30)\nLa prueba solo se considera superada si se produce la excepción esperada.\nInvestiga cómo utilizar pytest.raises() para completar el resto de pruebas de validación.\nImportante: no basta con que el programa genere cualquier error. Debes comprobar que genera el tipo de excepción esperado.\n\n\n\n\nUna vez que tengas varias pruebas implementadas, realiza este experimento:\n\nEjecuta toda la batería de pruebas y comprueba que funciona.\nModifica temporalmente la implementación de Altavoz para introducir un error.\nEjecuta de nuevo pytest.\nIdentifica qué pruebas detectan el problema.\nExplica por qué esas pruebas han fallado.\nRestaura el código y comprueba que vuelven a superarse.\n\nPuedes introducir un error en una validación, en el valor inicial del estado o en alguno de los métodos.\nEl objetivo es comprobar que los tests permiten detectar regresiones, es decir, errores que aparecen cuando modificamos código que anteriormente funcionaba.\n\n\n\nUtiliza una herramienta de IA para revisar la cobertura de tus pruebas.\nPuedes utilizar este prompt:\nEstoy desarrollando una clase Python llamada Altavoz.\n\nLa clase tiene las siguientes reglas:\n\n- El nombre debe ser una cadena no vacía y se eliminan los espacios exteriores.\n- El volumen debe ser un entero entre 0 y 100, ambos incluidos.\n- El estado inicial es \"apagado\".\n- El estado solo puede modificarse mediante los métodos encender() y apagar().\n- Los datos no válidos deben provocar ValueError.\n\nHe implementado pruebas automatizadas con pytest.\n\nVoy a proporcionarte el código de la clase y mis pruebas.\n\nQuiero que:\n\n1. Identifiques qué requisitos están cubiertos por las pruebas.\n2. Detectes comportamientos que no se están comprobando.\n3. Propongas nuevos casos de prueba positivos y negativos.\n4. Señales posibles errores en mis pruebas.\n\nNo reescribas el código ni las pruebas.\nNo afirmes que una prueba funciona si no la has ejecutado.\nExplica por qué cada caso de prueba propuesto sería útil.\nCompara las propuestas de la IA con tus pruebas actuales.\nNo tienes que incorporar automáticamente todas sus sugerencias: debes valorar si son pertinentes y justificarlas.\n\n\n\nLa entrega debe mantener esta estructura:\nsmart-speaker/\n├── src/smart-speaker/\n│   ├── altavoz.py\n│   └── main.py\n│   └── __init__.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    ├── laboratorio.md\n    └── pruebas.md\nDebes entregar:\n\n\n\n\n\n\n\nArchivo\nContenido\n\n\n\n\naltavoz.py\nImplementación de la clase Altavoz\n\n\ntests/test_altavoz.py\nBatería de pruebas automatizadas\n\n\ndocs/pruebas.md\nDocumentación del diseño de las pruebas y análisis de resultados\n\n\ndocs/laboratorio.md\nDocumentación de la primera fase del laboratorio\n\n\n\nEl documento pruebas.md debe incluir:\n\nRelación de requisitos comprobados.\nDescripción de los principales casos de prueba.\nCaptura o salida de una ejecución correcta de pytest.\nEjemplo de una prueba que haya fallado al introducir un error deliberadamente.\nExplicación de qué ha permitido detectar ese fallo.\nReflexión sobre las sugerencias de la IA: cuáles has incorporado y cuáles has descartado, justificando las decisiones.\n\n\n\n\n\n\n\nTip\n\n\n\nRecuerda: que todos los tests pasen no demuestra que el programa esté libre de errores. Significa que, para los casos que has diseñado, el comportamiento observado coincide con el esperado.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#contexto",
+    "href": "laboratorios/ud2/lab2.html#contexto",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "En la primera fase del laboratorio has diseñado e implementado una clase Altavoz que representa un altavoz inteligente.\nHas definido sus atributos, establecido qué información puede consultarse y modificado y programado mecanismos para controlar su estado y validar los datos introducidos.\nSin embargo, ¿cómo puedes comprobar que la clase se comporta correctamente? ¿Cómo puedes detectar si una modificación rompe algo que antes funcionaba?\nEn esta fase incorporarás pruebas automatizadas con pytest para verificar el comportamiento de tu clase.\nNo se trata únicamente de comprobar que el programa funciona con un ejemplo, sino de diseñar diferentes situaciones que permitan detectar errores y comprobar que se respetan las reglas establecidas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#preparación-del-proyecto",
+    "href": "laboratorios/ud2/lab2.html#preparación-del-proyecto",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "Añade pytest como dependencia de desarrollo:\nuv add --dev pytest\nComprueba que se ha instalado correctamente:\nuv run pytest --version\nOrganiza el proyecto con una estructura similar a esta:\nsmart-speaker/\n├── .gitignore\n├── pyproject.toml\n├── uv.lock\n├── src/smart-speaker/\n│   ├── altavoz.py\n│   └── main.py\n│   └── __init__.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    └── laboratorio.md\nEl archivo altavoz.py debe contener la clase desarrollada en la primera fase.\nEl archivo test_altavoz.py contendrá las pruebas automatizadas. Recuerda que pytest identifica por defecto los archivos cuyos nombres empiezan por test_ y las funciones de prueba cuyos nombres también empiezan por test_.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#primeras-pruebas",
+    "href": "laboratorios/ud2/lab2.html#primeras-pruebas",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "Antes de diseñar toda la batería de pruebas, crea una prueba sencilla que compruebe que el altavoz se construye correctamente.\nPor ejemplo, si has creado un altavoz llamado Salón, puedes comprobar que su propiedad nombre devuelve ese valor.\nfrom altavoz import Altavoz\n\n\ndef test_altavoz_se_crea_con_nombre():\n    altavoz = Altavoz(\"Salón\", 30)\n\n    assert altavoz.nombre == \"Salón\"\nEjecuta las pruebas desde la raíz del proyecto:\nuv run pytest\nAnaliza el resultado obtenido.\nDebes identificar: - Cuántas pruebas se han ejecutado. - Cuántas han superado la comprobación. - Qué información aparece cuando una prueba falla.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#diseño-de-la-batería-de-pruebas",
+    "href": "laboratorios/ud2/lab2.html#diseño-de-la-batería-de-pruebas",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "Ahora debes diseñar una batería de pruebas que permita comprobar los requisitos de tu clase Altavoz.\nNo tienes que limitarte a copiar los ejemplos anteriores. Debes identificar qué comportamiento quieres comprobar, qué datos necesitas y cuál debería ser el resultado esperado.\n\n\nComprueba que un altavoz se crea correctamente.\nComo mínimo, debes verificar:\n\nQue se almacena correctamente el nombre.\nQue se almacena correctamente el volumen inicial.\nQue el estado inicial es apagado.\n\n\n\n\nComprueba que las propiedades permiten consultar y modificar correctamente los datos cuando corresponda.\nTen en cuenta las reglas establecidas en la primera fase:\n\nEl nombre debe ser una cadena no vacía.\nLos espacios al principio y al final del nombre deben eliminarse.\nEl volumen debe ser un número entero entre 0 y 100, ambos incluidos.\nEl estado debe poder consultarse, pero no modificarse directamente mediante su propiedad pública.\n\nDiseña pruebas que permitan comprobar tanto los casos válidos como los inválidos.\n\n\n\nComprueba que los métodos de la clase modifican correctamente el estado del altavoz.\nComo mínimo, debes probar:\n\nQue encender() cambia el estado a encendido.\nQue apagar() cambia el estado a apagado.\nQue puedes apagar un altavoz después de haberlo encendido.\n\nPiensa si existen otros comportamientos que merezca la pena comprobar.\n\n\n\nUna parte importante de las pruebas consiste en comprobar que el programa rechaza correctamente los datos que incumplen las reglas.\nDiseña pruebas para situaciones como:\n\n\n\nPropiedad\nDato de prueba\nComportamiento esperado\n\n\n\n\nNombre\n\"\"\nRechazar\n\n\nNombre\n\"   \"\nRechazar\n\n\nNombre\n25\nRechazar\n\n\nVolumen\n-1\nRechazar\n\n\nVolumen\n101\nRechazar\n\n\nVolumen\n\"50\"\nRechazar\n\n\nVolumen\nTrue\nRechazar\n\n\n\nPara comprobar que se produce una excepción, pytest proporciona pytest.raises().\nEjemplo:\nimport pytest\n\ndef test_nombre_vacio_no_es_valido():\n    with pytest.raises(ValueError):\n        Altavoz(\"\", 30)\nLa prueba solo se considera superada si se produce la excepción esperada.\nInvestiga cómo utilizar pytest.raises() para completar el resto de pruebas de validación.\nImportante: no basta con que el programa genere cualquier error. Debes comprobar que genera el tipo de excepción esperado.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#prueba-de-robustez-provoca-un-fallo",
+    "href": "laboratorios/ud2/lab2.html#prueba-de-robustez-provoca-un-fallo",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "Una vez que tengas varias pruebas implementadas, realiza este experimento:\n\nEjecuta toda la batería de pruebas y comprueba que funciona.\nModifica temporalmente la implementación de Altavoz para introducir un error.\nEjecuta de nuevo pytest.\nIdentifica qué pruebas detectan el problema.\nExplica por qué esas pruebas han fallado.\nRestaura el código y comprueba que vuelven a superarse.\n\nPuedes introducir un error en una validación, en el valor inicial del estado o en alguno de los métodos.\nEl objetivo es comprobar que los tests permiten detectar regresiones, es decir, errores que aparecen cuando modificamos código que anteriormente funcionaba.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#ia-como-asistente-de-diseño-de-pruebas",
+    "href": "laboratorios/ud2/lab2.html#ia-como-asistente-de-diseño-de-pruebas",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "Utiliza una herramienta de IA para revisar la cobertura de tus pruebas.\nPuedes utilizar este prompt:\nEstoy desarrollando una clase Python llamada Altavoz.\n\nLa clase tiene las siguientes reglas:\n\n- El nombre debe ser una cadena no vacía y se eliminan los espacios exteriores.\n- El volumen debe ser un entero entre 0 y 100, ambos incluidos.\n- El estado inicial es \"apagado\".\n- El estado solo puede modificarse mediante los métodos encender() y apagar().\n- Los datos no válidos deben provocar ValueError.\n\nHe implementado pruebas automatizadas con pytest.\n\nVoy a proporcionarte el código de la clase y mis pruebas.\n\nQuiero que:\n\n1. Identifiques qué requisitos están cubiertos por las pruebas.\n2. Detectes comportamientos que no se están comprobando.\n3. Propongas nuevos casos de prueba positivos y negativos.\n4. Señales posibles errores en mis pruebas.\n\nNo reescribas el código ni las pruebas.\nNo afirmes que una prueba funciona si no la has ejecutado.\nExplica por qué cada caso de prueba propuesto sería útil.\nCompara las propuestas de la IA con tus pruebas actuales.\nNo tienes que incorporar automáticamente todas sus sugerencias: debes valorar si son pertinentes y justificarlas.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+    ]
+  },
+  {
+    "objectID": "laboratorios/ud2/lab2.html#entregables",
+    "href": "laboratorios/ud2/lab2.html#entregables",
+    "title": "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest",
+    "section": "",
+    "text": "La entrega debe mantener esta estructura:\nsmart-speaker/\n├── src/smart-speaker/\n│   ├── altavoz.py\n│   └── main.py\n│   └── __init__.py\n├── tests/\n│   └── test_altavoz.py\n└── docs/\n    ├── laboratorio.md\n    └── pruebas.md\nDebes entregar:\n\n\n\n\n\n\n\nArchivo\nContenido\n\n\n\n\naltavoz.py\nImplementación de la clase Altavoz\n\n\ntests/test_altavoz.py\nBatería de pruebas automatizadas\n\n\ndocs/pruebas.md\nDocumentación del diseño de las pruebas y análisis de resultados\n\n\ndocs/laboratorio.md\nDocumentación de la primera fase del laboratorio\n\n\n\nEl documento pruebas.md debe incluir:\n\nRelación de requisitos comprobados.\nDescripción de los principales casos de prueba.\nCaptura o salida de una ejecución correcta de pytest.\nEjemplo de una prueba que haya fallado al introducir un error deliberadamente.\nExplicación de qué ha permitido detectar ese fallo.\nReflexión sobre las sugerencias de la IA: cuáles has incorporado y cuáles has descartado, justificando las decisiones.\n\n\n\n\n\n\n\nTip\n\n\n\nRecuerda: que todos los tests pasen no demuestra que el programa esté libre de errores. Significa que, para los casos que has diseñado, el comportamiento observado coincide con el esperado.",
+    "crumbs": [
+      "🧪 Laboratorios",
+      "UD2",
+      "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
     ]
   }
 ]

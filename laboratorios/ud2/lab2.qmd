@@ -1,0 +1,248 @@
+---
+title: "UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest"
+---
+
+# SmartSpeaker: pruebas automatizadas con Pytest
+
+## Contexto
+
+En la primera fase del laboratorio has diseñado e implementado una clase `Altavoz` que representa un altavoz inteligente.
+
+Has definido sus atributos, establecido qué información puede consultarse y modificado y programado mecanismos para controlar su estado y validar los datos introducidos.
+
+Sin embargo, ¿cómo puedes comprobar que la clase se comporta correctamente? ¿Cómo puedes detectar si una modificación rompe algo que antes funcionaba?
+
+En esta fase incorporarás **pruebas automatizadas con pytest** para verificar el comportamiento de tu clase.
+
+No se trata únicamente de comprobar que el programa funciona con un ejemplo, sino de diseñar diferentes situaciones que permitan detectar errores y comprobar que se respetan las reglas establecidas.
+
+## Preparación del proyecto
+
+Añade pytest como dependencia de desarrollo:
+
+```bash
+uv add --dev pytest
+```
+
+Comprueba que se ha instalado correctamente:
+
+```bash
+uv run pytest --version
+```
+
+Organiza el proyecto con una estructura similar a esta:
+
+```text
+smart-speaker/
+├── .gitignore
+├── pyproject.toml
+├── uv.lock
+├── src/smart-speaker/
+│   ├── altavoz.py
+│   └── main.py
+│   └── __init__.py
+├── tests/
+│   └── test_altavoz.py
+└── docs/
+    └── laboratorio.md
+```
+
+El archivo `altavoz.py` debe contener la clase desarrollada en la primera fase.
+
+El archivo `test_altavoz.py` contendrá las pruebas automatizadas. Recuerda que pytest identifica por defecto los archivos cuyos nombres empiezan por `test_` y las funciones de prueba cuyos nombres también empiezan por `test_`.
+
+## Primeras pruebas
+
+Antes de diseñar toda la batería de pruebas, crea una prueba sencilla que compruebe que el altavoz se construye correctamente.
+
+Por ejemplo, si has creado un altavoz llamado `Salón`, puedes comprobar que su propiedad `nombre` devuelve ese valor.
+
+```python
+from altavoz import Altavoz
+
+
+def test_altavoz_se_crea_con_nombre():
+    altavoz = Altavoz("Salón", 30)
+
+    assert altavoz.nombre == "Salón"
+```
+
+Ejecuta las pruebas desde la raíz del proyecto:
+
+```bash
+uv run pytest
+```
+
+Analiza el resultado obtenido.
+
+Debes identificar:
+- Cuántas pruebas se han ejecutado.
+- Cuántas han superado la comprobación.
+- Qué información aparece cuando una prueba falla.
+
+## Diseño de la batería de pruebas
+
+Ahora debes diseñar una batería de pruebas que permita comprobar los requisitos de tu clase `Altavoz`.
+
+No tienes que limitarte a copiar los ejemplos anteriores. Debes identificar qué comportamiento quieres comprobar, qué datos necesitas y cuál debería ser el resultado esperado.
+
+### Pruebas de creación
+
+Comprueba que un altavoz se crea correctamente.
+
+Como mínimo, debes verificar:
+
+- Que se almacena correctamente el nombre.
+- Que se almacena correctamente el volumen inicial.
+- Que el estado inicial es `apagado`.
+
+### Pruebas de propiedades
+
+Comprueba que las propiedades permiten consultar y modificar correctamente los datos cuando corresponda.
+
+Ten en cuenta las reglas establecidas en la primera fase:
+
+- El nombre debe ser una cadena no vacía.
+- Los espacios al principio y al final del nombre deben eliminarse.
+- El volumen debe ser un número entero entre 0 y 100, ambos incluidos.
+- El estado debe poder consultarse, pero no modificarse directamente mediante su propiedad pública.
+
+Diseña pruebas que permitan comprobar tanto los casos válidos como los inválidos.
+
+### Pruebas de comportamiento
+
+Comprueba que los métodos de la clase modifican correctamente el estado del altavoz.
+
+Como mínimo, debes probar:
+
+- Que `encender()` cambia el estado a `encendido`.
+- Que `apagar()` cambia el estado a `apagado`.
+- Que puedes apagar un altavoz después de haberlo encendido.
+
+Piensa si existen otros comportamientos que merezca la pena comprobar.
+
+### Pruebas de validación y errores
+
+Una parte importante de las pruebas consiste en comprobar que el programa rechaza correctamente los datos que incumplen las reglas.
+
+Diseña pruebas para situaciones como:
+
+| Propiedad | Dato de prueba | Comportamiento esperado |
+|---|---|---|
+| Nombre | `""` | Rechazar |
+| Nombre | `"   "` | Rechazar |
+| Nombre | `25` | Rechazar |
+| Volumen | `-1` | Rechazar |
+| Volumen | `101` | Rechazar |
+| Volumen | `"50"` | Rechazar |
+| Volumen | `True` | Rechazar |
+
+Para comprobar que se produce una excepción, pytest proporciona `pytest.raises()`.
+
+Ejemplo:
+
+```python
+import pytest
+
+def test_nombre_vacio_no_es_valido():
+    with pytest.raises(ValueError):
+        Altavoz("", 30)
+```
+
+La prueba solo se considera superada si se produce la excepción esperada.
+
+Investiga cómo utilizar `pytest.raises()` para completar el resto de pruebas de validación.
+
+**Importante:** no basta con que el programa genere cualquier error. Debes comprobar que genera el tipo de excepción esperado.
+
+## Prueba de robustez: provoca un fallo
+
+Una vez que tengas varias pruebas implementadas, realiza este experimento:
+
+1. Ejecuta toda la batería de pruebas y comprueba que funciona.
+2. Modifica temporalmente la implementación de `Altavoz` para introducir un error.
+3. Ejecuta de nuevo pytest.
+4. Identifica qué pruebas detectan el problema.
+5. Explica por qué esas pruebas han fallado.
+6. Restaura el código y comprueba que vuelven a superarse.
+
+Puedes introducir un error en una validación, en el valor inicial del estado o en alguno de los métodos.
+
+El objetivo es comprobar que los tests permiten detectar regresiones, es decir, errores que aparecen cuando modificamos código que anteriormente funcionaba.
+
+## IA como asistente de diseño de pruebas
+
+Utiliza una herramienta de IA para revisar la cobertura de tus pruebas.
+
+Puedes utilizar este prompt:
+
+```text
+Estoy desarrollando una clase Python llamada Altavoz.
+
+La clase tiene las siguientes reglas:
+
+- El nombre debe ser una cadena no vacía y se eliminan los espacios exteriores.
+- El volumen debe ser un entero entre 0 y 100, ambos incluidos.
+- El estado inicial es "apagado".
+- El estado solo puede modificarse mediante los métodos encender() y apagar().
+- Los datos no válidos deben provocar ValueError.
+
+He implementado pruebas automatizadas con pytest.
+
+Voy a proporcionarte el código de la clase y mis pruebas.
+
+Quiero que:
+
+1. Identifiques qué requisitos están cubiertos por las pruebas.
+2. Detectes comportamientos que no se están comprobando.
+3. Propongas nuevos casos de prueba positivos y negativos.
+4. Señales posibles errores en mis pruebas.
+
+No reescribas el código ni las pruebas.
+No afirmes que una prueba funciona si no la has ejecutado.
+Explica por qué cada caso de prueba propuesto sería útil.
+```
+
+Compara las propuestas de la IA con tus pruebas actuales.
+
+No tienes que incorporar automáticamente todas sus sugerencias: debes valorar si son pertinentes y justificarlas.
+
+## Entregables
+
+La entrega debe mantener esta estructura:
+
+```text
+smart-speaker/
+├── src/smart-speaker/
+│   ├── altavoz.py
+│   └── main.py
+│   └── __init__.py
+├── tests/
+│   └── test_altavoz.py
+└── docs/
+    ├── laboratorio.md
+    └── pruebas.md
+```
+
+Debes entregar:
+
+| Archivo | Contenido |
+|---|---|
+| `altavoz.py` | Implementación de la clase Altavoz |
+| `tests/test_altavoz.py` | Batería de pruebas automatizadas |
+| `docs/pruebas.md` | Documentación del diseño de las pruebas y análisis de resultados |
+| `docs/laboratorio.md` | Documentación de la primera fase del laboratorio |
+
+El documento `pruebas.md` debe incluir:
+
+- Relación de requisitos comprobados.
+- Descripción de los principales casos de prueba.
+- Captura o salida de una ejecución correcta de pytest.
+- Ejemplo de una prueba que haya fallado al introducir un error deliberadamente.
+- Explicación de qué ha permitido detectar ese fallo.
+- Reflexión sobre las sugerencias de la IA: cuáles has incorporado y cuáles has descartado, justificando las decisiones.
+
+:::{.callout-tip}
+**Recuerda:** que todos los tests pasen no demuestra que el programa esté libre de errores. Significa que, para los casos que has diseñado, el comportamiento observado coincide con el esperado.
+:::
+
