@@ -791,13 +791,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(altavoz.estado)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Una persona tiene que ejecutar el programa, observar los resultados y decidir si son correctos.</p>
 <p>Pero imaginemos que mañana modificamos el constructor o añadimos una funcionalidad. ¿Cómo sabemos que seguimos cumpliendo todas las reglas anteriores?</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>(Mis notas) Preguntas para iniciar el debate
+<span class="screen-reader-only">Caution</span>(Mis notas) Preguntas para iniciar el debate
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -889,7 +889,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> resultado <span class="op">==</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para ejecutar los test hacemos:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Explicamos los elementos: - test_: indica a pytest que es una función de prueba. - sumar_dos_numeros: describe qué estamos comprobando. - resultado: almacena el valor devuelto por la función. - assert: comprueba que una condición se cumple. - resultado == 8: es la condición que esperamos que sea verdadera.</p>
+<p>Explicamos los elementos:</p>
+<ul>
+<li><code>test_</code>: indica a pytest que es una función de prueba.</li>
+<li><code>sumar_dos_numeros</code>: describe qué estamos comprobando.</li>
+<li><code>resultado</code>: almacena el valor devuelto por la función.</li>
+<li><code>assert</code>: comprueba que una condición se cumple.</li>
+<li><code>resultado == 8</code>: es la condición que esperamos que sea verdadera.</li>
+</ul>
 <p><strong>¿Qué ocurre cuando el test falla?</strong></p>
 <p>Modificamos deliberadamente la función:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sumar(a, b):</span>
@@ -914,17 +921,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_sumar_dos_ceros():</span>
 <span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> sumar(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si da error en la ejecución de pytest, comprueba: - Que el nombre del paquete coincide con la ruta de importación. - Añade <code>pytest</code> como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.</p>
+<p>Si da error en la ejecución de pytest, comprueba:</p>
+<ul>
+<li>Que el nombre del paquete coincide con la ruta de importación.</li>
+<li>Añade <code>pytest</code> como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.</li>
+</ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> add <span class="at">--dev</span> pytest</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run pytest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

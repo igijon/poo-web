@@ -412,7 +412,7 @@ Una persona tiene que ejecutar el programa, observar los resultados y decidir si
 Pero imaginemos que mañana modificamos el constructor o añadimos una funcionalidad. ¿Cómo sabemos que seguimos cumpliendo todas las reglas anteriores?
 
 :::{.content-visible when-profile="docente"}
-:::{.callout-tip}
+:::{.callout-caution}
 ### (Mis notas) Preguntas para iniciar el debate
 
 1. ¿Tenemos que repetir todas las comprobaciones cada vez que cambiamos el código?
@@ -497,11 +497,12 @@ uv run pytest
 ```
 
 Explicamos los elementos:
-- test_: indica a pytest que es una función de prueba.
-- sumar_dos_numeros: describe qué estamos comprobando.
-- resultado: almacena el valor devuelto por la función.
-- assert: comprueba que una condición se cumple.
-- resultado == 8: es la condición que esperamos que sea verdadera.
+
+- `test_`: indica a pytest que es una función de prueba.
+- `sumar_dos_numeros`: describe qué estamos comprobando.
+- `resultado`: almacena el valor devuelto por la función.
+- `assert`: comprueba que una condición se cumple.
+- `resultado == 8`: es la condición que esperamos que sea verdadera.
 
 **¿Qué ocurre cuando el test falla?**
 
@@ -536,8 +537,9 @@ def test_sumar_con_cero():
 def test_sumar_dos_ceros():
     assert sumar(0, 0) == 0
 ```
-:::{.callout-caution}
+:::{.callout-warning}
 Si da error en la ejecución de pytest, comprueba:
+
 - Que el nombre del paquete coincide con la ruta de importación.
 - Añade `pytest` como dependencia de desarrollo para que no lo coja de Anaconda si está instalado.
 ```bash
