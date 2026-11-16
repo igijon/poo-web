@@ -38,7 +38,9 @@ jobs:
       - name: Install PlantUML
         run: |
           wget https://github.com/plantuml/plantuml/releases/download/v1.2026.10/plantuml-1.2026.10.jar \
-            -O /usr/local/lib/plantuml.jar
+            -O plantuml.jar
+
+          sudo mv plantuml.jar /usr/local/lib/plantuml.jar
 
           sudo tee /usr/local/bin/plantuml > /dev/null <<'EOF'
           #!/bin/bash
