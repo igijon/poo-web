@@ -1,3 +1,4 @@
+
 name: Publish Quarto
 
 on:
@@ -10,38 +11,51 @@ permissions:
   id-token: write
 
 jobs:
-
   build-deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      # Instalar Java 21 LTS
       - name: Install Java
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y default-jre
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
+      # Instalar Graphviz
       - name: Install Graphviz
         run: |
+          sudo apt-get update
           sudo apt-get install -y graphviz
 
+      # Instalar PlantUML actualizado
       - name: Install PlantUML
         run: |
-          sudo apt-get install -y plantuml
+          wget https://github.com/plantuml/plantuml/releases/download/v1.2026.10/plantuml-1.2026.10.jar \
+            -O /usr/local/lib/plantuml.jar
 
+          sudo tee /usr/local/bin/plantuml > /dev/null <<'EOF'
+          #!/bin/bash
+          java -jar /usr/local/lib/plantuml.jar "$@"
+          EOF
+
+          sudo chmod +x /usr/local/bin/plantuml
+
+      # Comprobar herramientas
       - name: Check PlantUML
         run: |
           java -version
           dot -V
           plantuml -version
+          plantuml -testdot
 
+      # Renderizar Quarto
       - name: Render
         uses: quarto-dev/quarto-actions/render@v2
 
