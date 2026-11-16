@@ -1,0 +1,106 @@
+---
+title: "UD2 · Lab 3 · La baraja"
+---
+
+:::{.callout-note}
+RA1 (Se evalúa un 15% de todos los CCEE del RA)
+
+RA2 (Se evalúa un 10% de todos los CCEE del RA)
+:::
+
+# Laboratorio: «La baraja»
+
+Crea un archivo `baraja.py` con dos clases y haz pasar todos los tests de `test_baraja.py`.
+
+## Clase `Carta`
+
+- `Carta(valor, palo)`. El valor es un número de 1 a 12; si no, `ValueError`. (Usa property y setter, como ya sabes.)
+- Palos válidos: `'oros'`, `'copas'`, `'espadas'`, `'bastos'`.
+- `__str__` → `5 de oros`
+- `__repr__` → `Carta(5, 'oros')`
+- Dos cartas son iguales si tienen el mismo valor y el mismo palo. Recuerda `__hash__`.
+- Se ordenan por valor (`__lt__`).
+
+## Clase `Mazo`
+
+- `Mazo()` se crea con las 48 cartas (4 palos × 12 valores).
+- `robar()` quita y devuelve la última carta. Si el mazo está vacío, `ValueError('El mazo está vacío')`.
+- `len(mazo)`, `for carta in mazo` y `carta in mazo` deben funcionar.
+
+## Ampliaciones
+
+Investiga las siguientes ampliaciones:
+
+1. `mezclar()` con `random.shuffle`.
+2. Un juego sencillo de «mayor o menor»: se roba una carta, el jugador apuesta si la siguiente es mayor o menor y se comparan con `<`.
+3. `__add__` para unir dos mazos.
+
+## Tests (`test_baraja.py`)
+
+Deben pasar los siguientes test:
+
+```python
+import pytest
+from baraja import Carta, Mazo
+
+
+def test_str_de_carta():
+    assert str(Carta(5, 'oros')) == '5 de oros'
+
+
+def test_repr_de_carta():
+    assert repr(Carta(5, 'oros')) == "Carta(5, 'oros')"
+
+
+def test_cartas_iguales():
+    assert Carta(5, 'oros') == Carta(5, 'oros')
+    assert Carta(5, 'oros') != Carta(5, 'copas')
+
+
+def test_cartas_en_set_sin_duplicados():
+    assert len({Carta(5, 'oros'), Carta(5, 'oros')}) == 1
+
+
+def test_orden_por_valor():
+    cartas = [Carta(9, 'oros'), Carta(2, 'copas'), Carta(5, 'bastos')]
+    assert [c.valor for c in sorted(cartas)] == [2, 5, 9]
+
+
+def test_valor_fuera_de_rango():
+    with pytest.raises(ValueError):
+        Carta(13, 'oros')
+
+
+def test_mazo_nuevo_tiene_48_cartas():
+    assert len(Mazo()) == 48
+
+
+def test_robar_quita_una_carta():
+    mazo = Mazo()
+    carta = mazo.robar()
+    assert len(mazo) == 47
+    assert carta not in mazo
+
+
+def test_in_funciona_con_el_mazo():
+    assert Carta(1, 'oros') in Mazo()
+
+
+def test_se_puede_recorrer_el_mazo():
+    assert sum(1 for _ in Mazo()) == 48
+
+
+def test_robar_de_mazo_vacio():
+    mazo = Mazo()
+    for _ in range(48):
+        mazo.robar()
+    with pytest.raises(ValueError):
+        mazo.robar()
+```
+
+## Cuidado con estos errores típicos
+
+- Definir `__eq__` y olvidar `__hash__`.
+- Comparar con `self.titulo == otra` (sin comprobar que `otra` es una `Cancion` en el ejemplo de teoría de playlist).
+- Escribir `print(...)` dentro de `__str__` en vez de `return`.
+- Dejar `__iter__` devolviendo la lista (`return self._canciones`) en vez de `iter(...)`.

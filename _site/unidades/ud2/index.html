@@ -223,6 +223,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">UD2 · Lab 2 · SmartSpeaker: pruebas automatizadas con Pytest</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../laboratorios/ud2/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UD2 · Lab 3 · La baraja</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -315,6 +321,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#qué-significa-assert" id="toc-qué-significa-assert" class="nav-link" data-scroll-target="#qué-significa-assert">¿Qué significa assert?</a></li>
   </ul></li>
   <li><a href="#cómo-se-organiza-una-prueba-arrange-act-assert" id="toc-cómo-se-organiza-una-prueba-arrange-act-assert" class="nav-link" data-scroll-target="#cómo-se-organiza-una-prueba-arrange-act-assert">Cómo se organiza una prueba: Arrange – Act – Assert</a></li>
+  </ul></li>
+  <li><a href="#métodos-especiales-dunder" id="toc-métodos-especiales-dunder" class="nav-link" data-scroll-target="#métodos-especiales-dunder">🎺 Métodos especiales (dunder)</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-guiado-mi-playlist" id="toc-ejemplo-guiado-mi-playlist" class="nav-link" data-scroll-target="#ejemplo-guiado-mi-playlist">Ejemplo guiado: «Mi playlist»</a>
+  <ul class="collapse">
+  <li><a href="#paso-1.-la-clase-cancion" id="toc-paso-1.-la-clase-cancion" class="nav-link" data-scroll-target="#paso-1.-la-clase-cancion">Paso 1. La clase <code>Cancion</code></a></li>
+  <li><a href="#paso-2.-igualdad-y-hash" id="toc-paso-2.-igualdad-y-hash" class="nav-link" data-scroll-target="#paso-2.-igualdad-y-hash">Paso 2. Igualdad y hash</a></li>
+  <li><a href="#paso-3.-ordenar" id="toc-paso-3.-ordenar" class="nav-link" data-scroll-target="#paso-3.-ordenar">Paso 3. Ordenar</a></li>
+  <li><a href="#paso-4.-la-clase-playlist" id="toc-paso-4.-la-clase-playlist" class="nav-link" data-scroll-target="#paso-4.-la-clase-playlist">Paso 4. La clase <code>Playlist</code></a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen">Resumen</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -1125,8 +1142,154 @@ tests/test_altavoz.py .                                                   [100%]
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> altavoz.estado <span class="op">==</span> <span class="st">"encendido"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>No es obligatorio escribir comentarios en todas las pruebas, pero esta estructura ayuda a identificar qué estamos preparando, qué comportamiento estamos ejecutando y qué resultado esperamos.</p>
 <hr>
+</section>
+</section>
+<section id="métodos-especiales-dunder" class="level1">
+<h1>🎺 Métodos especiales (dunder)</h1>
+<section id="ejemplo-guiado-mi-playlist" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-guiado-mi-playlist">Ejemplo guiado: «Mi playlist»</h2>
+<section id="paso-1.-la-clase-cancion" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1.-la-clase-cancion">Paso 1. La clase <code>Cancion</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cancion:</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, artista, segundos):</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.artista <span class="op">=</span> artista</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.segundos <span class="op">=</span> segundos</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>        minutos, seg <span class="op">=</span> <span class="bu">divmod</span>(<span class="va">self</span>.segundos, <span class="dv">60</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>minutos<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>seg<span class="sc">:02d}</span><span class="ss">)'</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'Cancion(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>segundos<span class="sc">}</span><span class="ss">)'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>divmod</code> devuelve una tupla con el cociente y el resto</li>
+<li><code>{seg:02d}</code> rellena los espacios vacíos con cero a la izquierda hasta completar el número de caracteres indicados por <code>nd</code>, en este caso <code>2d</code> serían 2 dígitos.</li>
+<li><code>!r</code> indica que se muestre su representación técnica del dato, en este caso <code>{self.titulo!r}</code> mostrará no sólo el contenido sino su representación técnica.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Info
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Qué ocurre si creamos dos objetos con los mismos datos y los comparamos con <code>==</code>?</p>
+</div>
+</div>
+</section>
+<section id="paso-2.-igualdad-y-hash" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2.-igualdad-y-hash">Paso 2. Igualdad y hash</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, otra):</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(otra, Cancion):</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">NotImplemented</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.titulo, <span class="va">self</span>.artista) <span class="op">==</span> (otra.titulo, otra.artista)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__hash__</span>(<span class="va">self</span>):</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">hash</span>((<span class="va">self</span>.titulo, <span class="va">self</span>.artista))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Dos canciones son «la misma» si coinciden título y artista (la duración no importa).</li>
+<li><code>__hash__</code> devuelve un número entero que representa al objeto. Python lo usa para guardar y localizar objetos rápidamente en <strong>sets</strong> y como <strong>claves de diccionario</strong>. Un <strong>set</strong> o un <strong>dict</strong> no recorren todos sus elementos para encontrar uno. Usan el <strong>hash</strong> para saltar directamente a la zona donde debería estar, como un archivador por letras, no recorres todas las fichas, vas a la letra correspondiente y comparas ahí.</li>
+<li>Regla para recordar: <strong>si defines <code>__eq__</code>, define también <code>__hash__</code></strong>.</li>
+</ul>
+</section>
+<section id="paso-3.-ordenar" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3.-ordenar">Paso 3. Ordenar</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__lt__</span>(<span class="va">self</span>, otra):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.segundos <span class="op">&lt;</span> otra.segundos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Con solo <code>__lt__</code>, ya funcionan <code>sorted(canciones)</code>, <code>min(canciones)</code> y <code>max(canciones)</code>.</p>
+</section>
+<section id="paso-4.-la-clase-playlist" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4.-la-clase-playlist">Paso 4. La clase <code>Playlist</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Playlist:</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre):</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones <span class="op">=</span> []</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> añadir(<span class="va">self</span>, cancion):</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones.append(cancion)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> duracion_total(<span class="va">self</span>):</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(c.segundos <span class="cf">for</span> c <span class="kw">in</span> <span class="va">self</span>._canciones)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>._canciones)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">iter</span>(<span class="va">self</span>._canciones)</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__contains__</span>(<span class="va">self</span>, cancion):</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cancion <span class="kw">in</span> <span class="va">self</span>._canciones</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lo que ahora funciona:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mi_lista <span class="op">=</span> Playlist(<span class="st">'Estudio'</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>mi_lista.añadir(Cancion(<span class="st">'Sol'</span>, <span class="st">'Ana'</span>, <span class="dv">180</span>))</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>mi_lista.añadir(Cancion(<span class="st">'Luna'</span>, <span class="st">'Ana'</span>, <span class="dv">200</span>))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(mi_lista)                      <span class="co"># 2</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> mi_lista: <span class="bu">print</span>(c)        <span class="co"># recorre con for</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>Cancion(<span class="st">'Sol'</span>, <span class="st">'Ana'</span>, <span class="dv">999</span>) <span class="kw">in</span> mi_lista   <span class="co"># True</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(mi_lista)                   <span class="co"># de la más corta a la más larga</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>in</code> funcionaría igual sin <code>__contains__</code> (Python recorre con <code>__iter__</code>). Se define para mostrar el método; «Python ya hace muchas cosas por ti si le das <code>__iter__</code>».</p>
+</div>
+</div>
+</section>
+<section id="resumen" class="level3">
+<h3 class="anchored" data-anchor-id="resumen">Resumen</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Quiero que…</th>
+<th>Defino</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>print(obj)</code> sea legible</td>
+<td><code>__str__</code></td>
+</tr>
+<tr class="even">
+<td><code>obj</code> se vea bien al depurar</td>
+<td><code>__repr__</code></td>
+</tr>
+<tr class="odd">
+<td><code>a == b</code> compare datos</td>
+<td><code>__eq__</code> (y <code>__hash__</code>)</td>
+</tr>
+<tr class="even">
+<td><code>sorted(lista)</code> funcione</td>
+<td><code>__lt__</code></td>
+</tr>
+<tr class="odd">
+<td><code>len(obj)</code> funcione</td>
+<td><code>__len__</code></td>
+</tr>
+<tr class="even">
+<td><code>for x in obj</code> funcione</td>
+<td><code>__iter__</code></td>
+</tr>
+<tr class="odd">
+<td><code>x in obj</code> funcione</td>
+<td><code>__contains__</code> (también <code>__iter__</code>)</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 </section>
 

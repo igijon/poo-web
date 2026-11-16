@@ -1,6 +1,11 @@
 ---
 title: "UD2 · Lab 1 · SmartSpeaker: diseñar y proteger un objeto"
 ---
+:::{.callout-note}
+RA1 (Se evalúa un 10% de todos los CCEE del RA)
+
+RA2 (Se evalúa un 10% de todos los CCEE del RA)
+:::
 
 # SmartSpeaker: diseñar y proteger un objeto
 

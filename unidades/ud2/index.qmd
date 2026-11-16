@@ -730,3 +730,113 @@ No es obligatorio escribir comentarios en todas las pruebas, pero esta estructur
 
 ---
 
+
+# 🎺 Métodos especiales (dunder)
+
+## Ejemplo guiado: «Mi playlist»
+
+### Paso 1. La clase `Cancion`
+
+```python
+class Cancion:
+    def __init__(self, titulo, artista, segundos):
+        self.titulo = titulo
+        self.artista = artista
+        self.segundos = segundos
+
+    def __str__(self):
+        minutos, seg = divmod(self.segundos, 60)
+        return f'{self.titulo} - {self.artista} ({minutos}:{seg:02d})'
+
+    def __repr__(self):
+        return f'Cancion({self.titulo!r}, {self.artista!r}, {self.segundos})'
+```
+
+- `divmod` devuelve una tupla con el cociente y el resto
+- `{seg:02d}` rellena los espacios vacíos con cero a la izquierda hasta completar el número de caracteres indicados por `nd`, en este caso `2d` serían 2 dígitos.
+- `!r` indica que se muestre su representación técnica del dato, en este caso `{self.titulo!r}` mostrará no sólo el contenido sino su representación técnica.
+
+:::{.callout-note}
+## Info
+¿Qué ocurre si creamos dos objetos con los mismos datos y los comparamos con `==`?
+:::
+
+### Paso 2. Igualdad y hash 
+
+```python
+    def __eq__(self, otra):
+        if not isinstance(otra, Cancion):
+            return NotImplemented
+        return (self.titulo, self.artista) == (otra.titulo, otra.artista)
+
+    def __hash__(self):
+        return hash((self.titulo, self.artista))
+```
+
+- Dos canciones son «la misma» si coinciden título y artista (la duración no importa).
+- `__hash__` devuelve un número entero que representa al objeto. Python lo usa para guardar y localizar objetos rápidamente en **sets** y como **claves de diccionario**. Un **set** o un **dict** no recorren todos sus elementos para encontrar uno. Usan el **hash** para saltar directamente a la zona donde debería estar, como un archivador por letras, no recorres todas las fichas, vas a la letra correspondiente y comparas ahí.
+- Regla para recordar: **si defines `__eq__`, define también `__hash__`**.
+
+### Paso 3. Ordenar 
+
+```python
+    def __lt__(self, otra):
+        return self.segundos < otra.segundos
+```
+
+Con solo `__lt__`, ya funcionan `sorted(canciones)`, `min(canciones)` y `max(canciones)`.
+
+### Paso 4. La clase `Playlist` 
+
+```python
+class Playlist:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self._canciones = []
+
+    def añadir(self, cancion):
+        self._canciones.append(cancion)
+
+    @property
+    def duracion_total(self):
+        return sum(c.segundos for c in self._canciones)
+
+    def __len__(self):
+        return len(self._canciones)
+
+    def __iter__(self):
+        return iter(self._canciones)
+
+    def __contains__(self, cancion):
+        return cancion in self._canciones
+```
+
+Lo que ahora funciona:
+
+```python
+mi_lista = Playlist('Estudio')
+mi_lista.añadir(Cancion('Sol', 'Ana', 180))
+mi_lista.añadir(Cancion('Luna', 'Ana', 200))
+
+len(mi_lista)                      # 2
+for c in mi_lista: print(c)        # recorre con for
+Cancion('Sol', 'Ana', 999) in mi_lista   # True
+sorted(mi_lista)                   # de la más corta a la más larga
+```
+
+:::{.callout-tip}
+`in` funcionaría igual sin `__contains__` (Python recorre con `__iter__`). Se define para mostrar el método; «Python ya hace muchas cosas por ti si le das `__iter__`».
+:::
+
+### Resumen 
+
+| Quiero que... | Defino |
+|---|---|
+| `print(obj)` sea legible | `__str__` |
+| `obj` se vea bien al depurar | `__repr__` |
+| `a == b` compare datos | `__eq__` (y `__hash__`) |
+| `sorted(lista)` funcione | `__lt__` |
+| `len(obj)` funcione | `__len__` |
+| `for x in obj` funcione | `__iter__` |
+| `x in obj` funcione | `__contains__` (también `__iter__`) |
+
