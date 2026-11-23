@@ -740,6 +740,7 @@ No es obligatorio escribir comentarios en todas las pruebas, pero esta estructur
 ```python
 class Cancion:
     def __init__(self, titulo, artista, segundos):
+        # Podrían ser propiedades, en este ejemplo se deja así por simplificar
         self.titulo = titulo
         self.artista = artista
         self.segundos = segundos
@@ -791,6 +792,7 @@ Con solo `__lt__`, ya funcionan `sorted(canciones)`, `min(canciones)` y `max(can
 ```python
 class Playlist:
     def __init__(self, nombre):
+        # nombre podría ser propiedad, en este ejemplo se deja así por simplificar
         self.nombre = nombre
         self._canciones = []
 
