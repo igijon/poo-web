@@ -1152,16 +1152,17 @@ tests/test_altavoz.py .                                                   [100%]
 <h3 class="anchored" data-anchor-id="paso-1.-la-clase-cancion">Paso 1. La clase <code>Cancion</code></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cancion:</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, titulo, artista, segundos):</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.artista <span class="op">=</span> artista</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.segundos <span class="op">=</span> segundos</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>        minutos, seg <span class="op">=</span> <span class="bu">divmod</span>(<span class="va">self</span>.segundos, <span class="dv">60</span>)</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>minutos<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>seg<span class="sc">:02d}</span><span class="ss">)'</span></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'Cancion(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>segundos<span class="sc">}</span><span class="ss">)'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Podrían ser propiedades, en este ejemplo se deja así por simplificar</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.titulo <span class="op">=</span> titulo</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.artista <span class="op">=</span> artista</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.segundos <span class="op">=</span> segundos</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>        minutos, seg <span class="op">=</span> <span class="bu">divmod</span>(<span class="va">self</span>.segundos, <span class="dv">60</span>)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>minutos<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span>seg<span class="sc">:02d}</span><span class="ss">)'</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f'Cancion(</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>titulo<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>artista<span class="sc">!r}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>segundos<span class="sc">}</span><span class="ss">)'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><code>divmod</code> devuelve una tupla con el cociente y el resto</li>
 <li><code>{seg:02d}</code> rellena los espacios vacíos con cero a la izquierda hasta completar el número de caracteres indicados por <code>nd</code>, en este caso <code>2d</code> serían 2 dígitos.</li>
@@ -1206,24 +1207,25 @@ tests/test_altavoz.py .                                                   [100%]
 <h3 class="anchored" data-anchor-id="paso-4.-la-clase-playlist">Paso 4. La clase <code>Playlist</code></h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Playlist:</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, nombre):</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones <span class="op">=</span> []</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> añadir(<span class="va">self</span>, cancion):</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones.append(cancion)</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> duracion_total(<span class="va">self</span>):</span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(c.segundos <span class="cf">for</span> c <span class="kw">in</span> <span class="va">self</span>._canciones)</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>._canciones)</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">iter</span>(<span class="va">self</span>._canciones)</span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__contains__</span>(<span class="va">self</span>, cancion):</span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cancion <span class="kw">in</span> <span class="va">self</span>._canciones</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># nombre podría ser propiedad, en este ejemplo se deja así por simplificar</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nombre <span class="op">=</span> nombre</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones <span class="op">=</span> []</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> añadir(<span class="va">self</span>, cancion):</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._canciones.append(cancion)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> duracion_total(<span class="va">self</span>):</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span>(c.segundos <span class="cf">for</span> c <span class="kw">in</span> <span class="va">self</span>._canciones)</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>):</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>._canciones)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">iter</span>(<span class="va">self</span>._canciones)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__contains__</span>(<span class="va">self</span>, cancion):</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> cancion <span class="kw">in</span> <span class="va">self</span>._canciones</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Lo que ahora funciona:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mi_lista <span class="op">=</span> Playlist(<span class="st">'Estudio'</span>)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>mi_lista.añadir(Cancion(<span class="st">'Sol'</span>, <span class="st">'Ana'</span>, <span class="dv">180</span>))</span>
